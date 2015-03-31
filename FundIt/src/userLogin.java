@@ -1,3 +1,7 @@
+
+import java.sql.*;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -47,10 +51,6 @@ public class userLogin extends javax.swing.JFrame {
 
         jLabel4.setText("Password:");
 
-        jTextField1.setText("jTextField1");
-
-        jTextField2.setText("jTextField2");
-
         jButton1.setText("Login");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -65,7 +65,7 @@ public class userLogin extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(146, Short.MAX_VALUE)
+                .addGap(146, 146, 146)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel2)
@@ -81,16 +81,13 @@ public class userLogin extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(2, 2, 2)
                                         .addComponent(jButton1)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(56, 56, 56)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(0, 0, Short.MAX_VALUE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButton2))))
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(jButton2))
+                                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jTextField2)))
                             .addComponent(jLabel1))
                         .addGap(127, 127, 127))))
         );
@@ -120,12 +117,19 @@ public class userLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.setVisible(false);
+       //If statement does not work, it's not accessing 
+       //the fields after theyve been filled in
         
-        /*
-        need to add check username/password and see if correct, else error
-        */
+        if(jTextField1.equals("Test") & jTextField2.equals("password")){
+        this.setVisible(false);
         new mainView().setVisible(true);
+       }
+       else {
+           JOptionPane error = new JOptionPane(); 
+           JOptionPane.showMessageDialog(this, "You provided a username/password "
+                   + "that was incorrect. Try again or click "
+                   + "'Forgot Credentials?'.");
+       }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -154,8 +158,22 @@ public class userLogin extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(userLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
-        /* Create and display the form */
+        
+       try{
+           Connection con = DriverManager.getConnection(
+                "jdbc:ucanaccess://C:/Users/Owner/Desktop/project-edgar/Project-Edgar-Database.accdb");
+       
+        Statement s = con.createStatement();
+        ResultSet rs = s.executeQuery("");
+        System.out.println("Connection to DB established...");
+        while (rs.next()){
+            System.out.println(rs.getString(1));
+        }
+       }
+       catch(SQLException e){
+           System.out.println(e.getErrorCode());
+       }
+         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new userLogin().setVisible(true);
