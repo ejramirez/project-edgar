@@ -1,12 +1,13 @@
 
 import java.sql.*;
+import java.util.Arrays;
 import javax.swing.JOptionPane;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+import net.ucanaccess.converters.TypesMap.AccessType;
+import net.ucanaccess.ext.FunctionType;
+import net.ucanaccess.jdbc.UcanaccessConnection;
+import net.ucanaccess.jdbc.UcanaccessDriver;
+
 
 /**
  *
@@ -35,9 +36,9 @@ public class userLogin extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jPasswordField1 = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("FundIt! - Login");
@@ -60,20 +61,27 @@ public class userLogin extends javax.swing.JFrame {
 
         jButton2.setText("Forgot Credentials?");
 
+        jPasswordField1.setText("jPasswordField1");
+        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPasswordField1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(146, 146, 146)
+                .addGap(132, 132, 132)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(174, 174, 174))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(41, 41, 41)
+                            .addComponent(jLabel1)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(jLabel4)
@@ -83,12 +91,12 @@ public class userLogin extends javax.swing.JFrame {
                                         .addComponent(jButton1)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addGroup(layout.createSequentialGroup()
                                         .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(jButton2))
+                                        .addComponent(jButton2)
+                                        .addGap(21, 21, 21))
                                     .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jTextField2)))
-                            .addComponent(jLabel1))
+                                    .addComponent(jPasswordField1))))
                         .addGap(127, 127, 127))))
         );
         layout.setVerticalGroup(
@@ -102,10 +110,10 @@ public class userLogin extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(56, 56, 56)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -117,12 +125,10 @@ public class userLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       //If statement does not work, it's not accessing 
-       //the fields after theyve been filled in
-        
-        if(jTextField1.equals("Test") & jTextField2.equals("password")){
-        this.setVisible(false);
-        new mainView().setVisible(true);
+       char [] pass = "password".toCharArray();
+       if(jTextField1.getText().equals("Test") & Arrays.equals(jPasswordField1.getPassword(), pass)){
+            this.setVisible(false);
+            new mainView().setVisible(true);
        }
        else {
            JOptionPane error = new JOptionPane(); 
@@ -131,6 +137,10 @@ public class userLogin extends javax.swing.JFrame {
                    + "'Forgot Credentials?'.");
        }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPasswordField1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -160,18 +170,22 @@ public class userLogin extends javax.swing.JFrame {
         //</editor-fold>
         
        try{
-           Connection con = DriverManager.getConnection(
-                "jdbc:ucanaccess://C:/Users/Owner/Desktop/project-edgar/Project-Edgar-Database.accdb");
+           Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+           Connection con;
+            con = DriverManager.getConnection(
+                    "jdbc:ucanaccess://C:\\Users\\Owner\\Desktop\\project-edgar\\Project-Edgar-Database.accdb",
+                    "","");
        
-        Statement s = con.createStatement();
-        ResultSet rs = s.executeQuery("");
+       // Statement s = con.createStatement();
+       // ResultSet rs = s.executeQuery("");
+        System.out.println("Is connection closed: " + con.isClosed());
         System.out.println("Connection to DB established...");
-        while (rs.next()){
-            System.out.println(rs.getString(1));
-        }
+       // while (rs.next()){
+       //    System.out.println(rs.getString(1));
+       // }
        }
-       catch(SQLException e){
-           System.out.println(e.getErrorCode());
+       catch(Exception e){
+           e.printStackTrace();
        }
          /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -188,7 +202,7 @@ public class userLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }
