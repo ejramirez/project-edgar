@@ -46,6 +46,8 @@ public class mainView extends javax.swing.JFrame {
         exitMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(3000, 3000));
+        setMinimumSize(new java.awt.Dimension(3000, 3000));
 
         jButton1.setText("View Donations");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -62,8 +64,18 @@ public class mainView extends javax.swing.JFrame {
         });
 
         jButton3.setText("Add Campaign");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("View Campaign");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("Add Event");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -75,6 +87,11 @@ public class mainView extends javax.swing.JFrame {
         jButton6.setText("Add Campaign Event");
 
         jButton7.setText("View Donors");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         jTextArea1.setColumns(20);
         jTextArea1.setLineWrap(true);
@@ -177,14 +194,31 @@ public class mainView extends javax.swing.JFrame {
         this.setVisible(false);
         new viewDonations().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    //button 2 - add donation(s)
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        this.setVisible(false); 
+        new addDonation().setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+         this.setVisible(false); 
+        new addCE().setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        this.setVisible(false);
+        new viewDonors().setVisible(true);
+    }//GEN-LAST:event_jButton7ActionPerformed
+    //button 3 - add campaign
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        this.setVisible(false); 
+        new addCampaign().setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
+    //button 4 - view campaign
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        this.setVisible(false); 
+        new viewCampaign().setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -1,6 +1,8 @@
 
 import java.sql.*;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 import net.ucanaccess.converters.TypesMap.AccessType;
@@ -60,8 +62,12 @@ public class userLogin extends javax.swing.JFrame {
         });
 
         jButton2.setText("Forgot Credentials?");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
-        jPasswordField1.setText("jPasswordField1");
         jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPasswordField1ActionPerformed(evt);
@@ -125,7 +131,7 @@ public class userLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       char [] pass = "password".toCharArray();
+       char [] pass = "pwd".toCharArray();
        if(jTextField1.getText().equals("Test") & Arrays.equals(jPasswordField1.getPassword(), pass)){
             this.setVisible(false);
             new mainView().setVisible(true);
@@ -141,11 +147,16 @@ public class userLogin extends javax.swing.JFrame {
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jPasswordField1ActionPerformed
+    //button 2  - credentials 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.setVisible(false);
+        new forgotCredentials().setVisible(true); 
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[]) throws ClassNotFoundException {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -168,32 +179,13 @@ public class userLogin extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(userLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
-       try{
-           Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-           Connection con;
-            con = DriverManager.getConnection(
-                    "jdbc:ucanaccess://C:\\Users\\Owner\\Desktop\\project-edgar\\Project-Edgar-Database.accdb",
-                    "","");
-       
-       // Statement s = con.createStatement();
-       // ResultSet rs = s.executeQuery("");
-        System.out.println("Is connection closed: " + con.isClosed());
-        System.out.println("Connection to DB established...");
-       // while (rs.next()){
-       //    System.out.println(rs.getString(1));
-       // }
-       }
-       catch(Exception e){
-           e.printStackTrace();
-       }
-         /* Create and display the form */
+        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new userLogin().setVisible(true);
             }
         });
-    }
+    }   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
