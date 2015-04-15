@@ -132,6 +132,7 @@ GROUP BY D.Zipcode;
 SELECT Count(DonorID)
 FROM DONOR
 WHERE
+
 /* Count and group donors by Type */
 
 SELECT
@@ -150,3 +151,11 @@ WHERE DA.EventName = E.EventName AND DA.EventDate = E.EventDate;
 SELECT CampaignTitle, SUM(Donations)
 FROM CAMPAIGN as C, EVENTS as E, DONATIONS as DA
 WHERE C.CampaignTitle = EVENTS.CampaignTitle AND E.EventName = DA.EventName AND E.EventDate = DA.EventDate;
+
+/* Updates */
+
+UPDATE
+
+/* Insertion Statements */
+
+/* Deletion Statements
