@@ -3,7 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import java.sql.*;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
+import net.ucanaccess.converters.TypesMap.AccessType;
+import net.ucanaccess.ext.FunctionType;
+import net.ucanaccess.jdbc.UcanaccessConnection;
+import net.ucanaccess.jdbc.UcanaccessDriver;
 /**
  *
  * @author Owner
@@ -15,6 +24,69 @@ public class addGrant extends javax.swing.JFrame {
      */
     public addGrant() {
         initComponents();
+        
+        jComboBox1.removeAllItems();
+        jComboBox1.addItem("Yes");
+        jComboBox1.addItem("No");
+        
+        
+        jComboBox3.removeAllItems(); 
+        jComboBox3.addItem("Active");
+        jComboBox3.addItem("Inactive");
+        jComboBox3.addItem("Deceased");
+        
+        jComboBox2.removeAllItems();
+        jComboBox2.addItem("AL");
+        jComboBox2.addItem("AK");
+        jComboBox2.addItem("AZ");
+        jComboBox2.addItem("AR");
+        jComboBox2.addItem("CA");
+        jComboBox2.addItem("CO");
+        jComboBox2.addItem("CT");
+        jComboBox2.addItem("DE");
+        jComboBox2.addItem("FL");
+        jComboBox2.addItem("GA");
+        jComboBox2.addItem("HI");
+        jComboBox2.addItem("ID");
+        jComboBox2.addItem("IL");
+        jComboBox2.addItem("IN");
+        jComboBox2.addItem("IO");
+        jComboBox2.addItem("KS");
+        jComboBox2.addItem("KY");
+        jComboBox2.addItem("LA");
+        jComboBox2.addItem("ME");
+        jComboBox2.addItem("MD");
+        jComboBox2.addItem("MA");
+        jComboBox2.addItem("MI");
+        jComboBox2.addItem("MN");
+        jComboBox2.addItem("MS");
+        jComboBox2.addItem("MO");
+        jComboBox2.addItem("MT");
+        jComboBox2.addItem("NE");
+        jComboBox2.addItem("NV");
+        jComboBox2.addItem("NH");
+        jComboBox2.addItem("NJ");
+        jComboBox2.addItem("NM");
+        jComboBox2.addItem("NY");
+        jComboBox2.addItem("NC");
+        jComboBox2.addItem("ND");
+        jComboBox2.addItem("OH");
+        jComboBox2.addItem("OK");
+        jComboBox2.addItem("OR");
+        jComboBox2.addItem("PA");
+        jComboBox2.addItem("RI");
+        jComboBox2.addItem("SC");
+        jComboBox2.addItem("SD");
+        jComboBox2.addItem("TN");
+        jComboBox2.addItem("TX");
+        jComboBox2.addItem("UT");
+        jComboBox2.addItem("VT");
+        jComboBox2.addItem("VA");
+        jComboBox2.addItem("WA");
+        jComboBox2.addItem("WV");
+        jComboBox2.addItem("WI");
+        jComboBox2.addItem("WY");
+        
     }
 
     /**
@@ -44,7 +116,6 @@ public class addGrant extends javax.swing.JFrame {
         jTextField9 = new javax.swing.JTextField();
         jTextField10 = new javax.swing.JTextField();
         jComboBox3 = new javax.swing.JComboBox();
-        jToggleButton1 = new javax.swing.JToggleButton();
         jButton2 = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
@@ -54,6 +125,7 @@ public class addGrant extends javax.swing.JFrame {
         jFormattedTextField1 = new javax.swing.JFormattedTextField();
         jFormattedTextField2 = new javax.swing.JFormattedTextField();
         jFormattedTextField3 = new javax.swing.JFormattedTextField();
+        jComboBox1 = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -104,8 +176,6 @@ public class addGrant extends javax.swing.JFrame {
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jToggleButton1.setText("jToggleButton1");
-
         jButton2.setText("Cancel - Back to Main");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,6 +190,8 @@ public class addGrant extends javax.swing.JFrame {
         jLabel15.setText("Start Date:");
 
         jLabel16.setText("End Date:");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -152,7 +224,6 @@ public class addGrant extends javax.swing.JFrame {
                             .addComponent(jLabel8))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jToggleButton1)
                             .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jTextField10)
                             .addGroup(layout.createSequentialGroup()
@@ -167,10 +238,10 @@ public class addGrant extends javax.swing.JFrame {
                                 .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
                             .addComponent(jTextField6)
                             .addComponent(jTextField9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jFormattedTextField3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                                .addComponent(jFormattedTextField2, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.Alignment.LEADING)))))
+                            .addComponent(jFormattedTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
+                            .addComponent(jFormattedTextField2)
+                            .addComponent(jFormattedTextField1)
+                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
                 .addContainerGap())
@@ -225,8 +296,8 @@ public class addGrant extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(jToggleButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -300,6 +371,7 @@ public class addGrant extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JComboBox jComboBox3;
     private javax.swing.JFormattedTextField jFormattedTextField1;
@@ -325,6 +397,5 @@ public class addGrant extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
-    private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
 }

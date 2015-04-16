@@ -1,3 +1,14 @@
+
+import java.sql.*;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
+import net.ucanaccess.converters.TypesMap.AccessType;
+import net.ucanaccess.ext.FunctionType;
+import net.ucanaccess.jdbc.UcanaccessConnection;
+import net.ucanaccess.jdbc.UcanaccessDriver;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,11 +21,136 @@
  */
 public class addIndividual extends javax.swing.JFrame {
 
+    
+    
     /**
      * Creates new form addIndividual
      */
     public addIndividual() {
         initComponents();
+        jComboBox1.removeAllItems();
+        jComboBox1.addItem("Ms");
+        jComboBox1.addItem("Miss");
+        jComboBox1.addItem("Mrs");
+        jComboBox1.addItem("Mr");
+        jComboBox1.addItem("Prof.");
+        jComboBox1.addItem("Dr");
+        jComboBox1.addItem("Rev.");
+        
+        
+        jComboBox2.removeAllItems();
+        jComboBox2.addItem("AL");
+        jComboBox2.addItem("AK");
+        jComboBox2.addItem("AZ");
+        jComboBox2.addItem("AR");
+        jComboBox2.addItem("CA");
+        jComboBox2.addItem("CO");
+        jComboBox2.addItem("CT");
+        jComboBox2.addItem("DE");
+        jComboBox2.addItem("FL");
+        jComboBox2.addItem("GA");
+        jComboBox2.addItem("HI");
+        jComboBox2.addItem("ID");
+        jComboBox2.addItem("IL");
+        jComboBox2.addItem("IN");
+        jComboBox2.addItem("IO");
+        jComboBox2.addItem("KS");
+        jComboBox2.addItem("KY");
+        jComboBox2.addItem("LA");
+        jComboBox2.addItem("ME");
+        jComboBox2.addItem("MD");
+        jComboBox2.addItem("MA");
+        jComboBox2.addItem("MI");
+        jComboBox2.addItem("MN");
+        jComboBox2.addItem("MS");
+        jComboBox2.addItem("MO");
+        jComboBox2.addItem("MT");
+        jComboBox2.addItem("NE");
+        jComboBox2.addItem("NV");
+        jComboBox2.addItem("NH");
+        jComboBox2.addItem("NJ");
+        jComboBox2.addItem("NM");
+        jComboBox2.addItem("NY");
+        jComboBox2.addItem("NC");
+        jComboBox2.addItem("ND");
+        jComboBox2.addItem("OH");
+        jComboBox2.addItem("OK");
+        jComboBox2.addItem("OR");
+        jComboBox2.addItem("PA");
+        jComboBox2.addItem("RI");
+        jComboBox2.addItem("SC");
+        jComboBox2.addItem("SD");
+        jComboBox2.addItem("TN");
+        jComboBox2.addItem("TX");
+        jComboBox2.addItem("UT");
+        jComboBox2.addItem("VT");
+        jComboBox2.addItem("VA");
+        jComboBox2.addItem("WA");
+        jComboBox2.addItem("WV");
+        jComboBox2.addItem("WI");
+        jComboBox2.addItem("WY");
+        
+        
+        jComboBox3.removeAllItems();
+        jComboBox3.addItem("Active");
+        jComboBox3.addItem("Inactive");
+        jComboBox3.addItem("Deceased");
+        
+        jComboBox4.removeAllItems();
+        jComboBox4.addItem("AL");
+        jComboBox4.addItem("AK");
+        jComboBox4.addItem("AZ");
+        jComboBox4.addItem("AR");
+        jComboBox4.addItem("CA");
+        jComboBox4.addItem("CO");
+        jComboBox4.addItem("CT");
+        jComboBox4.addItem("DE");
+        jComboBox4.addItem("FL");
+        jComboBox4.addItem("GA");
+        jComboBox4.addItem("HI");
+        jComboBox4.addItem("ID");
+        jComboBox4.addItem("IL");
+        jComboBox4.addItem("IN");
+        jComboBox4.addItem("IO");
+        jComboBox4.addItem("KS");
+        jComboBox4.addItem("KY");
+        jComboBox4.addItem("LA");
+        jComboBox4.addItem("ME");
+        jComboBox4.addItem("MD");
+        jComboBox4.addItem("MA");
+        jComboBox4.addItem("MI");
+        jComboBox4.addItem("MN");
+        jComboBox4.addItem("MS");
+        jComboBox4.addItem("MO");
+        jComboBox4.addItem("MT");
+        jComboBox4.addItem("NE");
+        jComboBox4.addItem("NV");
+        jComboBox4.addItem("NH");
+        jComboBox4.addItem("NJ");
+        jComboBox4.addItem("NM");
+        jComboBox4.addItem("NY");
+        jComboBox4.addItem("NC");
+        jComboBox4.addItem("ND");
+        jComboBox4.addItem("OH");
+        jComboBox4.addItem("OK");
+        jComboBox4.addItem("OR");
+        jComboBox4.addItem("PA");
+        jComboBox4.addItem("RI");
+        jComboBox4.addItem("SC");
+        jComboBox4.addItem("SD");
+        jComboBox4.addItem("TN");
+        jComboBox4.addItem("TX");
+        jComboBox4.addItem("UT");
+        jComboBox4.addItem("VT");
+        jComboBox4.addItem("VA");
+        jComboBox4.addItem("WA");
+        jComboBox4.addItem("WV");
+        jComboBox4.addItem("WI");
+        jComboBox4.addItem("WY");
+        
+        jComboBox5.removeAllItems(); 
+        jComboBox5.addItem("Yes");
+        jComboBox5.addItem("No");
     }
 
     /**
@@ -46,7 +182,6 @@ public class addIndividual extends javax.swing.JFrame {
         jTextField3 = new javax.swing.JTextField();
         jComboBox3 = new javax.swing.JComboBox();
         jTextField4 = new javax.swing.JTextField();
-        jToggleButton1 = new javax.swing.JToggleButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
@@ -66,6 +201,7 @@ public class addIndividual extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jComboBox5 = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -109,13 +245,16 @@ public class addIndividual extends javax.swing.JFrame {
             }
         });
 
-        jToggleButton1.setText("jToggleButton1");
-
         jLabel2.setText("Preferred HH Name:");
 
         jLabel3.setText("Title:");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Street:");
 
@@ -167,6 +306,8 @@ public class addIndividual extends javax.swing.JFrame {
             }
         });
 
+        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -174,6 +315,30 @@ public class addIndividual extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel13)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jTextField15, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel15)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabel18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
+                            .addComponent(jTextField11, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField14, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,37 +382,12 @@ public class addIndividual extends javax.swing.JFrame {
                                 .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jTextField9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jComboBox3, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jToggleButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(jComboBox5, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jComboBox3, javax.swing.GroupLayout.Alignment.LEADING, 0, 105, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jCheckBox1))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel13)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jTextField15, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel15)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(10, 10, 10)
-                                .addComponent(jLabel18)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
-                            .addComponent(jTextField11, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField14, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(88, 88, 88)))
+                        .addComponent(jCheckBox1)))
                 .addContainerGap(94, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -259,7 +399,7 @@ public class addIndividual extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
+                .addContainerGap(24, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -298,7 +438,7 @@ public class addIndividual extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(jToggleButton1))
+                    .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
@@ -369,6 +509,10 @@ public class addIndividual extends javax.swing.JFrame {
         new addDonor().setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -412,6 +556,7 @@ public class addIndividual extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JComboBox jComboBox3;
     private javax.swing.JComboBox jComboBox4;
+    private javax.swing.JComboBox jComboBox5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -444,6 +589,6 @@ public class addIndividual extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
-    private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
+
 }

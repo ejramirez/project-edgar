@@ -45,10 +45,10 @@ public class userLogin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("FundIt! - Login");
 
-        jLabel1.setText("Please enter your credentials below to login to FundIt:");
+        jLabel1.setText("Please enter your credentials below to login to [new name]:");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel2.setText("Welcome to FundIt!");
+        jLabel2.setText("Welcome to [new name]!");
 
         jLabel3.setText("Username:");
 
