@@ -154,8 +154,30 @@ WHERE C.CampaignTitle = EVENTS.CampaignTitle AND E.EventName = DA.EventName AND 
 
 /* Updates */
 
-UPDATE
+UPDATE DONOR
+SET
+WHERE
 
 /* Insertion Statements */
+
+/* New Donors */
+INSERT INTO DONOR
+VALUES
+
+/* New Individuals */
+INSERT INTO INDIVIDUAL
+VALUES
+
+/* New Corporate/Organizations */
+INSERT INTO CORPORATE/ORGANIZATIONS
+VALUES
+
+/* New Grants */
+INSERT INTO GRANTS
+VALUES
+
+/* New Events */
+
+/* New Campaigns */
 
 /* Deletion Statements
