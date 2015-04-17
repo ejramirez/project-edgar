@@ -1,0 +1,12 @@
+Me: selecting ind., org, grant donors (minus DonorIds') 
+	-add separate buttons for each in viewDonors
+
+Aung: 
+view donations: [radio buttons: when selected show dropdown (dates), textfield (for dollar amount, over or between), dropdown (campaign), view all] 
+	-by between dates
+	-by amount over ($) or between
+	-by campaign
+	-view all
+	
+Alex: 
+add campaign, campaign events

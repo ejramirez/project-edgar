@@ -436,7 +436,9 @@ public class addCorpOrgan extends javax.swing.JFrame {
                     "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
           
             Statement s = con.createStatement();
-            /*ResultSet rs = s.executeQuery("INSERT INTO Donor(Street, City, "
+           // ResultSet rs = s.executeQuery(
+                                    
+            s.executeUpdate("INSERT INTO Donor(Street, City, "
                     + "State, ZipCode, "
                     + "Phone, EmailAddress, "
                     + "UserStatus, Solicitation, "
@@ -449,9 +451,7 @@ public class addCorpOrgan extends javax.swing.JFrame {
                                     jComboBox3.getSelectedItem().toString() + "," + jComboBox1.getSelectedItem().toString() + "," +
                                     jTextField14.getText() + "," + jTextField15.getText() + "," +
                                     jTextField11.getText() +"," + jTextField12.getText() + "," +
-                                    jComboBox4.getSelectedItem().toString() + ","  + jTextField13.getText() + ");");
-                                    
-            */                        
+                                    jComboBox4.getSelectedItem().toString() + ","  + jTextField13.getText() + ")");
             
             System.out.println("Is connection closed: " + con.isClosed());
             System.out.println("Connection to DB established...");

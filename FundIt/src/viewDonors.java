@@ -114,19 +114,20 @@ public class viewDonors extends javax.swing.JFrame {
                     "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
 
             Statement s = con.createStatement();
-            ResultSet rs = s.executeQuery("SELECT Individual.Fname, Individual.Minit, "
-                    + "Individual.Lname, Individual.PreferredHouseholdName FROM Individual");
+            ResultSet rs = s.executeQuery("SELECT * FROM Individual left outer join Donor on (Individual.DonorID = Donor.DonorID)");
+            
+           /* SELECT Individual.Fname, Individual.Minit, "
+                    + "Individual.Lname, Individual.PreferredHouseholdName FROM Individual "
+                    + "where Individual.PreferredHouseholdName like 'Robinson'*/
             System.out.println("Is connection closed: " + con.isClosed());
             System.out.println("Connection to DB established...");
             while (rs.next()) {
-                System.out.print(rs.getString(1) + " ");
-                jTextArea1.append(rs.getString(1) + " ");
-                System.out.print(rs.getString(2) + " ");
-                jTextArea1.append(rs.getString(2) + " ");
-                System.out.print(rs.getString(3) + " ");
-                jTextArea1.append(rs.getString(3) + " ");
-                System.out.println(rs.getString(4));
-                jTextArea1.append(rs.getString(4) + "  \n");
+                for(int i = 1; i < 22; i++){
+                    System.out.print(rs.getString(i) + " ");
+                    jTextArea1.append(rs.getString(i) + " ");
+                }
+                jTextArea1.append("\n");
+                System.out.println(); 
             }
         } catch (SQLException ex) {
             Logger.getLogger(userLogin.class.getName()).log(Level.SEVERE, null, ex);
