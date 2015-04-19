@@ -42,6 +42,8 @@ public class viewDonors extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,7 +54,7 @@ public class viewDonors extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Show Donors");
+        jButton2.setText("Show Individual Donors");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -63,6 +65,20 @@ public class viewDonors extends javax.swing.JFrame {
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
+        jButton3.setText("Show Corporate/Organization Donors");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("Show Grant Donors");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -70,23 +86,28 @@ public class viewDonors extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton4))
+                    .addComponent(jScrollPane1))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3)
+                    .addComponent(jButton4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -114,25 +135,261 @@ public class viewDonors extends javax.swing.JFrame {
                     "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
 
             Statement s = con.createStatement();
-            ResultSet rs = s.executeQuery("SELECT * FROM Individual left outer join Donor on (Individual.DonorID = Donor.DonorID)");
-            
+            ResultSet rs = s.executeQuery("SELECT Fname, Minit, Lname,"
+                    + "Title, PreferredHouseholdName, "
+                    + "Street, "
+                    + "City, State, ZipCode,"
+                    + "Phone, "
+                    + "EmailAddress,"
+                    + "UserStatus, Solicitation,"
+                    + "PreferredMailStreet,"
+                    + "PreferredMailCity, PreferredMailState, PreferredMailZipCode,"
+                    + "PreferredPhone, PreferredEmail FROM Individual left outer join Donor on (Individual.DonorID = Donor.DonorID)");
+
            /* SELECT Individual.Fname, Individual.Minit, "
                     + "Individual.Lname, Individual.PreferredHouseholdName FROM Individual "
                     + "where Individual.PreferredHouseholdName like 'Robinson'*/
             System.out.println("Is connection closed: " + con.isClosed());
             System.out.println("Connection to DB established...");
             while (rs.next()) {
-                for(int i = 1; i < 22; i++){
-                    System.out.print(rs.getString(i) + " ");
-                    jTextArea1.append(rs.getString(i) + " ");
-                }
+                 //for(int i = 1; i < 20; i++){
+                    //name 
+                    System.out.print(rs.getString(1) + " ");
+                    jTextArea1.append(rs.getString(1) + " ");
+                    System.out.print(rs.getString(2) + " ");
+                    jTextArea1.append(rs.getString(2) + " ");
+                    System.out.print(rs.getString(3) + " \n");
+                    jTextArea1.append(rs.getString(3) + " \n");
+                    
+                    //title, p. HH name
+                    System.out.print(rs.getString(4) + " ");
+                    jTextArea1.append(rs.getString(4) + " ");
+                    System.out.print(rs.getString(5) + " \n");
+                    jTextArea1.append(rs.getString(5) + " \n");
+                    
+                    //address
+                    System.out.print(rs.getString(6) + ", ");
+                    jTextArea1.append(rs.getString(6) + ", ");
+                    System.out.print(rs.getString(7) + ", ");
+                    jTextArea1.append(rs.getString(7) + ", ");
+                    System.out.print(rs.getString(8) + ", ");
+                    jTextArea1.append(rs.getString(8) + ", ");
+                    System.out.print(rs.getString(9) + " \n");
+                    jTextArea1.append(rs.getString(9) + " \n");
+                    
+                    //phone, email
+                    System.out.print(rs.getString(10) + ", ");
+                    jTextArea1.append(rs.getString(10) + ", ");
+                    System.out.print(rs.getString(11) + " \n");
+                    jTextArea1.append(rs.getString(11) + " \n");
+                    
+                    //user status, solicitation
+                    System.out.print(rs.getString(12) + ", ");
+                    jTextArea1.append(rs.getString(12) + ". ");
+                    System.out.print(rs.getString(13) + " \n");
+                    jTextArea1.append(rs.getString(13) + " \n");
+                    
+                    //preferred address
+                    System.out.print(rs.getString(14) + ", ");
+                    jTextArea1.append(rs.getString(14) + ", ");
+                    System.out.print(rs.getString(15) + ", ");
+                    jTextArea1.append(rs.getString(15) + ", ");
+                    System.out.print(rs.getString(16) + ", ");
+                    jTextArea1.append(rs.getString(16) + ", ");
+                    System.out.print(rs.getString(17) + " \n");
+                    jTextArea1.append(rs.getString(17) + " \n");
+                    
+                    //preferred phone, email
+                    System.out.print(rs.getString(18) + ", ");
+                    jTextArea1.append(rs.getString(18) + ", ");
+                    System.out.print(rs.getString(19) + " \n");
+                    jTextArea1.append(rs.getString(19) + " \n");
+                    
+                //}
                 jTextArea1.append("\n");
                 System.out.println(); 
             }
+            con.close();
+            System.out.println("Is connection closed: " + con.isClosed());
         } catch (SQLException ex) {
             Logger.getLogger(userLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    //connect, show corporate/organization donors
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        jTextArea1.append("C/O Name, Primary Contact, ... \n");
+        
+        try {
+            try {
+                Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(viewDonors.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Connection con;
+            con = DriverManager.getConnection(
+                    "jdbc:ucanaccess://C:\\Users\\Owner\\Desktop\\project-edgar\\Project-Edgar-Database.accdb",
+                    "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
+
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("SELECT OrgName, PrimaryContact,"
+                    + "Street, "
+                    + "City, State, ZipCode,"
+                    + "Phone, "
+                    + "EmailAddress,"
+                    + "UserStatus, Solicitation,"
+                    + "PreferredMailStreet,"
+                    + "PreferredMailCity, PreferredMailState, PreferredMailZipCode,"
+                    + "PreferredPhone, PreferredEmail FROM Corporate_Organization left outer join Donor on (Corporate_Organization.DonorID = Donor.DonorID)");
+
+           /* SELECT Individual.Fname, Individual.Minit, "
+                    + "Individual.Lname, Individual.PreferredHouseholdName FROM Individual "
+                    + "where Individual.PreferredHouseholdName like 'Robinson'*/
+            System.out.println("Is connection closed: " + con.isClosed());
+            System.out.println("Connection to DB established...");
+            while (rs.next()) {
+                //for(int i = 1; i < 17; i++){
+                    //jTextArea1.append(null);
+                    //C.O. name, Primary contact
+                    System.out.print(rs.getString(1) + ", ");
+                    jTextArea1.append(rs.getString(1) + ", ");
+                    System.out.print(rs.getString(2) + " \n");
+                    jTextArea1.append(rs.getString(2) + " \n");
+                    //address
+                    System.out.print(rs.getString(3) + ", ");
+                    jTextArea1.append(rs.getString(3) + ", ");
+                    System.out.print(rs.getString(4) + ", ");
+                    jTextArea1.append(rs.getString(4) + ", ");
+                    System.out.print(rs.getString(5) + ", ");
+                    jTextArea1.append(rs.getString(5) + ", ");
+                    System.out.print(rs.getString(6) + " \n");
+                    jTextArea1.append(rs.getString(6) + " \n");
+                    //Phone, Email
+                    System.out.print(rs.getString(7) + ", ");
+                    jTextArea1.append(rs.getString(7) + ", ");
+                    System.out.print(rs.getString(8) + " \n");
+                    jTextArea1.append(rs.getString(8) + " \n");
+                    //User Stat, Solici. 
+                    System.out.print(rs.getString(9) + ", ");
+                    jTextArea1.append(rs.getString(9) + ", ");
+                    System.out.print(rs.getString(10) + " \n");
+                    jTextArea1.append(rs.getString(10) + " \n");
+                    //Preferred Address
+                    System.out.print(rs.getString(11) + ", ");
+                    jTextArea1.append(rs.getString(11) + ", ");
+                    System.out.print(rs.getString(12) + ", ");
+                    jTextArea1.append(rs.getString(12) + ", ");
+                    System.out.print(rs.getString(13) + ", ");
+                    jTextArea1.append(rs.getString(13) + ", ");
+                    System.out.print(rs.getString(14) + " \n");
+                    jTextArea1.append(rs.getString(14) + " \n");
+                    //Pref. Phone, Email
+                    System.out.print(rs.getString(15) + ", ");
+                    jTextArea1.append(rs.getString(15) + ", ");
+                    System.out.print(rs.getString(16) + " \n");
+                    jTextArea1.append(rs.getString(16) + " \n");
+                    
+                //}
+                jTextArea1.append("\n");
+                System.out.println(); 
+            }
+            con.close();
+            System.out.println("Is connection closed: " + con.isClosed());
+        } catch (SQLException ex) {
+            Logger.getLogger(userLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    //connect, show all grant donor information
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        jTextArea1.append("Grant Name, Primary Contact, ... \n");
+        
+        try {
+            try {
+                Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(viewDonors.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Connection con;
+            con = DriverManager.getConnection(
+                    "jdbc:ucanaccess://C:\\Users\\Owner\\Desktop\\project-edgar\\Project-Edgar-Database.accdb",
+                    "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
+
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("SELECT GrantName, GrantNumber, "
+                    + "StartDate, EndDate, NextReportDate, "
+                    + "Street, "
+                    + "City, State, ZipCode,"
+                    + "Phone, "
+                    + "EmailAddress, "
+                    + "UserStatus, Solicitation,"
+                    + "PreferredMailStreet,"
+                    + "PreferredMailCity, PreferredMailState, PreferredMailZipCode,"
+                    + "PreferredPhone, PreferredEmail FROM Grant left outer join Donor on (Grant.DonorID = Donor.DonorID)");
+
+           /* SELECT Individual.Fname, Individual.Minit, "
+                    + "Individual.Lname, Individual.PreferredHouseholdName FROM Individual "
+                    + "where Individual.PreferredHouseholdName like 'Robinson'*/
+            System.out.println("Is connection closed: " + con.isClosed());
+            System.out.println("Connection to DB established...");
+            while (rs.next()) {
+               // for(int i = 1; i < 20; i++){
+                    //Grant Name, No. 
+                    System.out.print(rs.getString(1) + ", ");
+                    jTextArea1.append(rs.getString(1) + ", ");
+                    System.out.print(rs.getString(2) + " ");
+                    jTextArea1.append(rs.getString(2) + " \n");
+                    //grant start, end, report dates
+                    System.out.print(rs.getString(3) + ", ");
+                    jTextArea1.append(rs.getString(3) + ", ");
+                    System.out.print(rs.getString(4) + ", ");
+                    jTextArea1.append(rs.getString(4) + ", ");
+                    System.out.print(rs.getString(5) + " \n");
+                    jTextArea1.append(rs.getString(5) + " \n");
+                    //Address
+                    System.out.print(rs.getString(6) + ", ");
+                    jTextArea1.append(rs.getString(6) + ", ");
+                    System.out.print(rs.getString(7) + ", ");
+                    jTextArea1.append(rs.getString(7) + ", ");
+                    System.out.print(rs.getString(8) + ", ");
+                    jTextArea1.append(rs.getString(8) + ", ");
+                    System.out.print(rs.getString(9) + " \n");
+                    jTextArea1.append(rs.getString(9) + " \n");
+                    //Phone, Email
+                    System.out.print(rs.getString(10) + ", ");
+                    jTextArea1.append(rs.getString(10) + ", ");
+                    System.out.print(rs.getString(11) + " \n");
+                    jTextArea1.append(rs.getString(11) + " \n");
+                    //User state, solicitation
+                    System.out.print(rs.getString(12) + ", ");
+                    jTextArea1.append(rs.getString(12) + ", ");
+                    System.out.print(rs.getString(13) + " \n");
+                    jTextArea1.append(rs.getString(13) + " \n");
+                    //Preferred Address
+                    System.out.print(rs.getString(14) + ", ");
+                    jTextArea1.append(rs.getString(14) + ", ");
+                    System.out.print(rs.getString(15) + ", ");
+                    jTextArea1.append(rs.getString(15) + ", ");
+                    System.out.print(rs.getString(16) + ", ");
+                    jTextArea1.append(rs.getString(16) + ", ");
+                    System.out.print(rs.getString(17) + " \n");
+                    jTextArea1.append(rs.getString(17) + " \n");
+                    //Preferred Phone, Email
+                    System.out.print(rs.getString(18) + ", ");
+                    jTextArea1.append(rs.getString(18) + ", ");
+                    System.out.print(rs.getString(19) + " \n");
+                    jTextArea1.append(rs.getString(19) + " \n");
+                    
+               // }
+                jTextArea1.append("\n");
+                System.out.println(); 
+            }
+            con.close();
+            System.out.println("Is connection closed: " + con.isClosed());
+        } catch (SQLException ex) {
+            Logger.getLogger(userLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -172,6 +429,8 @@ public class viewDonors extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
