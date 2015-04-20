@@ -1,132 +1,162 @@
-/* Largest Donation per Donor */
+/* Largest Donation Per Donor */
 
-/* Individual */
-SELECT Fname, Lname, MAX(Amount)
-FROM INDIVIDUAL as I, DONOR as D, DONATIONS as DA
-WHERE I.DonorID = D.DonorID AND D.DonorID = DA.DonorID
-GROUP BY I.Lname;
+  /* Individual */
+  SELECT Fname, Lname, MAX(Amount)
+  FROM INDIVIDUAL AS I, DONOR AS D, DONATIONS AS DA
+  INNER JOIN I, D, DA
+  ON I.DonorID = D.DonorID AND D.DonorID = DA.DonorID
+  GROUP BY I.Lname
 
-/* Corporate/Organization */
-SELECT OrgName, MAX(Amount)
-FROM CORPORATE_ORGANIZATION as CO, DONOR as D, DONATIONS as DA
-WHERE CO.DonorID = D.DonorID AND D.DonorID = DA.DonorID
-GROUP BY CO.OrgName;
+  /* Corporate/Organization */
+  SELECT Fname, Lname, MAX(Amount)
+  FROM CORPORATE_ORGANIZATION, DONOR AS D, DONATIONS AS DA
+  INNER JOIN CO, D, DA
+  ON CO.DonorID = D.DonorID AND D.DonorID = DA.DonorID
+  GROUP BY CO.OrgName
 
-/* Grants */
-SELECT GrantName, MAX(Amount)
-FROM GRANT as G, DONOR as D, DONATIONS as DA
-WHERE G.DonorID = D.DonorID AND D.DonorID = DA.DonorID
-GROUP BY G.GrantName;
+  /* Grants */
+  SELECT GrantName, MAX(Amount)
+  FROM GRANT AS G, DONOR AS D, DONATIONS AS DA
+  INNER JOIN G, D, DA
+  ON G.DonorID = D.DonorID AND D.DonorID = DA.DonorID
+  GROUP BY G.GrantName
 
 /* Average Donations per donor */
 
-/* Individual */
-SELECT Fname, Lname, AVG(Amount)
-FROM INDIVIDUAL as I, DONOR as D, DONATIONS as DA
-WHERE I.DonorID = D.DonorID AND D.DonorID = DA.DonorID
-GROUP BY I.Lname;
+  /* Individual */
+  SELECT Fname, Lname, AVG(Amount)
+  FROM INDIVIDUAL AS I, DONOR AS D, DONATIONS AS DA
+  INNER JOIN I, D, DA
+  ON I.DonorID = D.DonorID AND D.DonorID = DA.DonorID
+  GROUP BY I.Lname
 
-/* Corporate/Organization */
-SELECT OrgName, AVG (Amount)
-FROM CORPORATE_ORGANIZATION as CO, DONOR as D, DONATIONS as DA
-WHERE CO.DonorID = D.DonorID AND D.DonorID = DA.DonorID
-GROUP BY CO.OrgName;
+  /* Corporate/Organization */
+  SELECT OrgName, AVG(Amount)
+  FROM CORPORATE_ORGANIZATION AS CO, DONOR AS D, DONATIONS AS DA
+  INNER JOIN CO, D, DA
+  ON CO.DonorID = D.DonorID AND D.DonorID = DA.DonorID
+  GROUP BY CO.OrgName
 
-/* Grant */
-SELECT GrantName, AVG (Amount)
-FROM GRANT as G, DONOR as D, DONATIONS as DA
-WHERE G.DonorID = D.DonorID AND D.DonorID = DA.DonorID
-GROUP BY G.GrantName;
+  /* Grant */
+  SELECT GrantName, AVG(Amount)
+  FROM GRANT AS G, DONOR AS D, DONATIONS AS DA
+  INNER JOIN G, D, DA
+  ON G.DonorID = D.DonorID AND D.DonorID = DA.DonorID
+  GROUP BY G.GrantName;
 
-/* Count number of donations per donor */
+/* Count Number of Donations Per Donor */
 
-/* Individual */
-SELECT Fname, Lname, COUNT(DonationID)
-FROM INDIVIDUAL as I, DONOR as D, DONATIONS as DA
-WHERE I.DonorID = D.DonorID AND D.DonorID = DA.DonorID
-GROUP BY I.Lname;
+  /* Individual */
+  SELECT Fname, Lname, COUNT(DonationID)
+  FROM INDIVIDUAL AS I, DONOR AS D, DONATIONS AS DA
+  INNER JOIN I, D, DA
+  ON I.DonorID = D.DonorID AND D.DonorID = DA.DonorID
+  GROUP BY I.Lname
 
-/* Corporate/Organization */
-SELECT OrgName, COUNT (DonationID)
-FROM CORPORATE_ORGANIZATION as CO, DONOR as D, DONATIONS as DA
-WHERE CO.DonorID = D.DonorID AND D.DonorID = DA.DonorID
-GROUP BY CO.OrgName;
+  /* Corporate/Organization */
+  SELECT OrgName, COUNT(DonationID)
+  FROM CORPORATE_ORGANIZATION AS CO, DONOR AS D, DONATIONS AS DA
+  INNER JOIN CO, D, DA
+  ON CO.DonorID = D.DonorID AND D.DonorID = DA.DonorID
+  GROUP BY CO.OrgName
 
-/* Grant */
-SELECT GrantName, COUNT (DonationID)
-FROM GRANT as G, DONOR as D, DONATIONS as DA
-WHERE G.DonorID = D.DonorID AND D.DonorID = DA.DonorID
-GROUP BY G.GrantName;
+  /* Grant */
+  SELECT Fname, Lname, COUNT(DonationID)
+  FROM GRANT AS G, DONOR AS D, DONATIONS AS DA
+  INNER JOIN G, D, DA
+  ON G.DonorID = D.DonorID AND D.DonorID = DA.DonorID
+  GROUP BY G.GrantName
 
-/* Total Amount an individual donated */
+/* Total Amount Donated Per Donor Type */
 
-/* Individual */
-SELECT Fname, Lname, SUM(Amount)
-FROM INDIVIDUAL as I, DONOR as D, DONATIONS as DA
-WHERE I.DonorID = D.DonorID AND D.DonorID = DA.DonorID
-GROUP BY I.Lname;
+  /* Individual */
+  SELECT Fname, Lname, SUM(Amount)
+  FROM INDIVIDUAL AS I, DONOR AS D, DONATIONS AS DA
+  INNER JOIN I, D, DA
+  ON I.DonorID = D.DonorID AND D.DonorID = DA.DonorID
+  GROUP BY I.Lname
 
-/* Group donors by location */
+  /* Corporate/Organization */
+  SELECT OrgName, SUM(Amount)
+  FROM CORPORATE_ORGANIZATION AS CO, DONOR AS D, DONATIONS AS DA
+  INNER JOIN CO, D, DA
+  ON CO.DonorID = D.DonorID AND D.DonorID = DA.DonorID
+  GROUP BY CO.OrgName
 
-/* Grouping Individuals */
+  /* Grant */
+  SELECT GrantName, SUM(Amount)
+  FROM GRANT AS G, DONOR AS D, DONATIONS AS DA
+  INNER JOIN G, D, DA
+  ON G.DonorID = D.DonorID AND D.DonorID = DA.DonorID
+  GROUP BY G.GrantName
 
-/* By City */
-SELECT Fname, Lname, City, State, Zipcode
-FROM INDIVIDUAL as I, DONOR as D, DONATIONS as DA
-WHERE I.DonorID = D.DonorID AND D.DonorID = DA.DonorID
-GROUP BY D.City;
+/* Group Donors By Locations */
 
-/* By State */
-SELECT Fname, Lname, City, State, Zipcode
-FROM INDIVIDUAL as I, DONOR as D, DONATIONS as DA
-WHERE I.DonorID = D.DonorID AND D.DonorID = DA.DonorID
-GROUP BY D.State;
+  /* Grouping Individuals */
+    /* By City */
+    SELECT Fname, Lname, City, State, Zipcode
+    FROM INDIVIDUAL AS I, DONOR AS D, DONATIONS AS DA
+    INNER JOIN I, D, DA
+    ON I.DonorID = D.DonorID AND D.DonorID = DA.DonorID
+    Group By D.City
 
-/* By Zipcode */
-SELECT Fname, Lname, City, State, Zipcode
-FROM INDIVIDUAL as I, DONOR as D, DONATIONS as DA
-WHERE I.DonorID = D.DonorID AND D.DonorID = DA.DonorID
-GROUP BY D.Zipcode;
+    /* By State */
+    SELECT Fname, Lname, City, State, Zipcode
+    FROM INDIVIDUAL as I, DONOR as D, DONATIONS as DA
+    INNER JOIN I, D, DA
+    ON I.DonorID = D.DonorID AND D.DonorID = DA.DonorID
+    GROUP BY D.State
 
-/* Group by Corporate/Organization */
+    /* By Zipcode */
+    SELECT Fname, Lname, City, State, Zipcode
+    FROM INDIVIDUAL as I, DONOR as D, DONATIONS as DA
+    INNER JOIN I, D, DA
+    ON I.DonorID = D.DonorID AND D.DonorID = DA.DonorID
+    GROUP BY D.Zipcode
 
-/* By City */
-SELECT OrgName, City, State, Zipcode
-FROM CORPORATE_ORGANIZATION as CO, DONOR as D, DONATIONS as DA
-WHERE CO.DonorID = D.DonorID AND D.DonorID = DA.DonorID
-GROUP BY D.City;
+  /* Grouping Corporate_Organizations */
+    /* By City */
+    SELECT OrgName, City, State, Zipcode
+    FROM CORPORATE_ORGANIZATION as CO, DONOR as D, DONATIONS as DA
+    INNER JOIN CO, D, DA
+    ON CO.DonorID = D.DonorID AND D.DonorID = DA.DonorID
+    GROUP BY D.City
 
-/* By State */
-SELECT OrgName, City, State, Zipcode
-FROM CORPORATE_ORGANIZATION as CO, DONOR as D, DONATIONS as DA
-WHERE CO.DonorID = D.DonorID AND D.DonorID = DA.DonorID
-GROUP BY D.State;
+    /* By State */
+    SELECT OrgName, City, State, Zipcode
+    FROM CORPORATE_ORGANIZATION as CO, DONOR as D, DONATIONS as DA
+    INNER JOIN CO, D, DA
+    ON CO.DonorID = D.DonorID AND D.DonorID = DA.DonorID
+    GROUP BY D.State
 
-/* By Zipcode */
-SELECT OrgName, City, State, Zipcode
-FROM CORPORATE_ORGANIZATION as CO, DONOR as D, DONATIONS as DA
-WHERE CO.DonorID = D.DonorID AND D.DonorID = DA.DonorID
-GROUP BY D.Zipcode;
+    /* By Zipcode */
+    SELECT OrgName, City, State, Zipcode
+    FROM CORPORATE_ORGANIZATION as CO, DONOR as D, DONATIONS as DA
+    INNER JOIN CO, D, DA
+    ON CO.DonorID = D.DonorID AND D.DonorID = DA.DonorID
+    GROUP BY D.Zipcode
 
-/* Group by Grant */
+  /* Group by Grant */
+    /* By City */
+    SELECT GrantName, City, State, Zipcode
+    FROM GRANT as G, DONOR as D, DONATIONS as DA
+    INNER JOIN G, D, DA
+    ON G.DonorID = D.DonorID AND D.DonorID = DA.DonorID
+    GROUP BY D.City
 
-/* By City */
-SELECT GrantName, City, State, Zipcode
-FROM GRANT as G, DONOR as D, DONATIONS as DA
-WHERE G.DonorID = D.DonorID AND D.DonorID = DA.DonorID
-GROUP BY D.City;
+    /* By State */
+    SELECT GrantName, City, State, Zipcode
+    FROM GRANT as G, DONOR as D, DONATIONS as DA
+    INNER JOIN G, D, DA
+    ON G.DonorID = D.DonorID AND D.DonorID = DA.DonorID
+    GROUP BY D.State
 
-/* By State */
-SELECT GrantName, City, State, Zipcode
-FROM GRANT as G, DONOR as D, DONATIONS as DA
-WHERE G.DonorID = D.DonorID AND D.DonorID = DA.DonorID
-GROUP BY D.State;
-
-/* By Zipcode */
-SELECT GrantName, City, State, Zipcode
-FROM GRANT as G, DONOR as D, DONATIONS as DA
-WHERE G.DonorID = D.DonorID AND D.DonorID = DA.DonorID
-GROUP BY D.Zipcode;
+    /* By Zipcode */
+    SELECT GrantName, City, State, Zipcode
+    FROM GRANT as G, DONOR as D, DONATIONS as DA
+    INNER JOIN G, D, DA
+    ON G.DonorID = D.DonorID AND D.DonorID = DA.DonorID
+    GROUP BY D.Zipcode
 
 /* Count Donors */
 SELECT Count(DonorID)
