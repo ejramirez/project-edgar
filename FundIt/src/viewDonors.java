@@ -132,7 +132,13 @@ public class viewDonors extends javax.swing.JFrame {
             Connection con;
             con = DriverManager.getConnection(
                     "jdbc:ucanaccess://C:\\Users\\Owner\\Desktop\\project-edgar\\Project-Edgar-Database.accdb",
-                   "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
+                    "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
+            
+            /* Alex Database Location
+            con = DriverManager.getConnection(
+                    "jdbc:ucanaccess://C:\\Users\\Alexander\\Documents\\GitHub\\project-edgar\\Project-Edgar-Database.accdb",
+                    "","");
+            */
             
             Statement s = con.createStatement();
             ResultSet rs = s.executeQuery("SELECT Fname, Minit, Lname,"
@@ -230,7 +236,13 @@ public class viewDonors extends javax.swing.JFrame {
             con = DriverManager.getConnection(
                     "jdbc:ucanaccess://C:\\Users\\Owner\\Desktop\\project-edgar\\Project-Edgar-Database.accdb",
                     "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
-
+            
+            /* Alex Database Location
+            con = DriverManager.getConnection(
+                    "jdbc:ucanaccess://C:\\Users\\Alexander\\Documents\\GitHub\\project-edgar\\Project-Edgar-Database.accdb",
+                    "","");
+            */
+            
             Statement s = con.createStatement();
             ResultSet rs = s.executeQuery("SELECT OrgName, PrimaryContact,"
                     + "Street, "
@@ -314,7 +326,13 @@ public class viewDonors extends javax.swing.JFrame {
             con = DriverManager.getConnection(
                     "jdbc:ucanaccess://C:\\Users\\Owner\\Desktop\\project-edgar\\Project-Edgar-Database.accdb",
                     "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
-
+            
+            /* Alex Database Location
+            con = DriverManager.getConnection(
+                    "jdbc:ucanaccess://C:\\Users\\Alexander\\Documents\\GitHub\\project-edgar\\Project-Edgar-Database.accdb",
+                    "","");
+            */
+            
             Statement s = con.createStatement();
             ResultSet rs = s.executeQuery("SELECT GrantName, GrantNumber, "
                     + "StartDate, EndDate, NextReportDate, "
