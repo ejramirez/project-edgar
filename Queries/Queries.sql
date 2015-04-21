@@ -161,26 +161,52 @@
 /* Count Donors */
 SELECT Count(DonorID)
 FROM DONOR
-WHERE
-
-/* Count and group donors by Type */
-
-SELECT
-FROM
-WHERE
-GROUP BY
+GROUP BY D.Lname
 
 /* Calculate total amount of donations received during event */
 
 SELECT EventName, SUM(Donations)
 FROM DONATIONS as DA, EVENTS as E
-WHERE DA.EventName = E.EventName AND DA.EventDate = E.EventDate;
+INNER JOIN DA, E
+ON DA.EventName = E.EventName AND DA.EventDate = E.EventDate
+GROUP BY E.EventName
 
-/* Calculate total amount of donations received during campaign (WIP) */
+/* Calculate total amount of donations received during campaign */
 
 SELECT CampaignTitle, SUM(Donations)
 FROM CAMPAIGN as C, EVENTS as E, DONATIONS as DA
-WHERE C.CampaignTitle = EVENTS.CampaignTitle AND E.EventName = DA.EventName AND E.EventDate = DA.EventDate;
+INNER JOIN C, E, DA
+ON C.CampaignTitle = E.CampaignTitle AND E.EventName = DA.EventName AND E.EventDate = DA.EventDate
+GROUP BY C.CampaignTitle
+
+/* Grouping by Names */
+  /* By Individual - Last Names*/
+  SELECT *
+  FROM DONOR AS D, INDIVIDUAL AS I
+  INNER JOIN D, I
+  ON I.DonorID = D.DonorID
+  GROUP BY I.Lname
+
+  /* By Individual - First Names */
+  SELECT *
+  FROM DONOR AS D, INDIVIDUAL AS I
+  INNER JOIN D, I
+  ON I.DonorID = D.DonorID
+  GROUP BY I.Fname
+
+  /* Corporate_Organizations */
+  SELECT *
+  FROM DONOR AS D, CORPORATE_ORGANIZATION AS CO
+  INNER JOIN D, CO
+  ON CO.DonorID = D.DonorID
+  GROUP BY CO.OrgName
+
+  /* Grant */
+  SELECT *
+  FROM DONOR AS D, GRANT AS G
+  INNER JOIN D, G
+  ON D.DonorID = D.DonorID
+  GROUP BY G.GrantName
 
 /* Updates */
 
@@ -188,26 +214,76 @@ UPDATE DONOR
 SET
 WHERE
 
+UPDATE INDIVIDUAL
+SET
+WHERE
+
+UPDATE CORPORATE_ORGANIZATION
+SET
+WHERE
+
+UPDATE GRANT
+SET
+WHERE
+
+UPDATE EVENTS
+SET
+WHERE
+
+UPDATE CAMPAIGN
+SET
+WHERE
+
+UPDATE PLEDGES
+SET
+WHERE
+
+UPDATE PAYMENTTYPE
+SET
+WHERE
+
+UPDATE DONATIONS
+SET
+WHERE
+
 /* Insertion Statements */
 
-/* New Donors */
-INSERT INTO DONOR
-VALUES
+  /* New Donor */
+  INSERT INTO DONOR
+  VALUES (Textfield1, Textfield2, Textfield3, Textfield4, Textfield5, Textfield6, Textfield7, Textfield8, Textfield9, Textfield10)
 
-/* New Individuals */
-INSERT INTO INDIVIDUAL
-VALUES
+  /* New Individual */
+  INSERT INTO INDIVIDUAL
+  VALUES (Textfield1, Textfield2, Textfield3, Textfield4, Textfield5)
 
-/* New Corporate/Organizations */
-INSERT INTO CORPORATE/ORGANIZATIONS
-VALUES
+  /* New Corporate/Organization */
+  INSERT INTO CORPORATE_ORGANIZATION
+  VALUES (Textfield1, Textfield2)
 
-/* New Grants */
-INSERT INTO GRANTS
-VALUES
+  /* New Grants */
+  INSERT INTO GRANT
+  VALUES (Textfield1, Textfield2)
 
-/* New Events */
+  /* New Events */
+  INSERT INTO EVENTS
+  VALUES (Textfield1, Textfield2, Textfield3, Textfield4, Textfield5)
 
-/* New Campaigns */
+  /* New Campaigns */
+  INSERT INTO CAMPAIGN
+  VALUES (Textfield1, Textfield2, Textfield3, Textfield4, Textfield5)
 
-/* Deletion Statements
+  /* New Donations */
+  INSERT INTO DONATIONS
+  VALUES (Textfield1, Textfield2, Textfield3, Textfield4, Textfield5, Textfield6, Textfield7)
+
+  /* New Payment Type */
+  INSERT INTO PAYMENTTYPE
+  VALUES (Textfield1)
+
+  /* New Pledges */
+  INSERT INTO PLEDGES
+  VALUES (Textfield1, Textfield2, Textfield3)
+
+/* Deletion Statements */
+
+  /* Deleting Full Tables */
