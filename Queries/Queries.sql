@@ -250,39 +250,39 @@ WHERE
 
   /* New Donor */
   INSERT INTO DONOR
-  VALUES (Textfield1, Textfield2, Textfield3, Textfield4, Textfield5, Textfield6, Textfield7, Textfield8, Textfield9, Textfield10)
+  VALUES (street, city, state, zipcode, phone, emailaddress, userstatus, solicitation, preferredphone, preferredemail, preferredmailaddress, preferredmailcity, preferredmailstate, preferredmailzipcode)
 
   /* New Individual */
   INSERT INTO INDIVIDUAL
-  VALUES (Textfield1, Textfield2, Textfield3, Textfield4, Textfield5)
+  VALUES (Fname, Minit, Lname, PreferredHouseHoldName, Title)
 
   /* New Corporate/Organization */
   INSERT INTO CORPORATE_ORGANIZATION
-  VALUES (Textfield1, Textfield2)
+  VALUES (OrgName, PrimaryContact)
 
   /* New Grants */
   INSERT INTO GRANT
-  VALUES (Textfield1, Textfield2)
+  VALUES (GrantName, StartDate, EndDate, NextReportDate)
 
   /* New Events */
   INSERT INTO EVENTS
-  VALUES (Textfield1, Textfield2, Textfield3, Textfield4, Textfield5)
+  VALUES (EventName, EventDate, Description, MoneyRaised, CampaignTitle)
 
   /* New Campaigns */
   INSERT INTO CAMPAIGN
-  VALUES (Textfield1, Textfield2, Textfield3, Textfield4, Textfield5)
+  VALUES (CampaignTitle, StartDate, EndDate, Description, Goal)
 
   /* New Donations */
   INSERT INTO DONATIONS
-  VALUES (Textfield1, Textfield2, Textfield3, Textfield4, Textfield5, Textfield6, Textfield7)
+  VALUES (DonationID, CampaignTitle, DonorID, Amount, DDate, Notes, PledgeID, PaymentType, EventName, EventDate)
 
   /* New Payment Type */
   INSERT INTO PAYMENTTYPE
-  VALUES (Textfield1)
+  VALUES (TypeName)
 
   /* New Pledges */
   INSERT INTO PLEDGES
-  VALUES (Textfield1, Textfield2, Textfield3)
+  VALUES (Amount, PaymentFrequency, PayToDate)
 
 /* Deletion Statements */
 
