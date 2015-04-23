@@ -1,9 +1,12 @@
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ButtonGroup;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -23,6 +26,15 @@ public class viewDonations extends javax.swing.JFrame {
      */
     public viewDonations() {
         initComponents();
+        jFormattedTextField1.setEnabled(false);
+        jFormattedTextField2.setEnabled(false);
+        jComboBox1.setEnabled(false);
+        jTextField1.setEnabled(false);
+        buttonGroup1 = new ButtonGroup();
+        buttonGroup1.add(jRadioButton1);
+        buttonGroup1.add(jRadioButton2);
+        buttonGroup1.add(jRadioButton3);
+    
     }
 
     /**
@@ -34,6 +46,7 @@ public class viewDonations extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jRadioButton1 = new javax.swing.JRadioButton();
@@ -46,6 +59,7 @@ public class viewDonations extends javax.swing.JFrame {
         jRadioButton3 = new javax.swing.JRadioButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -123,6 +137,8 @@ public class viewDonations extends javax.swing.JFrame {
         jTextArea2.setRows(5);
         jScrollPane2.setViewportView(jTextArea2);
 
+        jLabel1.setText("To");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -130,35 +146,28 @@ public class viewDonations extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2)
-                        .addGap(19, 19, 19))
+                    .addComponent(jScrollPane2)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jRadioButton1)
                             .addComponent(jRadioButton2)
                             .addComponent(jRadioButton3))
                         .addGap(12, 12, 12)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButton1))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 278, Short.MAX_VALUE)
-                                        .addComponent(jButton3)
-                                        .addGap(30, 30, 30)))
-                                .addGap(19, 19, 19))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton2)
-                                .addContainerGap())))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1)
+                            .addComponent(jButton3)
+                            .addComponent(jButton2))))
+                .addGap(19, 19, 19))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,7 +177,8 @@ public class viewDonations extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton2))
+                        .addComponent(jButton2)
+                        .addComponent(jLabel1))
                     .addComponent(jRadioButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -177,8 +187,9 @@ public class viewDonations extends javax.swing.JFrame {
                     .addComponent(jRadioButton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton1))
                     .addComponent(jRadioButton3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -195,8 +206,7 @@ public class viewDonations extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        jTextArea2.append("Amount DDate Notes CampaignTitle PledgeID Event Name Event Date \n");
-        try {
+         try {
             try {
                 Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
             } catch (ClassNotFoundException ex) {
@@ -204,11 +214,47 @@ public class viewDonations extends javax.swing.JFrame {
             }
             Connection con;
             con = DriverManager.getConnection(
-                    "jdbc:ucanaccess://C:\\Users\\Owner\\Desktop\\data\\project-edgar\\Project-Edgar-Database.accdb",
+                    "jdbc:ucanaccess://C:\\Users\\aung\\Desktop\\data\\project-edgar\\Project-Edgar-Database.accdb",
                     "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
            //
-            // 
-           // 
+            //
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("SELECT CampaignTitle, "
+                    + "Amount, DDate, Notes, "
+                    + "EventName, EventDate FROM Donations");
+            System.out.println("Is connection closed: " + con.isClosed());
+            System.out.println("Connection to DB established...");
+          //  if(jTextField1.getText().equals(null)){
+            
+            //}
+            //else{
+                 //if(jTextField1.getText()< rs.getString(2)){
+            while (rs.next()) {
+                //Campaign Title
+                   System.out.print(rs.getString(1) + " \n");
+                   jTextArea2.append(rs.getString(1) + " \n");
+                   
+                //Amount, DDate   
+                   System.out.print(rs.getString(2) + " ");
+                   jTextArea2.append(rs.getString(2) + " ");
+                   System.out.print(rs.getString(3) + " \n");
+                   jTextArea2.append(rs.getString(3) + " \n");
+                   
+                //Notes
+                   System.out.print(rs.getString(4) + " \n");
+                   jTextArea2.append(rs.getString(4)+ " \n");
+                   
+                //Event Name, Event Date
+                   System.out.print(rs.getString(5) + " ");
+                   jTextArea2.append(rs.getString(5) + " ");
+                   System.out.print(rs.getString(6) + " \n");
+                   jTextArea2.append(rs.getString(6) + " \n");
+                  
+                   jTextArea2.append("\n");
+            }
+            //}
+            
+           //
             con.close();
             System.out.println("Is connection closed: " + con.isClosed());
         } catch (SQLException ex) {
@@ -219,7 +265,7 @@ public class viewDonations extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        jTextArea2.append("Amount DDate Notes CampaignTitle PledgeID Event Name Event Date \n");
+        jTextArea2.append("View All \n");
           try {
             try {
                 Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
@@ -228,11 +274,40 @@ public class viewDonations extends javax.swing.JFrame {
             }
             Connection con;
             con = DriverManager.getConnection(
-                    "jdbc:ucanaccess://C:\\Users\\Owner\\Desktop\\data\\project-edgar\\Project-Edgar-Database.accdb",
+                    "jdbc:ucanaccess://C:\\Users\\aung\\Desktop\\data\\project-edgar\\Project-Edgar-Database.accdb",
                     "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
            //
-            // 
-           // 
+            //
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("SELECT CampaignTitle, "
+                    + "Amount, DDate, Notes, "
+                    + "EventName, EventDate FROM Donations");
+            System.out.println("Is connection closed: " + con.isClosed());
+            System.out.println("Connection to DB established...");
+            while (rs.next()) {
+                //Campaign Title
+                   System.out.print(rs.getString(1) + " \n");
+                   jTextArea2.append(rs.getString(1) + " \n");
+                   
+                //Amount, DDate   
+                   System.out.print(rs.getString(2) + " ");
+                   jTextArea2.append(rs.getString(2) + " ");
+                   System.out.print(rs.getString(3) + " \n");
+                   jTextArea2.append(rs.getString(3) + " \n");
+                   
+                //Notes
+                   System.out.print(rs.getString(4) + " \n");
+                   jTextArea2.append(rs.getString(4)+ " \n");
+                   
+                //Event Name, Event Date
+                   System.out.print(rs.getString(5) + " ");
+                   jTextArea2.append(rs.getString(5) + " ");
+                   System.out.print(rs.getString(6) + " \n");
+                   jTextArea2.append(rs.getString(6) + " \n");
+                  
+                   jTextArea2.append("\n");
+            }
+           //
             con.close();
             System.out.println("Is connection closed: " + con.isClosed());
         } catch (SQLException ex) {
@@ -241,50 +316,17 @@ public class viewDonations extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-            jFormattedTextField1.setEnabled(true);     
-            jFormattedTextField2.setEnabled(true);   // TODO add your handling code here:
-        jTextArea2.append("Amount DDate Notes CampaignTitle PledgeID Event Name Event Date \n");
-          try {
-            try {
-                Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(viewDonations.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            Connection con;
-            con = DriverManager.getConnection(
-                    "jdbc:ucanaccess://C:\\Users\\Owner\\Desktop\\data\\project-edgar\\Project-Edgar-Database.accdb",
-                    "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
-           //
-            // 
-           // 
-            con.close();
-            System.out.println("Is connection closed: " + con.isClosed());
-        } catch (SQLException ex) {
-            Logger.getLogger(userLogin.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        // TODO add your handling code here:
+        jFormattedTextField1.setEnabled(true);     
+        jFormattedTextField2.setEnabled(true);   
+        jTextField1.setEnabled(false);        
+        jComboBox1.setEnabled(false);
+       // jTextArea2.append("Amount DDate Notes CampaignTitle PledgeID Event Name Event Date \n"); 
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
-        jTextArea2.append("Amount DDate Notes CampaignTitle PledgeID Event Name Event Date \n");
-          try {
-            try {
-                Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(viewDonations.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            Connection con;
-            con = DriverManager.getConnection(
-                    "jdbc:ucanaccess://C:\\Users\\Owner\\Desktop\\data\\project-edgar\\Project-Edgar-Database.accdb",
-                    "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
-           //
-            // 
-           // 
-            con.close();
-            System.out.println("Is connection closed: " + con.isClosed());
-        } catch (SQLException ex) {
-            Logger.getLogger(userLogin.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -300,11 +342,19 @@ public class viewDonations extends javax.swing.JFrame {
     }//GEN-LAST:event_jFormattedTextField2ActionPerformed
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
-    jComboBox1.setEnabled(true);           // TODO add your handling code here:
+    // TODO add your handling code here:
+    jComboBox1.setEnabled(true);         
+    jFormattedTextField1.setEnabled(false);
+    jFormattedTextField2.setEnabled(false);
+    jTextField1.setEnabled(false);
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
-    jTextField1.setEnabled(true);        // TODO add your handling code here:
+    // TODO add your handling code here:
+    jTextField1.setEnabled(true);        
+    jComboBox1.setEnabled(false);        
+    jFormattedTextField1.setEnabled(false);
+    jFormattedTextField2.setEnabled(false);
     }//GEN-LAST:event_jRadioButton3ActionPerformed
 
     /**
@@ -342,13 +392,16 @@ public class viewDonations extends javax.swing.JFrame {
         });
     }
 
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JFormattedTextField jFormattedTextField2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
