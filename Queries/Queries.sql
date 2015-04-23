@@ -179,72 +179,68 @@ INNER JOIN C, E, DA
 ON C.CampaignTitle = E.CampaignTitle AND E.EventName = DA.EventName AND E.EventDate = DA.EventDate
 GROUP BY C.CampaignTitle
 
-/* Grouping by Names */
+/* Search Templates By Names */
   /* By Individual - Last Names*/
-  SELECT *
+  SELECT Lname
   FROM DONOR AS D, INDIVIDUAL AS I
   INNER JOIN D, I
   ON I.DonorID = D.DonorID
-  GROUP BY I.Lname
 
   /* By Individual - First Names */
-  SELECT *
+  SELECT Fname
   FROM DONOR AS D, INDIVIDUAL AS I
   INNER JOIN D, I
   ON I.DonorID = D.DonorID
-  GROUP BY I.Fname
 
   /* Corporate_Organizations */
-  SELECT *
+  SELECT OrgName
   FROM DONOR AS D, CORPORATE_ORGANIZATION AS CO
   INNER JOIN D, CO
   ON CO.DonorID = D.DonorID
-  GROUP BY CO.OrgName
 
   /* Grant */
-  SELECT *
+  SELECT GrantName
   FROM DONOR AS D, GRANT AS G
   INNER JOIN D, G
   ON D.DonorID = D.DonorID
-  GROUP BY G.GrantName
 
-/* Updates */
-
+/* Updates (SET Clause is where you put the change being made. WHERE Clause is the condition)(Not certain if an AND clause works with these statements) */
+/* DONOR */
 UPDATE DONOR
-SET
-WHERE
+SET street = '', city = '', state = '', zipcode = '', phone = '', emailaddress = '', userstatus = '', solicitation = '', preferredphone = '', preferredemail = '', preferredmailaddress = '', preferredmailcity = '', preferredmailstate = '', preferredmailzipcode = ''
+WHERE street = '', city = '', state = '', zipcode = '', phone = '', emailaddress = '', userstatus = '', solicitation = '', preferredphone = '', preferredemail = '', preferredmailaddress = '', preferredmailcity = '', preferredmailstate = '', preferredmailzipcode = ''
 
 UPDATE INDIVIDUAL
-SET
-WHERE
+SET Fname = '', Minit = '', Lname = '', PreferredHouseHoldName = '', Title = ''
+WHERE Fname = '', Minit = '', Lname = '', PreferredHouseHoldName = '', Title = ''
 
 UPDATE CORPORATE_ORGANIZATION
-SET
-WHERE
+SET OrgName = '', PrimaryContact = ''
+WHERE OrgName = '', PrimaryContact = ''
 
 UPDATE GRANT
-SET
-WHERE
+SET GrantName = '', StartDate = '', EndDate = '', NextReportDate = ''
+WHERE GrantName = '', StartDate = '', EndDate = '', NextReportDate = ''
 
 UPDATE EVENTS
-SET
-WHERE
+SET EventName = '', EventDate = '', Description = '', MoneyRaised = '', CampaignTitle = ''
+WHERE EventName = '', EventDate = '', Description = '', MoneyRaised = '', CampaignTitle = ''
 
 UPDATE CAMPAIGN
-SET
-WHERE
+SET CampaignTitle = '', StartDate = '', EndDate = '', Description = '', Goal = ''
+WHERE CampaignTitle = '', StartDate = '', EndDate = '', Description = '', Goal = ''
 
 UPDATE PLEDGES
-SET
-WHERE
+SET Amount = '', PaymentFrequency = '', PayToDate = ''
+WHERE Amount = '', PaymentFrequency = '', PayToDate = ''
 
 UPDATE PAYMENTTYPE
-SET
-WHERE
+SET TypeName = ''
+WHERE TypeName = ''
 
 UPDATE DONATIONS
-SET
-WHERE
+SET DonationID = '', CampaignTitle = '', DonorID = '', Amount = '', DDate = '', Notes = '', PledgeID = '', PaymentType = '', EventName = '', EventDate = ''
+WHERE DonationID = '', CampaignTitle = '', DonorID = '', Amount = '', DDate = '', Notes = '', PledgeID = '', PaymentType = '', EventName = '', EventDate = ''
 
 /* Insertion Statements */
 
@@ -285,5 +281,113 @@ WHERE
   VALUES (Amount, PaymentFrequency, PayToDate)
 
 /* Deletion Statements */
+  /* Templates */
+    /* Delete Entire Records From Tables */
+    DELETE FROM DONOR
 
-  /* Deleting Full Tables */
+    DELETE FROM INDIVIDUAL
+
+    DELETE FROM CORPORATION_ORGANIZATION
+
+    DELETE FROM GRANT
+
+    DELETE FROM EVENTS
+
+    DELETE FROM CAMPAIGN
+
+    DELETE FROM DONATIONS
+
+    DELETE FROM PAYMENTTYPE
+
+    DELETE FROM PLEDGES
+
+    /* Delete Specific Data --- Decide which AND clause to utilize */
+    /* Delete from DONOR */
+    DELETE FROM DONOR
+    WHERE street = ''
+      AND city = ''
+      AND state = ''
+      AND zipcode = ''
+      AND phone = ''
+      AND emailaddress = ''
+      AND userstatus = ''
+      AND solicitation = ''
+      AND preferredphone = ''
+      AND preferredemail = ''
+      AND preferredmailaddress = ''
+      AND preferredmailcity = ''
+      AND preferredmailstate = ''
+      AND preferredmailzipcode = ''
+
+      /* Delete from INDIVIDUAL */
+      DELETE FROM INDIVIDUAL
+      WHERE Fname = ''
+      AND Minit = ''
+      AND Lname = ''
+      AND PreferredHouseHoldName = ''
+      AND Title = ''
+
+      DELETE FROM CORPORATION_ORGANIZATION
+      WHERE OrgName = ''
+      AND PrimaryContact = ''
+
+      /* DELETE from Grants */
+      DELETE FROM GRANT
+      WHERE GrantName = ''
+      AND StartDate = ''
+      AND EndDate = ''
+      AND NextReportDate = ''
+
+      /* DELETE from EVENTS */
+      DELETE FROM EVENTS
+      WHERE EventName = ''
+      AND EventDate = ''
+      AND Description = ''
+      AND MoneyRaised = ''
+      AND CampaignTitle = ''
+
+      /* DELETE from CAMPAIGN */
+      DELETE FROM CAMPAIGN
+      WHERE CampaignTitle = ''
+      AND StartDate = ''
+      AND EndDate = ''
+      AND Description = ''
+      AND Goal = ''
+
+      /* DELETE from DONATIONS */
+      DELETE FROM DONATIONS
+      WHERE DonationID = ''
+      AND CampaignTitle = ''
+      AND DonorID = ''
+      AND Amount = ''
+      AND DDate = ''
+      AND Notes = ''
+      AND PledgeID = ''
+      AND PaymentType = ''
+      AND EventName = ''
+      AND EventDate = ''
+
+      /* DELETE from PAYMENTTYPE */
+      DELETE FROM PAYMENTTYPE
+      WHERE TypeName = ''
+
+      /* DELETE FROM PLEDGES */
+      DELETE FROM PLEDGES
+      WHERE Amount = ''
+      AND PaymentFrequency = ''
+      AND PayToDate = ''
+
+/* SELECT Statements Cont. */
+  /* GRANT Start & End Date */
+  SELECT EndDate
+  FROM GRANT AS G
+  WHERE 
+
+  SELECT StartDate
+  FROM GRANT
+  WHERE (clause)
+
+  /* Solicitation Status */
+  SELECT
+  FROM
+  WHERE
