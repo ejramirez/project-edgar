@@ -131,7 +131,7 @@ public class viewDonors extends javax.swing.JFrame {
             }
             Connection con;
             con = DriverManager.getConnection(
-                    "jdbc:ucanaccess://C:\\Users\\aung\\Desktop\\data\\project-edgar\\Project-Edgar-Database.accdb",
+                    "jdbc:ucanaccess://C:\\Users\\Owner\\Desktop\\project-edgar\\Project-Edgar-Database.accdb",
                     "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
             
             /* Alex Database Location
@@ -234,7 +234,7 @@ public class viewDonors extends javax.swing.JFrame {
             }
             Connection con;
             con = DriverManager.getConnection(
-                    "jdbc:ucanaccess://C:\\Users\\aung\\Desktop\\data\\project-edgar\\Project-Edgar-Database.accdb",
+                    "jdbc:ucanaccess://C:\\Users\\Owner\\Desktop\\project-edgar\\Project-Edgar-Database.accdb",
                     "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
             
             /* Alex Database Location
