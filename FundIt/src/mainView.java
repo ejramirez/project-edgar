@@ -8,6 +8,20 @@
  *
  * @author Owner
  */
+
+
+
+/*
+commentsssss testing commentssssssss
+adsgisdfiuhamdiasfhdvinsdughakfm
+sdginsdgiuhaimraoskdmosihcosihdc
+AEisndfusdjgnstkoIKt
+soighsidfhsk
+sdgsjopdgoijsg
+sdgihsgisgikjdfgijdrgas
+gSKDNszikgnszfg
+
+*/
 public class mainView extends javax.swing.JFrame {
 
     /**
