@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import java.awt.Color;
 import java.sql.*;
 import java.util.Arrays;
 import java.util.logging.Level;
@@ -242,9 +243,20 @@ public class addCorpOrgan extends javax.swing.JFrame {
 
         jLabel14.setText("City:");
 
+        jTextField12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField12ActionPerformed(evt);
+            }
+        });
+
         jLabel15.setText("State:");
 
         jCheckBox1.setText("Same as above?");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
 
         jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -295,15 +307,15 @@ public class addCorpOrgan extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jTextField15, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(jLabel15)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(10, 10, 10)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(jLabel18)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
+                                    .addComponent(jTextField13))
                                 .addComponent(jTextField11, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jTextField14, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(layout.createSequentialGroup()
@@ -435,9 +447,12 @@ public class addCorpOrgan extends javax.swing.JFrame {
                     "jdbc:ucanaccess://C:\\Users\\Owner\\Desktop\\project-edgar\\Project-Edgar-Database.accdb",
                     "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
           
-            Statement s = con.createStatement();
-           // ResultSet rs = s.executeQuery(
-                                    
+            boolean sol = false;
+            if(jComboBox1.getSelectedItem().toString().equalsIgnoreCase("Yes")){
+                sol = true; 
+            }
+            Statement s = con.createStatement();  
+            System.out.println("Connection to DB established...");
             s.execute("INSERT INTO Donor(Street, City, "
                     + "State, ZipCode, "
                     + "Phone, EmailAddress, "
@@ -445,21 +460,34 @@ public class addCorpOrgan extends javax.swing.JFrame {
                     + "PreferredPhone, PreferredEmail, "
                     + "PreferredMailStreet, PreferredMailCity, "
                     + "PreferredMailState, PreferredMailZipCode) " +
-                    "Values (" + jTextField6.getText() + "," + jTextField7.getText() +
-                            "," + jComboBox2.getSelectedItem().toString() + "," + jTextField8.getText() + "," +
-                                    jTextField9.getText() + "," + jTextField10.getText() + "," +
-                                    jComboBox3.getSelectedItem().toString() + "," + jComboBox1.getSelectedItem().toString() + "," +
-                                    jTextField14.getText() + "," + jTextField15.getText() + "," +
-                                    jTextField11.getText() +"," + jTextField12.getText() + "," +
-                                    jComboBox4.getSelectedItem().toString() + ","  + jTextField13.getText() + ")");
-            con.commit();
-            //ResultSet rs = s.executeQuery();
-            System.out.println("Is connection closed: " + con.isClosed());
-            System.out.println("Connection to DB established...");
+                    "Values ( '" + jTextField6.getText() + "', '" + jTextField7.getText() +
+                            "', '" + jComboBox2.getSelectedItem().toString() + "', '" + jTextField8.getText() + "', '" +
+                                    jTextField9.getText() + "', '" + jTextField10.getText() + "', '" +
+                                    jComboBox3.getSelectedItem().toString() + "', '" + sol + "', '" +
+                                    jTextField14.getText() + "', '" + jTextField15.getText() + "', '" +
+                                    jTextField11.getText() +"', '" + jTextField12.getText() + "', '" +
+                                    jComboBox4.getSelectedItem().toString() + "', '"  + jTextField13.getText() + "' )");
             
+            ResultSet rs = s.executeQuery("select DonorID From Donor where Donor.Street like '" + jTextField6.getText()+ "'");
+            String donorID = ""; 
+            while(rs.next()){
+                System.out.println("Donor id for insert is: " + rs.getString(1)); 
+                donorID=rs.getString(1);
+            }
+            
+            s.execute("INSERT INTO Corporate_Organization(DonorID, OrgName, PrimaryContact) "
+                    + "Values('" + donorID + "', '"+ jTextField1.getText() +"', '" 
+                    + jTextField2.getText() + "')");
+            con.commit();
+        
+            con.close();
+            System.out.println("Is connection closed: " + con.isClosed());
         } catch (SQLException ex) {
             Logger.getLogger(userLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        this.setVisible(false);
+        new addDonor().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField11ActionPerformed
@@ -473,6 +501,39 @@ public class addCorpOrgan extends javax.swing.JFrame {
     private void jTextField14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField14ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField14ActionPerformed
+
+    private void jTextField12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField12ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField12ActionPerformed
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        if(jCheckBox1.isSelected()){
+           jTextField11.setEditable(false);
+           jTextField11.setBackground(Color.lightGray);
+           jTextField11.setText(jTextField6.getText());//find match above
+           
+           jTextField12.setEditable(false);
+           jTextField12.setBackground(Color.lightGray);
+           jTextField12.setText(jTextField7.getText());
+           
+           jTextField13.setBackground(Color.lightGray);
+           jTextField13.setEditable(false);
+           jTextField13.setText(jTextField8.getText());
+           
+           jTextField14.setBackground(Color.lightGray);
+           jTextField14.setEditable(false);
+           jTextField14.setText(jTextField9.getText());
+           
+           jTextField15.setBackground(Color.lightGray);
+           jTextField15.setEditable(false);
+           jTextField15.setText(jTextField10.getText());
+           
+           jComboBox4.setBackground(Color.lightGray);
+           jComboBox4.setEditable(false);
+           jComboBox4.setEnabled(false);
+           jComboBox4.setSelectedIndex(jComboBox2.getSelectedIndex());
+        }
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     /**
      * @param args the command line arguments

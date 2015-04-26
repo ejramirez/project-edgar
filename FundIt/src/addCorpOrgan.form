@@ -51,15 +51,15 @@
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
                               <Component id="jTextField15" alignment="0" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jTextField12" min="-2" pref="115" max="-2" attributes="0"/>
+                                  <Component id="jTextField12" min="-2" pref="80" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jComboBox4" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jTextField13" pref="0" max="32767" attributes="0"/>
+                                  <Component id="jTextField13" max="32767" attributes="0"/>
                               </Group>
                               <Component id="jTextField11" alignment="0" max="32767" attributes="0"/>
                               <Component id="jTextField14" alignment="0" min="-2" pref="292" max="-2" attributes="0"/>
@@ -332,6 +332,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextField12">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField12ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel15">
       <Properties>
@@ -342,6 +345,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Same as above?"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBox1ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="jComboBox4">
       <Properties>

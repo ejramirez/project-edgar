@@ -87,6 +87,9 @@ public class addGrant extends javax.swing.JFrame {
         jComboBox2.addItem("WI");
         jComboBox2.addItem("WY");
         
+        jFormattedTextField1.setText("MM/DD/YY");
+        jFormattedTextField2.setText("MM/DD/YY");
+        jFormattedTextField3.setText("MM/DD/YY");
     }
 
     /**
@@ -330,7 +333,62 @@ public class addGrant extends javax.swing.JFrame {
     //Add GRANT TO DATABASE TUPLES
     //show save, then redirect to add donors
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        try {
+            try {
+                Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(viewDonors.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Connection con;
+            con = DriverManager.getConnection(
+                    "jdbc:ucanaccess://C:\\Users\\Owner\\Desktop\\project-edgar\\Project-Edgar-Database.accdb",
+                    "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
+          
+            boolean sol = false;
+            if(jComboBox1.getSelectedItem().toString().equalsIgnoreCase("Yes")){
+                sol = true; 
+            }
+            Statement s = con.createStatement();  
+            System.out.println("Connection to DB established...");
+            s.execute("INSERT INTO Donor(Street, City, "
+                    + "State, ZipCode, "
+                    + "Phone, EmailAddress, "
+                    + "UserStatus, Solicitation, "
+                    + "PreferredPhone, PreferredEmail, "
+                    + "PreferredMailStreet, PreferredMailCity, "
+                    + "PreferredMailState, PreferredMailZipCode) " +
+                    "Values ( '" + jTextField6.getText() + "', '" + jTextField7.getText() +
+                            "', '" + jComboBox2.getSelectedItem().toString() + "', '" + jTextField8.getText() + "', '" +
+                                    jTextField9.getText() + "', '" + jTextField10.getText() + "', '" +
+                                    jComboBox3.getSelectedItem().toString() + "', '" + sol + "', '" +
+                                    jTextField9.getText() + "', '" + jTextField10.getText() + "', '" +
+                                    jTextField6.getText() +"', '" + jTextField7.getText() + "', '" +
+                                    jComboBox2.getSelectedItem().toString() + "', '"  + jTextField8.getText() + "' )");
+            
+            ResultSet rs = s.executeQuery("select DonorID From Donor where Donor.Street like '" + jTextField6.getText()+ "' "
+                    + "AND Donor.Phone like '" + jTextField9.getText() + "' ");
+            String donorID = ""; 
+            while(rs.next()){
+                System.out.println("Donor id for insert is: " + rs.getString(1)); 
+                donorID=rs.getString(1);
+            }
+            
+            s.execute("INSERT INTO Grant(DonorID, GrantNumber, GrantName, StartDate, EndDate, NextReportDate) "
+                    + "Values('" + donorID + "', '"+ jTextField5.getText() +"', '" 
+                    + jTextField4.getText() + "', '" + jFormattedTextField2.getText() + "', ' "
+                    + jFormattedTextField1.getText() + "', '"
+                    + jFormattedTextField3.getText() +  "')");
+                    
+            con.commit();
+        
+            con.close();
+            System.out.println("Is connection closed: " + con.isClosed());
+        } catch (SQLException ex) {
+            Logger.getLogger(userLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        this.setVisible(false);
+        new addDonor().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
