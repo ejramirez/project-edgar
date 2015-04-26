@@ -4,9 +4,14 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
+import javax.swing.text.MaskFormatter;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -24,18 +29,53 @@ public class viewDonations extends javax.swing.JFrame {
     /**
      * Creates new form viewDonations
      */
-    public viewDonations() {
+    public viewDonations() throws ParseException {
         initComponents();
         jFormattedTextField1.setEnabled(false);
         jFormattedTextField2.setEnabled(false);
         jComboBox1.setEnabled(false);
+        jComboBox2.setEnabled(false);
         jTextField1.setEnabled(false);
+        jTextField2.setEnabled(false);  
+        jTextField3.setEnabled(false);
+        dateMask1 = new MaskFormatter("####-##-##");
+        dateMask1.install(jFormattedTextField1);
+        dateMask2 = new MaskFormatter("####-##-##");
+        dateMask2.install(jFormattedTextField2);
+              
         buttonGroup1 = new ButtonGroup();
         buttonGroup1.add(jRadioButton1);
         buttonGroup1.add(jRadioButton2);
         buttonGroup1.add(jRadioButton3);
         buttonGroup1.add(jRadioButton4);
-    
+        
+        jComboBox2.removeAllItems();
+        jComboBox2.addItem("Above");
+        jComboBox2.addItem("Below");
+        jComboBox1.removeAllItems();
+         try {
+            try {
+                Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(viewDonations.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Connection con;
+            con = DriverManager.getConnection(
+                    "jdbc:ucanaccess://C:\\Users\\aung\\Desktop\\data\\project-edgar\\Project-Edgar-Database.accdb",
+                    "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
+           //
+                 Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("SELECT CampaignTitle FROM Campaign");
+            System.out.println("Is connection closed: " + con.isClosed());
+            System.out.println("Connection to DB established...");
+            while(rs.next()){
+             jComboBox1.addItem(rs.getString(1));
+            }
+              con.close();
+            System.out.println("Is connection closed: " + con.isClosed());
+        } catch (SQLException ex) {
+            Logger.getLogger(userLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -58,8 +98,6 @@ public class viewDonations extends javax.swing.JFrame {
         jFormattedTextField2 = new javax.swing.JFormattedTextField();
         jRadioButton2 = new javax.swing.JRadioButton();
         jRadioButton3 = new javax.swing.JRadioButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         jRadioButton4 = new javax.swing.JRadioButton();
         jTextField2 = new javax.swing.JTextField();
@@ -67,6 +105,8 @@ public class viewDonations extends javax.swing.JFrame {
         jTextField3 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -84,7 +124,7 @@ public class viewDonations extends javax.swing.JFrame {
             }
         });
 
-        jRadioButton1.setText("By dates");
+        jRadioButton1.setText("By dates(YYYY-MM-DD)");
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButton1ActionPerformed(evt);
@@ -112,14 +152,14 @@ public class viewDonations extends javax.swing.JFrame {
             }
         });
 
-        jFormattedTextField1.setText("MM/DD/YY");
+        jFormattedTextField1.setText("YYYY-MM-DD");
         jFormattedTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFormattedTextField1ActionPerformed(evt);
             }
         });
 
-        jFormattedTextField2.setText("MM/DD/YY");
+        jFormattedTextField2.setText("YYYY-MM-DD");
         jFormattedTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFormattedTextField2ActionPerformed(evt);
@@ -140,10 +180,6 @@ public class viewDonations extends javax.swing.JFrame {
             }
         });
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane2.setViewportView(jTextArea2);
-
         jLabel1.setText("To");
 
         jRadioButton4.setText(" By Amount ");
@@ -161,6 +197,11 @@ public class viewDonations extends javax.swing.JFrame {
         });
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
 
         jTextField3.setText("Dollar Amount");
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
@@ -173,6 +214,10 @@ public class viewDonations extends javax.swing.JFrame {
 
         jLabel3.setText("And");
 
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -180,7 +225,9 @@ public class viewDonations extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jRadioButton1)
@@ -190,33 +237,30 @@ public class viewDonations extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel3)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton1)
-                                    .addComponent(jButton3)
-                                    .addComponent(jButton2))))))
-                .addGap(19, 19, 19))
+                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1)
+                            .addComponent(jButton3)
+                            .addComponent(jButton2))
+                        .addGap(19, 19, 19))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,26 +274,35 @@ public class viewDonations extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jRadioButton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton1)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel2)
-                        .addComponent(jTextField2)
-                        .addComponent(jLabel3))
-                    .addComponent(jRadioButton3))
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jRadioButton2))
+                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jRadioButton4))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jButton1))
+                            .addComponent(jTextField2))
+                        .addGap(34, 34, 34))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel3))
+                            .addComponent(jRadioButton3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addComponent(jRadioButton4))
+                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -275,54 +328,197 @@ public class viewDonations extends javax.swing.JFrame {
                     "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
            //
             //
-            Statement s = con.createStatement();
+            if(jRadioButton1.isSelected()){
+                Statement s = con.createStatement();
             ResultSet rs = s.executeQuery("SELECT CampaignTitle, "
                     + "Amount, DDate, Notes, "
                     + "EventName, EventDate FROM Donations");
             System.out.println("Is connection closed: " + con.isClosed());
             System.out.println("Connection to DB established...");
-          //  if(jTextField1.getText().equals(null)){
-            
-            //}
-            //else{
-                 //if(jTextField1.getText()< rs.getString(2)){
+                  
             while (rs.next()) {
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd");  
+            Date datemin = format.parse(jFormattedTextField1.getText());
+            System.out.println("datemin"+datemin);
+            Date datemax = format.parse(jFormattedTextField2.getText());
+            System.out.println("datemax"+datemax);
+            Date datetar = format.parse(rs.getString(3).substring(0,10));
+            System.out.println("datetar"+datetar);
+            if(datetar.after(datemin) && datetar.before(datemax)){
+                            
                 //Campaign Title
-                   System.out.print(rs.getString(1) + " \n");
-                   jTextArea2.append(rs.getString(1) + " \n");
+                  System.out.print(rs.getString(1) + " \n");
+                  jTextArea1.append(rs.getString(1) + " \n");
                    
                 //Amount, DDate   
                    System.out.print(rs.getString(2) + " ");
-                   jTextArea2.append(rs.getString(2) + " ");
-                   System.out.print(rs.getString(3) + " \n");
-                   jTextArea2.append(rs.getString(3) + " \n");
+                   jTextArea1.append(rs.getString(2) + " ");
+                   System.out.print(rs.getString(3).substring(0,10) + " \n");
+                   jTextArea1.append(rs.getString(3).substring(0,10) + " \n");
                    
                 //Notes
                    System.out.print(rs.getString(4) + " \n");
-                   jTextArea2.append(rs.getString(4)+ " \n");
+                   jTextArea1.append(rs.getString(4)+ " \n");
                    
                 //Event Name, Event Date
                    System.out.print(rs.getString(5) + " ");
-                   jTextArea2.append(rs.getString(5) + " ");
-                   System.out.print(rs.getString(6) + " \n");
-                   jTextArea2.append(rs.getString(6) + " \n");
+                   jTextArea1.append(rs.getString(5) + " ");
+                   System.out.print(rs.getString(6).substring(0,10) + " \n");
+                   jTextArea1.append(rs.getString(6).substring(0,10) + " \n");
                   
-                   jTextArea2.append("\n");
+                   jTextArea1.append("\n");
             }
-            //}
+            }
+            }
             
-           //
+            //jRadioButton2
+            if(jRadioButton2.isSelected()){            
+                Statement s = con.createStatement();
+                ResultSet rs = s.executeQuery("SELECT CampaignTitle, "
+                    + "Amount, DDate, Notes, "
+                    + "EventName, EventDate FROM Donations");
+            System.out.println("Is connection closed: " + con.isClosed());
+            System.out.println("Connection to DB established...");
+                  
+            while (rs.next()) {
+                
+                if(jComboBox1.getSelectedItem().toString().equals(rs.getString(1))) {
+                 //Campaign Title             
+                  System.out.print(rs.getString(1) + " \n");
+                  jTextArea1.append(rs.getString(1) + " \n");
+                   
+                //Amount, DDate   
+                   System.out.print(rs.getString(2) + " ");
+                   jTextArea1.append(rs.getString(2) + " ");
+                   System.out.print(rs.getString(3) + " \n");
+                   jTextArea1.append(rs.getString(3) + " \n");
+                   
+                //Notes
+                   System.out.print(rs.getString(4) + " \n");
+                   jTextArea1.append(rs.getString(4)+ " \n");
+                   
+                //Event Name, Event Date
+                   System.out.print(rs.getString(5) + " ");
+                   jTextArea1.append(rs.getString(5) + " ");
+                   System.out.print(rs.getString(6) + " \n");
+                   jTextArea1.append(rs.getString(6) + " \n");
+                  
+                   jTextArea1.append("\n");
+            }
+            }
+            }
+            
+            // jRadioButton3
+            if(jRadioButton3.isSelected()){
+                Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("SELECT CampaignTitle, "
+                    + "Amount, DDate, Notes, "
+                    + "EventName, EventDate FROM Donations");
+            System.out.println("Is connection closed: " + con.isClosed());
+            System.out.println("Connection to DB established...");
+                  
+            while (rs.next()) {
+                
+                if(Double.parseDouble(jTextField1.getText())<=Double.parseDouble(rs.getString(2))&&
+                        Double.parseDouble(jTextField2.getText())>=Double.parseDouble(rs.getString(2))) {
+                 //Campaign Title             
+                  System.out.print(rs.getString(1) + " \n");
+                  jTextArea1.append(rs.getString(1) + " \n");
+                   
+                //Amount, DDate   
+                   System.out.print(rs.getString(2) + " ");
+                   jTextArea1.append(rs.getString(2) + " ");
+                   System.out.print(rs.getString(3).substring(0,10) + " \n");
+                   jTextArea1.append(rs.getString(3).substring(0,10) + " \n");
+                   
+                //Notes
+                   System.out.print(rs.getString(4) + " \n");
+                   jTextArea1.append(rs.getString(4)+ " \n");
+                   
+                //Event Name, Event Date
+                   System.out.print(rs.getString(5) + " ");
+                   jTextArea1.append(rs.getString(5) + " ");
+                   System.out.print(rs.getString(6).substring(0,10) + " \n");
+                   jTextArea1.append(rs.getString(6).substring(0,10) + " \n");
+                  
+                   jTextArea1.append("\n");
+            }
+            }
+            }
+            //jRadioButton4
+            if(jRadioButton4.isSelected()){
+                Statement s = con.createStatement();
+                ResultSet rs = s.executeQuery("SELECT CampaignTitle, "
+                    + "Amount, DDate, Notes, "
+                    + "EventName, EventDate FROM Donations");
+            System.out.println("Is connection closed: " + con.isClosed());
+            System.out.println("Connection to DB established...");
+                  
+            while (rs.next()) {
+                
+                if(Double.parseDouble(jTextField3.getText())>=Double.parseDouble(rs.getString(2))&&
+                        jComboBox2.getSelectedItem().toString().equals("Below")) {
+                 //Campaign Title             
+                  System.out.print(rs.getString(1) + " \n");
+                  jTextArea1.append(rs.getString(1) + " \n");
+                   
+                //Amount, DDate   
+                   System.out.print(rs.getString(2) + " ");
+                   jTextArea1.append(rs.getString(2) + " ");
+                   System.out.print(rs.getString(3).substring(0,10) + " \n");
+                   jTextArea1.append(rs.getString(3).substring(0,10) + " \n");
+                   
+                //Notes
+                   System.out.print(rs.getString(4) + " \n");
+                   jTextArea1.append(rs.getString(4)+ " \n");
+                   
+                //Event Name, Event Date
+                   System.out.print(rs.getString(5) + " ");
+                   jTextArea1.append(rs.getString(5) + " ");
+                   System.out.print(rs.getString(6).substring(0,10) + " \n");
+                   jTextArea1.append(rs.getString(6).substring(0,10) + " \n");
+                  
+                   jTextArea1.append("\n");
+            }
+                else if(Double.parseDouble(jTextField3.getText())<=Double.parseDouble(rs.getString(2))&&
+                        jComboBox2.getSelectedItem().toString().equals("Above")) {
+                 //Campaign Title             
+                  System.out.print(rs.getString(1) + " \n");
+                  jTextArea1.append(rs.getString(1) + " \n");
+                   
+                //Amount, DDate   
+                   System.out.print(rs.getString(2) + " ");
+                   jTextArea1.append(rs.getString(2) + " ");
+                   System.out.print(rs.getString(3).substring(0,10) + " \n");
+                   jTextArea1.append(rs.getString(3).substring(0,10) + " \n");
+                   
+                //Notes
+                   System.out.print(rs.getString(4) + " \n");
+                   jTextArea1.append(rs.getString(4)+ " \n");
+                   
+                //Event Name, Event Date
+                   System.out.print(rs.getString(5) + " ");
+                   jTextArea1.append(rs.getString(5) + " ");
+                   System.out.print(rs.getString(6).substring(0,10) + " \n");
+                   jTextArea1.append(rs.getString(6).substring(0,10) + " \n");
+                  
+                   jTextArea1.append("\n");
+            }
+            }
+            }
             con.close();
             System.out.println("Is connection closed: " + con.isClosed());
         } catch (SQLException ex) {
             Logger.getLogger(userLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(viewDonations.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        jTextArea2.append("View All \n");
+        jTextArea1.append("View All \n");
           try {
             try {
                 Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
@@ -344,25 +540,25 @@ public class viewDonations extends javax.swing.JFrame {
             while (rs.next()) {
                 //Campaign Title
                    System.out.print(rs.getString(1) + " \n");
-                   jTextArea2.append(rs.getString(1) + " \n");
+                   jTextArea1.append(rs.getString(1) + " \n");
                    
                 //Amount, DDate   
                    System.out.print(rs.getString(2) + " ");
-                   jTextArea2.append(rs.getString(2) + " ");
-                   System.out.print(rs.getString(3) + " \n");
-                   jTextArea2.append(rs.getString(3) + " \n");
+                   jTextArea1.append(rs.getString(2) + " ");
+                   System.out.print(rs.getString(3).substring(0,10) + " \n");
+                   jTextArea1.append(rs.getString(3).substring(0,10) + " \n");
                    
                 //Notes
                    System.out.print(rs.getString(4) + " \n");
-                   jTextArea2.append(rs.getString(4)+ " \n");
+                   jTextArea1.append(rs.getString(4)+ " \n");
                    
                 //Event Name, Event Date
                    System.out.print(rs.getString(5) + " ");
-                   jTextArea2.append(rs.getString(5) + " ");
-                   System.out.print(rs.getString(6) + " \n");
-                   jTextArea2.append(rs.getString(6) + " \n");
+                   jTextArea1.append(rs.getString(5) + " ");
+                   System.out.print(rs.getString(6).substring(0,10) + " \n");
+                   jTextArea1.append(rs.getString(6).substring(0,10) + " \n");
                   
-                   jTextArea2.append("\n");
+                   jTextArea1.append("\n");
             }
            //
             con.close();
@@ -376,8 +572,11 @@ public class viewDonations extends javax.swing.JFrame {
         // TODO add your handling code here:
         jFormattedTextField1.setEnabled(true);     
         jFormattedTextField2.setEnabled(true);   
-        jTextField1.setEnabled(false);        
+        jTextField1.setEnabled(false); 
+        jTextField2.setEnabled(false);  
+        jTextField3.setEnabled(false);
         jComboBox1.setEnabled(false);
+        jComboBox2.setEnabled(false);
        // jTextArea2.append("Amount DDate Notes CampaignTitle PledgeID Event Name Event Date \n"); 
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
@@ -400,7 +599,10 @@ public class viewDonations extends javax.swing.JFrame {
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
     // TODO add your handling code here:
-    jComboBox1.setEnabled(true);         
+    jComboBox1.setEnabled(true);
+    jComboBox2.setEnabled(false);
+    jTextField2.setEnabled(false);  
+    jTextField3.setEnabled(false);
     jFormattedTextField1.setEnabled(false);
     jFormattedTextField2.setEnabled(false);
     jTextField1.setEnabled(false);
@@ -408,8 +610,11 @@ public class viewDonations extends javax.swing.JFrame {
 
     private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
     // TODO add your handling code here:
-    jTextField1.setEnabled(true);        
-    jComboBox1.setEnabled(false);        
+    jTextField1.setEnabled(true);
+    jTextField2.setEnabled(true);  
+    jTextField3.setEnabled(false);
+    jComboBox1.setEnabled(false);
+    jComboBox2.setEnabled(false);
     jFormattedTextField1.setEnabled(false);
     jFormattedTextField2.setEnabled(false);
     }//GEN-LAST:event_jRadioButton3ActionPerformed
@@ -423,8 +628,18 @@ public class viewDonations extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField3ActionPerformed
 
     private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4ActionPerformed
-        // TODO add your handling code here:
+    jTextField1.setEnabled(false);        
+    jTextField2.setEnabled(false);  
+    jTextField3.setEnabled(true);  
+    jComboBox1.setEnabled(false);
+    jComboBox2.setEnabled(true);
+    jFormattedTextField1.setEnabled(false);
+    jFormattedTextField2.setEnabled(false);
     }//GEN-LAST:event_jRadioButton4ActionPerformed
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -456,12 +671,17 @@ public class viewDonations extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new viewDonations().setVisible(true);
+                try {
+                    new viewDonations().setVisible(true);
+                } catch (ParseException ex) {
+                    Logger.getLogger(viewDonations.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
-    
+    private MaskFormatter dateMask1;
+    private MaskFormatter dateMask2;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
@@ -478,8 +698,8 @@ public class viewDonations extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
