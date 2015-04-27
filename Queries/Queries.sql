@@ -245,40 +245,40 @@ WHERE DonationID = '', CampaignTitle = '', DonorID = '', Amount = '', DDate = ''
 /* Insertion Statements */
 
   /* New Donor */
-  INSERT INTO DONOR
-  VALUES (street, city, state, zipcode, phone, emailaddress, userstatus, solicitation, preferredphone, preferredemail, preferredmailaddress, preferredmailcity, preferredmailstate, preferredmailzipcode)
+  INSERT INTO DONOR (street, city, state, zipcode, phone, emailaddress, userstatus, solicitation, preferredphone, preferredemail, preferredmailaddress, preferredmailcity, preferredmailstate, preferredmailzipcode)
+  VALUES ()
 
   /* New Individual */
-  INSERT INTO INDIVIDUAL
-  VALUES (Fname, Minit, Lname, PreferredHouseHoldName, Title)
+  INSERT INTO INDIVIDUAL (Fname, Minit, Lname, PreferredHouseHoldName, Title)
+  VALUES ()
 
   /* New Corporate/Organization */
-  INSERT INTO CORPORATE_ORGANIZATION
-  VALUES (OrgName, PrimaryContact)
+  INSERT INTO CORPORATE_ORGANIZATION (OrgName, PrimaryContact)
+  VALUES ()
 
   /* New Grants */
-  INSERT INTO GRANT
-  VALUES (GrantName, StartDate, EndDate, NextReportDate)
+  INSERT INTO GRANT (GrantName, StartDate, EndDate, NextReportDate)
+  VALUES ()
 
   /* New Events */
-  INSERT INTO EVENTS
-  VALUES (EventName, EventDate, Description, MoneyRaised, CampaignTitle)
+  INSERT INTO EVENTS (EventName, EventDate, Description, MoneyRaised, CampaignTitle)
+  VALUES ()
 
   /* New Campaigns */
-  INSERT INTO CAMPAIGN
-  VALUES (CampaignTitle, StartDate, EndDate, Description, Goal)
+  INSERT INTO CAMPAIGN (CampaignTitle, StartDate, EndDate, Description, Goal)
+  VALUES ()
 
   /* New Donations */
-  INSERT INTO DONATIONS
-  VALUES (DonationID, CampaignTitle, DonorID, Amount, DDate, Notes, PledgeID, PaymentType, EventName, EventDate)
+  INSERT INTO DONATIONS (DonationID, CampaignTitle, DonorID, Amount, DDate, Notes, PledgeID, PaymentType, EventName, EventDate)
+  VALUES ()
 
   /* New Payment Type */
-  INSERT INTO PAYMENTTYPE
-  VALUES (TypeName)
+  INSERT INTO PAYMENTTYPE (TypeName)
+  VALUES ()
 
   /* New Pledges */
-  INSERT INTO PLEDGES
-  VALUES (Amount, PaymentFrequency, PayToDate)
+  INSERT INTO PLEDGES (Amount, PaymentFrequency, PayToDate)
+  VALUES ()
 
 /* Deletion Statements */
   /* Templates */
@@ -381,7 +381,7 @@ WHERE DonationID = '', CampaignTitle = '', DonorID = '', Amount = '', DDate = ''
   /* GRANT Start & End Date */
   SELECT EndDate
   FROM GRANT AS G
-  WHERE 
+  WHERE (Clause)
 
   SELECT StartDate
   FROM GRANT
@@ -391,3 +391,137 @@ WHERE DonationID = '', CampaignTitle = '', DonorID = '', Amount = '', DDate = ''
   SELECT
   FROM
   WHERE
+
+  /* Donations Found Between Dates (Insert Dates) */
+  SELECT DonationID
+  FROM DONATIONS
+  WHERE D.DDate BETWEEN DATE1 AND DATE2
+
+  /* Get Pledge Totals */
+  SELECT DonorID, PayToDate
+  FROM PLEDGES AS P, DONATIONS AS DA, DONOR AS D
+  INNER JOIN D, DA, P
+  ON P.PledgeID = DA.PledgeID AND D.DonorID = DA.DonorID
+
+  /* Group by Donor Status */
+    /* Insert Active/Inactive/Deceased */
+    SELECT DonorID
+    FROM INDIVIDUAL AS I, GRANTS AS G, COROPORATE_ORGANIZATION AS CO, DONOR AS D
+    INNER JOIN I, G, CO, D
+    ON I.DonorID = D.DonorID AND G.DonorID = D.DonorID
+      AND CO.DonorID = D.DonorID
+    WHERE D.Status = ""
+    GROUP BY D.DonorID
+
+
+  /* Solicitation  Status Template */
+  SELECT DonorID
+  FROM INDIVIDUAL AS I, GRANTS AS G, COROPORATE_ORGANIZATION AS CO, DONOR AS D
+  INNER JOIN I, G, CO, D
+  ON I.DonorID = D.DonorID AND G.DonorID = D.DonorID
+    AND CO.DonorID = D.DonorID
+  WHERE D.Solicitation = ""
+  GROUP BY D.DonorID
+
+  /* Donors by Payment Type */
+  SELECT DonorID
+  FROM
+
+  /* Total Donations Made During Dates */
+  SELECT Count(DonationID)
+  FROM DONATIONS
+  WHERE D.DDate BETWEEN DATE1 AND DATE2
+
+  /* Sum of Donations Made During Dates */
+  SELECT SUM()
+  FROM DONATIONS
+  WHERE D.DDate BETWEEN DATE1 AND DATE2
+
+  /* Select Using Specific Information */
+    /* Email - Individual */
+    SELECT EmailAddress
+    FROM DONOR AS D, INDIVIDUAL AS I
+    INNER JOIN D, I
+    ON D.DonorID = I.DonorID
+    WHERE D.EmailAddress = ""
+
+    /* Grant */
+    SELECT EmailAddress
+    FROM DONOR AS D, GRANT AS G
+    INNER JOIN D, I
+    ON D.DonorID = G.DonorID
+    WHERE D.EmailAddress = ""
+
+    /* Corporate_Organization */
+    SELECT EmailAddress
+    FROM DONOR AS D, COPORATE_ORGANIZATION AS CO
+    INNER JOIN D, CO
+    ON D.DonorID = CO.DonorID
+    WHERE D.EmailAddress = ""
+
+    /* Preferred Email Address */
+      /* Individual */
+      SELECT PreferredEmail
+      FROM DONOR AS D, INDIVIDUAL AS I
+      INNER JOIN D, I
+      ON D.DonorID = I.DonorID
+      WHERE D.PreferredEmail = ""
+
+      /* Grant */
+      SELECT PreferredEmail
+      FROM DONOR AS D, GRANT AS G
+      INNER JOIN D, G
+      ON D.DonorID = G.DonorID
+      WHERE D.PreferredEmail = ""
+
+      /* Corporate_Organization */
+      SELECT PreferredEmail
+      FROM DONOR AS D, CORPORATE_ORGANIZATION AS CO
+      INNER JOIN D, CO
+      ON D.DonorID = G.DonorID
+      WHERE D.PreferredEmail = ""
+
+    /* Phone and Preferred Phone Searches */
+      /* Phone */
+        /* Individual */
+        SELECT Phone
+        FROM DONOR AS D, INDIVIDUAL AS I
+        INNER JOIN D, I
+        ON D.DonorID = I.DonorID
+        WHERE D.Phone = ""
+
+        /* Grant */
+        SELECT Phone
+        FROM DONOR AS D, GRANT AS G
+        INNER JOIN D, G
+        ON D.DonorID = G.DonorID
+        WHERE D.Phone = ""
+
+        /* Corporate/Organization */
+        SELECT Phone
+        FROM DONOR AS D, CORPORATE_ORGANIZATION AS CO
+        INNER JOIN D, CO
+        ON D.DonorID = CO.DonorID
+        WHERE D.Phone = ""
+
+      /* Preferred Phone */
+        /* Individual */
+        SELECT PreferredPhone
+        FROM DONOR AS D, INDIVIDUAL AS I
+        INNER JOIN D, I
+        ON D.DonorID = I.DonorID
+        WHERE D.PreferredPhone = ""
+
+        /* Grant */
+        SELECT PreferredPhone
+        FROM DONOR AS D, GRANT AS G
+        INNER JOIN D, G
+        ON D.DonorID = G.DonorID
+        WHERE D.PreferredPhone = ""
+
+        /* Corporate/Organization */
+        SELECT PreferredPhone
+        FROM DONOR AS D, CORPORATE_ORGANIZATION AS CO
+        INNER JOIN D, CO
+        ON D.DonorID = CO.DonorID
+        WHERE D.PreferredPhone = ""
