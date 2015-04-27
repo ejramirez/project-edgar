@@ -390,8 +390,8 @@ public class viewDonations extends javax.swing.JFrame {
                 //Amount, DDate   
                    System.out.print(rs.getString(2) + " ");
                    jTextArea1.append(rs.getString(2) + " ");
-                   System.out.print(rs.getString(3) + " \n");
-                   jTextArea1.append(rs.getString(3) + " \n");
+                   System.out.print(rs.getString(3).substring(0,10) + " \n");
+                   jTextArea1.append(rs.getString(3).substring(0,10) + " \n");
                    
                 //Notes
                    System.out.print(rs.getString(4) + " \n");
@@ -400,8 +400,8 @@ public class viewDonations extends javax.swing.JFrame {
                 //Event Name, Event Date
                    System.out.print(rs.getString(5) + " ");
                    jTextArea1.append(rs.getString(5) + " ");
-                   System.out.print(rs.getString(6) + " \n");
-                   jTextArea1.append(rs.getString(6) + " \n");
+                   System.out.print(rs.getString(6).substring(0,10) + " \n");
+                   jTextArea1.append(rs.getString(6).substring(0,10) + " \n");
                   
                    jTextArea1.append("\n");
             }
