@@ -1,3 +1,11 @@
+
+import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.Date;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -153,8 +161,50 @@ public class addCampaign extends javax.swing.JFrame {
     }//GEN-LAST:event_backToMainActionPerformed
     //button 2 - save new tuple
     private void saveCampaignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveCampaignActionPerformed
+        try {
+            try {
+                Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(addCampaign.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            Connection con;
+            con = DriverManager.getConnection(
+                    "jdbc:ucanaccess://C:\\Users\\Alexander\\Documents\\GitHub\\project-edgar\\Project-Edgar-Database.accdb",
+                    "","");
+            
+            String insert = "INSERT INTO Campaign(CampaignTitle,StartDate,EndDate,Description,Goal) Values(?,?,?,?,?)";
+            SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+            
+            Date sDate = null;
+            Date eDate = null;
+            
+            try {
+                sDate = format.parse(startDate.getText());
+            } catch (ParseException ex) {
+                Logger.getLogger(addCampaign.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            try {
+                eDate = format.parse(endDate.getText());
+            } catch (ParseException ex) {
+                Logger.getLogger(addCampaign.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            PreparedStatement ps = con.prepareStatement(insert);
+            ps.setString(1,campaignTitle.getText());
+            ps.setTimestamp(2,new Timestamp(sDate.getTime()));
+            ps.setTimestamp(3,new Timestamp(eDate.getTime()));
+            ps.setString(4,description.getText());
+            ps.setString(5,financialGoal.getText());
+            ps.executeUpdate();
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(addCampaign.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         this.setVisible(false);
-        new mainView().setVisible(true);
+        new addCampaign().setVisible(true);
     }//GEN-LAST:event_saveCampaignActionPerformed
 
     private void campaignTitleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campaignTitleActionPerformed
