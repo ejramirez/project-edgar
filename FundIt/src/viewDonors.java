@@ -130,15 +130,16 @@ public class viewDonors extends javax.swing.JFrame {
                 Logger.getLogger(viewDonors.class.getName()).log(Level.SEVERE, null, ex);
             }
             Connection con;
+            /*
             con = DriverManager.getConnection(
                     "jdbc:ucanaccess://C:\\Users\\aung\\Desktop\\data\\project-edgar\\Project-Edgar-Database.accdb",
                     "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
-            
-            /* Alex Database Location
+            */
+            // Alex Database Location
             con = DriverManager.getConnection(
                     "jdbc:ucanaccess://C:\\Users\\Alexander\\Documents\\GitHub\\project-edgar\\Project-Edgar-Database.accdb",
                     "","");
-            */
+            
             
             Statement s = con.createStatement();
             ResultSet rs = s.executeQuery("SELECT Fname, Minit, Lname,"
@@ -233,15 +234,16 @@ public class viewDonors extends javax.swing.JFrame {
                 Logger.getLogger(viewDonors.class.getName()).log(Level.SEVERE, null, ex);
             }
             Connection con;
+            /*
             con = DriverManager.getConnection(
                     "jdbc:ucanaccess://C:\\Users\\aung\\Desktop\\data\\project-edgar\\Project-Edgar-Database.accdb",
                     "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
-            
-            /* Alex Database Location
+            */
+            // Alex Database Location
             con = DriverManager.getConnection(
                     "jdbc:ucanaccess://C:\\Users\\Alexander\\Documents\\GitHub\\project-edgar\\Project-Edgar-Database.accdb",
                     "","");
-            */
+            
             
             Statement s = con.createStatement();
             ResultSet rs = s.executeQuery("SELECT OrgName, PrimaryContact,"
@@ -323,15 +325,16 @@ public class viewDonors extends javax.swing.JFrame {
                 Logger.getLogger(viewDonors.class.getName()).log(Level.SEVERE, null, ex);
             }
             Connection con;
+            /*
             con = DriverManager.getConnection(
                     "jdbc:ucanaccess://C:\\Users\\aung\\Desktop\\data\\project-edgar\\Project-Edgar-Database.accdb",
                     "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
-            
-            /* Alex Database Location
+            */
+            // Alex Database Location
             con = DriverManager.getConnection(
                     "jdbc:ucanaccess://C:\\Users\\Alexander\\Documents\\GitHub\\project-edgar\\Project-Edgar-Database.accdb",
                     "","");
-            */
+            
             
             Statement s = con.createStatement();
             ResultSet rs = s.executeQuery("SELECT GrantName, GrantNumber, "

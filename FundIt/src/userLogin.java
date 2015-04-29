@@ -48,7 +48,7 @@ public class userLogin extends javax.swing.JFrame {
         jLabel1.setText("Please enter your credentials below to login to [new name]:");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel2.setText("Welcome to [new name]!");
+        jLabel2.setText("Welcome to $cotTrak!");
 
         jLabel3.setText("Username:");
 

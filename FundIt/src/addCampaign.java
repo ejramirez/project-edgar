@@ -204,7 +204,7 @@ public class addCampaign extends javax.swing.JFrame {
         }
         
         this.setVisible(false);
-        new addCampaign().setVisible(true);
+        new mainView().setVisible(true);
     }//GEN-LAST:event_saveCampaignActionPerformed
 
     private void campaignTitleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campaignTitleActionPerformed
