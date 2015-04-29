@@ -204,7 +204,7 @@ GROUP BY C.CampaignTitle
   INNER JOIN D, G
   ON D.DonorID = D.DonorID
 
-/* Updates (SET Clause is where you put the change being made. WHERE Clause is the condition)(Not certain if an AND clause works with these statements) */
+/* Updates (SET Clause is where you put the change being made. WHERE Clause is the condition)(Not certain if AND clause works with these statements) */
 /* DONOR */
 UPDATE DONOR
 SET street = '', city = '', state = '', zipcode = '', phone = '', emailaddress = '', userstatus = '', solicitation = '', preferredphone = '', preferredemail = '', preferredmailaddress = '', preferredmailcity = '', preferredmailstate = '', preferredmailzipcode = ''
@@ -287,7 +287,7 @@ WHERE DonationID = '', CampaignTitle = '', DonorID = '', Amount = '', DDate = ''
 
     DELETE FROM INDIVIDUAL
 
-    DELETE FROM CORPORATION_ORGANIZATION
+    DELETE FROM CORPORATE_ORGANIZATION
 
     DELETE FROM GRANT
 
@@ -327,7 +327,7 @@ WHERE DonationID = '', CampaignTitle = '', DonorID = '', Amount = '', DDate = ''
       AND PreferredHouseHoldName = ''
       AND Title = ''
 
-      DELETE FROM CORPORATION_ORGANIZATION
+      DELETE FROM CORPORATE_ORGANIZATION
       WHERE OrgName = ''
       AND PrimaryContact = ''
 
@@ -381,16 +381,11 @@ WHERE DonationID = '', CampaignTitle = '', DonorID = '', Amount = '', DDate = ''
   /* GRANT Start & End Date */
   SELECT EndDate
   FROM GRANT AS G
-  WHERE (Clause)
-
-  SELECT StartDate
-  FROM GRANT
   WHERE (clause)
 
-  /* Solicitation Status */
-  SELECT
-  FROM
-  WHERE
+  SELECT StartDate
+  FROM GRANT AS G
+  WHERE (clause)
 
   /* Donations Found Between Dates (Insert Dates) */
   SELECT DonationID
@@ -404,28 +399,77 @@ WHERE DonationID = '', CampaignTitle = '', DonorID = '', Amount = '', DDate = ''
   ON P.PledgeID = DA.PledgeID AND D.DonorID = DA.DonorID
 
   /* Group by Donor Status */
-    /* Insert Active/Inactive/Deceased */
-    SELECT DonorID
-    FROM INDIVIDUAL AS I, GRANTS AS G, COROPORATE_ORGANIZATION AS CO, DONOR AS D
+  -- By Individual
+    SELECT Fname, Lname
+    FROM INDIVIDUAL AS I, DONOR AS D
+    INNER JOIN I, D
+    ON I.DonorID = D.DonorID
+    WHERE D.Status = "" -- Active/Inactive/Deceased
+    GROUP BY I.Lname
+
+  -- By Grant
+    SELECT GrantName
+    FROM GRANTS AS G, DONOR AS D
+    INNER JOIN G, D
+    ON G.DonorID = D.DonorID
+    WHERE D.Status = "" -- Active/Inactive/Deceased
+    GROUP BY G.GrantName
+
+  -- By Corporate/Organization
+    SELECT OrgName
+    FROM CORPORATE_ORGANIZATION AS CO, DONOR AS D
     INNER JOIN I, G, CO, D
-    ON I.DonorID = D.DonorID AND G.DonorID = D.DonorID
-      AND CO.DonorID = D.DonorID
-    WHERE D.Status = ""
-    GROUP BY D.DonorID
+    ON CO.DonorID = D.DonorID
+    WHERE D.Status = "" -- Active/Inactive/Deceased
+    GROUP BY CO.OrgName
 
 
-  /* Solicitation  Status Template */
-  SELECT DonorID
-  FROM INDIVIDUAL AS I, GRANTS AS G, COROPORATE_ORGANIZATION AS CO, DONOR AS D
-  INNER JOIN I, G, CO, D
-  ON I.DonorID = D.DonorID AND G.DonorID = D.DonorID
-    AND CO.DonorID = D.DonorID
-  WHERE D.Solicitation = ""
-  GROUP BY D.DonorID
+  /* Solicitation Status Template */
+  -- By Individual
+    SELECT Fname, Lname
+    FROM INDIVIDUAL AS I, DONOR AS D
+    INNER JOIN I, D
+    ON I.DonorID = D.DonorID 
+    WHERE D.Solicitation = "" -- Input Yes or No
+    GROUP BY I.Lname
+
+  -- By Grants
+    SELECT GrantName
+    FROM GRANTS AS G, DONOR AS D
+    INNER JOIN G, D
+    ON G.DonorID = D.DonorID
+    WHERE D.Solicitation = "" -- Input Yes or No
+    GROUP BY G.GrantName
+
+  -- By Corporate/Organization
+    SELECT DonorID
+    FROM CORPORATE_ORGANIZATION AS CO, DONOR AS D
+    INNER JOIN CO, D
+    ON CO.DonorID = D.DonorID
+    WHERE D.Solicitation = "" -- Input Yes or No
+    GROUP BY CO.OrgName
 
   /* Donors by Payment Type */
-  SELECT DonorID
-  FROM
+  -- By Individual
+    SELECT Fname, Lname, Amount
+    FROM DONOR AS D, DONATIONS AS DA, INDIVIDUAL AS I
+    INNER JOIN D, DA, I
+    ON D.DonorID = DA.DonorID AND D.DonorID = I.DonorID
+    GROUP BY Lname
+
+  -- By Corporate/Organization
+    SELECT OrgName Amount
+    FROM DONOR AS D, DONATIONS AS DA, CORPORATE_ORGANIZATION AS CO
+    INNER JOIN D, DA, CO
+    ON D.DonorID = DA.DonorID AND D.DonorID = CO.DonorID
+    GROUP BY CO.OrgName
+
+  -- By Grant
+    SELECT Fname, Lname, Amount
+    FROM DONOR AS D, DONATIONS AS DA, GRANT AS G
+    INNER JOIN D, DA, G
+    ON D.DonorID = DA.DonorID AND D.DonorID = G.DonorID
+    GROUP BY G.GrantName
 
   /* Total Donations Made During Dates */
   SELECT Count(DonationID)
@@ -525,3 +569,5 @@ WHERE DonationID = '', CampaignTitle = '', DonorID = '', Amount = '', DDate = ''
         INNER JOIN D, CO
         ON D.DonorID = CO.DonorID
         WHERE D.PreferredPhone = ""
+      
+       
