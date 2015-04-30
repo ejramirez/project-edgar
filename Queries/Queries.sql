@@ -474,12 +474,17 @@ WHERE DonationID = '', CampaignTitle = '', DonorID = '', Amount = '', DDate = ''
   /* Total Donations Made During Dates */
   SELECT Count(DonationID)
   FROM DONATIONS
-  WHERE D.DDate BETWEEN DATE1 AND DATE2
+  WHERE D.DDate BETWEEN DATE1 AND DATE2 -- Insert Dates Here
 
   /* Sum of Donations Made During Dates */
   SELECT SUM()
   FROM DONATIONS
-  WHERE D.DDate BETWEEN DATE1 AND DATE2
+  WHERE D.DDate BETWEEN DATE1 AND DATE2 -- Insert Dates Here
+
+  /* List Donations Made Between Two Dates */
+    SELECT DonationID
+    FROM DONATIONS
+    WHERE D.DDate BETWEEN DATE1 AND DATE2 -- Insert Dates Here
 
   /* Select Using Specific Information */
     /* Email - Individual */
@@ -570,4 +575,165 @@ WHERE DonationID = '', CampaignTitle = '', DonorID = '', Amount = '', DDate = ''
         ON D.DonorID = CO.DonorID
         WHERE D.PreferredPhone = ""
       
-       
+    /* Search by DonorID */
+      -- Individual
+      SELECT Fname, Lname, Amount
+      FROM DONOR AS D, INDIVIDUAL AS I
+      INNER JOIN D, I
+      ON D.DonorID = I.DonorID
+      WHERE D.DonorID = ""
+
+      -- Grant
+      SELECT GrantName, Amount
+      FROM DONOR AS D, GRANT AS G
+      INNER JOIN D, G
+      ON D.DonorID = G.DonorID
+      WHERE D.DonorID = ""
+
+      -- Corporate/Organization 
+      SELECT OrgName, Amount
+      FROM DONOR AS D, CORPORATE_ORGANIZATION AS CO
+      INNER JOIN D, G
+      ON D.DonorID = CO.DonorID
+      WHERE D.DonorID = "" 
+
+    /* Search by PledgeID */
+      -- Individual
+      SELECT Fname, Lname, Amount
+      FROM DONOR AS D, INDIVIDUAL AS I, DONATIONS AS DA, PLEDGES AS P
+      INNER JOIN D, I, DA, P
+      ON D.DonorID = I.DonorID AND DA.PledgeID = P.PledgeID AND D.DonorID = DA.DonorID
+      WHERE P.PledgeID = ""
+
+      -- Corporate/Organization
+      SELECT OrgName
+      FROM DONOR AS D, CORPORATE_ORGANIZATION AS CO, DONATIONS AS DA, PLEDGES AS P
+      INNER JOIN D, CO, DA, P
+      ON D.DonorID = CO.DonorID AND DA.PledgeID = P.PledgeID AND D.DonorID = DA.DonorID
+      WHERE P.PledgeID = ""
+    
+/* Search Donors By Locations */
+
+  /* Individuals */
+    /* By City */
+    SELECT Fname, Lname, City, State, Zipcode
+    FROM INDIVIDUAL AS I, DONOR AS D, DONATIONS AS DA
+    INNER JOIN I, D, DA
+    ON I.DonorID = D.DonorID AND D.DonorID = DA.DonorID
+    WHERE D.City = ""
+
+    /* By State */
+    SELECT Fname, Lname, City, State, Zipcode
+    FROM INDIVIDUAL as I, DONOR as D, DONATIONS as DA
+    INNER JOIN I, D, DA
+    ON I.DonorID = D.DonorID AND D.DonorID = DA.DonorID
+    WHERE D.State = ""
+
+    /* By Zipcode */
+    SELECT Fname, Lname, City, State, Zipcode
+    FROM INDIVIDUAL as I, DONOR as D, DONATIONS as DA
+    INNER JOIN I, D, DA
+    ON I.DonorID = D.DonorID AND D.DonorID = DA.DonorID
+    WHERE D.Zipcode = ""
+
+  /* Grouping Corporate_Organizations */
+    /* By City */
+    SELECT OrgName, City, State, Zipcode
+    FROM CORPORATE_ORGANIZATION as CO, DONOR as D, DONATIONS as DA
+    INNER JOIN CO, D, DA
+    ON CO.DonorID = D.DonorID AND D.DonorID = DA.DonorID
+    WHERE D.City = ""
+
+    /* By State */
+    SELECT OrgName, City, State, Zipcode
+    FROM CORPORATE_ORGANIZATION as CO, DONOR as D, DONATIONS as DA
+    INNER JOIN CO, D, DA
+    ON CO.DonorID = D.DonorID AND D.DonorID = DA.DonorID
+    WHERE D.State = ""
+
+    /* By Zipcode */
+    SELECT OrgName, City, State, Zipcode
+    FROM CORPORATE_ORGANIZATION as CO, DONOR as D, DONATIONS as DA
+    INNER JOIN CO, D, DA
+    ON CO.DonorID = D.DonorID AND D.DonorID = DA.DonorID
+    WHERE D.Zipcode = ""
+
+  /* Group by Grant */
+    /* By City */
+    SELECT GrantName, City, State, Zipcode
+    FROM GRANT as G, DONOR as D, DONATIONS as DA
+    INNER JOIN G, D, DA
+    ON G.DonorID = D.DonorID AND D.DonorID = DA.DonorID
+    WHERE D.City = ""
+
+    /* By State */
+    SELECT GrantName, City, State, Zipcode
+    FROM GRANT as G, DONOR as D, DONATIONS as DA
+    INNER JOIN G, D, DA
+    ON G.DonorID = D.DonorID AND D.DonorID = DA.DonorID
+    WHERE D.State = ""
+
+    /* By Zipcode */
+    SELECT GrantName, City, State, Zipcode
+    FROM GRANT as G, DONOR as D, DONATIONS as DA
+    INNER JOIN G, D, DA
+    ON G.DonorID = D.DonorID AND D.DonorID = DA.DonorID
+    WHERE D.Zipcode = ""
+
+/* Search by Frequency */
+  -- Individual
+  SELECT Fname, Lname, Amount
+  FROM DONOR AS D, INDIVIDUAL AS I, DONATIONS AS DA
+  INNER JOIN D, I, DA
+  ON D.DonorID = I.DonorID AND D.DonorID = DA.DonorID
+  WHERE COUNT(DonationID) = "" OR COUNT(DonationID) > OR COUNT(DonationID) < -- pick one
+
+  -- Corporate/Organization
+  SELECT OrgName, Amount
+  FROM DONOR AS D, CORPORATE_ORGANIZATION AS CO, DONATIONS AS DA
+  INNER JOIN D, CO, DA
+  ON D.DonorID = CO.DonorID AND D.DonorID = DA.DonorID
+  WHERE COUNT(DonationID) = "" OR COUNT(DonationID) > OR COUNT(DonationID) < -- pick one
+  
+/* Donors by Donation Type */
+  -- Individual
+  SELECT Fname, Lname, Amount
+  FROM DONOR AS D, INDIVIDUAL AS I, DONATIONS AS DA, PLEDGES AS P
+  INNER JOIN D, I, DA, P
+  ON D.DonorID = I.DonorID AND DA.DonorID = D.DonorID AND P.DonorID = D.DonorID AND P.DonationID = DA.DonationID
+
+  -- Corporate/Organization
+  SELECT OrgName, Amount
+  FROM DONOR AS D, CORPORATE_ORGANIZATION AS CO, DONATIONS AS DA, PLEDGES AS P
+  INNER JOIN D, I, DA, P
+  ON D.DonorID = I.DonorID AND DA.DonorID = D.DonorID AND P.DonationID = DA.DonationID
+
+/* Search by Events */
+  -- By Donor
+    -- Individual
+    SELECT Fname, Lname, Amount
+    FROM DONOR AS D, INDIVIDUAL AS I, DONATIONS AS DA, EVENTS AS E
+    INNER JOIN D, I, DA, E
+    ON D.DonorID = I.DonorID AND DA.DonorID = D.DonorID AND E.DonationID = DA.DonationID
+    WHERE E.EventName = ""
+
+    -- Grant
+    SELECT GrantName, Amount
+    FROM DONOR AS D, GRANT AS G, DONATIONS AS DA, EVENTS AS E
+    INNER JOIN D, G, DA, E
+    ON D.DonorID = G.DonorID AND DA.DonorID = D.DonorID AND E.DonationID = DA.DonationID
+    WHERE E.EventName = ""
+
+    -- Corporate/Organization
+    SELECT OrgName, Amount
+    FROM DONOR AS D, CORPORATE_ORGANIZATION AS CO, DONATIONS AS DA, EVENTS AS E
+    INNER JOIN D, CO, DA, E
+    ON D.DonorID = CO.DonorID AND DA.DonorID = D.DonorID AND E.DonationID = DA.DonationID
+    WHERE E.EventName = ""
+
+  -- By Amount
+  
+
+/* Search by Next-Report-Date */
+
+/* Pledge Payment Frequency */
