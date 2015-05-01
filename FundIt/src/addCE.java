@@ -238,6 +238,8 @@ public class addCE extends javax.swing.JFrame {
             ps.setString(5, (String) campaign.getSelectedItem());
             ps.executeUpdate();
         
+            con.commit();
+            con.close();
         } catch (SQLException ex) {
             Logger.getLogger(addCampaign.class.getName()).log(Level.SEVERE, null, ex);
         }

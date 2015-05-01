@@ -1,3 +1,12 @@
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -15,6 +24,29 @@ public class viewCampaign extends javax.swing.JFrame {
      */
     public viewCampaign() {
         initComponents();
+        campaigns.removeAllItems();
+        
+        try {
+            try {
+                Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(viewDonations.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Connection con;
+            con = DriverManager.getConnection(
+                    "jdbc:ucanaccess://C:\\Users\\Alexander\\Documents\\GitHub\\project-edgar\\Project-Edgar-Database.accdb");
+            
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("SELECT CampaignTitle FROM Campaign");
+            while(rs.next()) {
+                campaigns.addItem(rs.getString(1));
+            }
+            con.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(addCE.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     /**
@@ -26,22 +58,54 @@ public class viewCampaign extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        viewCampaigns = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        textArea = new javax.swing.JTextArea();
+        clearText = new javax.swing.JButton();
+        backToMain = new javax.swing.JButton();
+        campaigns = new javax.swing.JComboBox();
+        jSeparator1 = new javax.swing.JSeparator();
+        viewSpecificCampaign = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Back to Main!");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        viewCampaigns.setText("View All Campaigns");
+        viewCampaigns.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                viewCampaignsActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Show Campaign");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        textArea.setColumns(20);
+        textArea.setRows(5);
+        jScrollPane1.setViewportView(textArea);
+
+        clearText.setText("Clear Text Area");
+        clearText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                clearTextActionPerformed(evt);
+            }
+        });
+
+        backToMain.setText("Back to Main");
+        backToMain.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backToMainActionPerformed(evt);
+            }
+        });
+
+        campaigns.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        campaigns.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campaignsActionPerformed(evt);
+            }
+        });
+
+        viewSpecificCampaign.setText("View Campaign");
+        viewSpecificCampaign.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewSpecificCampaignActionPerformed(evt);
             }
         });
 
@@ -51,32 +115,99 @@ public class viewCampaign extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
-                .addGap(18, 18, 18)
-                .addComponent(jButton2)
-                .addContainerGap(416, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(viewCampaigns, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(campaigns, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(viewSpecificCampaign))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(clearText)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(backToMain))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap(360, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(backToMain)
+                            .addComponent(clearText)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(viewCampaigns)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(campaigns, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(viewSpecificCampaign)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    //button 1 - main
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.setVisible(false); 
+
+   //button 2 - show campaigns
+    private void viewCampaignsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewCampaignsActionPerformed
+        try {
+            Connection con;
+            String DBLoc1, DBLoc2, DBLoc3, DBLoc4, DBLoc5;
+            DBLoc1 = "jdbc:ucanaccess://C:\\Users\\Alexander\\Documents\\GitHub\\project-edgar\\Project-Edgar-Database.accdb";
+            DBLoc2 = ""; // Mercedes
+            DBLoc3 = ""; // Aung
+            DBLoc4 = ""; // Eric
+            DBLoc5 = ""; // Alissa
+            con = DriverManager.getConnection(DBLoc1);
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("SELECT * FROM Campaign");
+            while (rs.next()) {
+                // Campaign Title
+                textArea.append("CAMPAIGN TITLE: " + rs.getString(1) + " \n");
+                // Start Date
+                textArea.append("START DATE: " + rs.getString(2).substring(0,10) + " \n");
+                // End Date
+                textArea.append("END DATE: " + rs.getString(3).substring(0,10) + " \n");
+                // Goal
+                textArea.append("FINANCIAL GOAL: $" + rs.getString(4) + " \n");
+                // Description
+                textArea.append("DESCRIPTION: " + rs.getString(5) + " \n");
+                textArea.append("-------------------------------" 
+                              + "-------------------------------"
+                              + "-------------------------------" + "\n");
+            }
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(viewCampaign.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_viewCampaignsActionPerformed
+
+    private void clearTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearTextActionPerformed
+        textArea.setText("");
+    }//GEN-LAST:event_clearTextActionPerformed
+
+    private void backToMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToMainActionPerformed
+        this.setVisible(false);
         new mainView().setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
-    //button 2 - show campaigns
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_backToMainActionPerformed
+
+    private void campaignsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campaignsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_campaignsActionPerformed
+
+    private void viewSpecificCampaignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewSpecificCampaignActionPerformed
+
+    }//GEN-LAST:event_viewSpecificCampaignActionPerformed
 
     /**
      * @param args the command line arguments
@@ -114,7 +245,14 @@ public class viewCampaign extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton backToMain;
+    private javax.swing.JComboBox campaigns;
+    private javax.swing.JButton clearText;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JTextArea textArea;
+    private javax.swing.JButton viewCampaigns;
+    private javax.swing.JButton viewSpecificCampaign;
     // End of variables declaration//GEN-END:variables
 }

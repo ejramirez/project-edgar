@@ -73,6 +73,11 @@ public class addCampaign extends javax.swing.JFrame {
         jLabel1.setText("Campaign Title");
 
         startDate.setText("MM/DD/YYYY");
+        startDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                startDateActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("End Date");
 
@@ -112,13 +117,13 @@ public class addCampaign extends javax.swing.JFrame {
                                 .addComponent(jLabel2)
                                 .addComponent(jLabel5))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(campaignTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(campaignTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(financialGoal, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(endDate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
                                     .addComponent(startDate, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(jScrollPane1)))))
                 .addContainerGap(342, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -142,13 +147,13 @@ public class addCampaign extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(financialGoal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addGap(36, 36, 36)
+                .addGap(29, 29, 29)
                 .addComponent(saveCampaign)
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
 
         pack();
@@ -199,6 +204,8 @@ public class addCampaign extends javax.swing.JFrame {
             ps.setString(5,financialGoal.getText());
             ps.executeUpdate();
         
+            con.commit();
+            con.close();
         } catch (SQLException ex) {
             Logger.getLogger(addCampaign.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -214,6 +221,10 @@ public class addCampaign extends javax.swing.JFrame {
     private void financialGoalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_financialGoalActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_financialGoalActionPerformed
+
+    private void startDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startDateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_startDateActionPerformed
 
     /**
      * @param args the command line arguments
