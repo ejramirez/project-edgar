@@ -162,6 +162,11 @@ public class viewCampaign extends javax.swing.JFrame {
    //button 2 - show campaigns
     private void viewCampaignsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewCampaignsActionPerformed
         try {
+            try {
+                Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(viewCampaign.class.getName()).log(Level.SEVERE, null, ex);
+            }
             this.con = DriverManager.getConnection(DBLoc1); // DATABASE LOCATION
             Statement s = con.createStatement();
             ResultSet rs = s.executeQuery("SELECT * FROM Campaign");
@@ -200,7 +205,29 @@ public class viewCampaign extends javax.swing.JFrame {
     }//GEN-LAST:event_campaignsActionPerformed
 
     private void viewSpecificCampaignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewSpecificCampaignActionPerformed
-
+        try {
+            this.con = DriverManager.getConnection(this.DBLoc1); // DATABASE LOCATION
+            Statement s = this.con.createStatement();
+            ResultSet rs = s.executeQuery("SELECT * FROM Campaign WHERE Campaign.CampaignTitle LIKE '" + this.campaigns.getSelectedItem().toString() + "' ");
+            while (rs.next()) {
+                // Campaign Title
+                textArea.append("CAMPAIGN TITLE: " + rs.getString(1) + " \n");
+                // Start Date
+                textArea.append("START DATE: " + rs.getString(2).substring(0,10) + " \n");
+                // End Date
+                textArea.append("END DATE: " + rs.getString(3).substring(0,10) + " \n");
+                // Goal
+                textArea.append("FINANCIAL GOAL: $" + rs.getString(4) + " \n");
+                // Description
+                textArea.append("DESCRIPTION: " + rs.getString(5) + " \n");
+                textArea.append("-------------------------------" 
+                              + "-------------------------------"
+                              + "-------------------------------" + "\n");
+            }
+            this.con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(viewCampaign.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_viewSpecificCampaignActionPerformed
 
     /**
