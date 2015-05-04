@@ -23,6 +23,12 @@ public class addCampaign extends javax.swing.JFrame {
      */
     public addCampaign() {
         initComponents();
+        this.DBLoc1 = "jdbc:ucanaccess://C:\\Users\\Alexander\\Documents\\GitHub\\project-edgar\\Project-Edgar-Database.accdb"; // Alex
+        this.DBLoc2 = "jdbc:ucanaccess://C:\\Users\\Owner\\Desktop\\project-edgar\\Project-Edgar-Database.accdb"; // Mercedes
+        this.DBLoc3 = "jdbc:ucanaccess://C:\\Users\\aung\\Desktop\\project-edgar\\Project-Edgar-Database.accdb"; // Aung
+        this.DBLoc4 = "jcbc:ucanaccess://C:"; // Alissa (Insert Location)
+        this.DBLoc5 = "jdbc:ucanaccess://C:"; // Eric (Insert Location)
+        this.MainDBLoc = "jdbc:ucanaccess://C:"; // Warren Achievement (Insert Location)
     }
 
     /**
@@ -167,35 +173,12 @@ public class addCampaign extends javax.swing.JFrame {
     //button 2 - save new tuple
     private void saveCampaignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveCampaignActionPerformed
         try {
-            try {
-                Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(addCampaign.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            Connection con;
-            con = DriverManager.getConnection(
-                    "jdbc:ucanaccess://C:\\Users\\Alexander\\Documents\\GitHub\\project-edgar\\Project-Edgar-Database.accdb",
-                    "","");
-            
+            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+            this.con = DriverManager.getConnection(this.DBLoc1); // DATABASE LOCATION
             String insert = "INSERT INTO Campaign(CampaignTitle,StartDate,EndDate,Description,Goal) Values(?,?,?,?,?)";
             SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
-            
-            Date sDate = null;
-            Date eDate = null;
-            
-            try {
-                sDate = format.parse(startDate.getText());
-            } catch (ParseException ex) {
-                Logger.getLogger(addCampaign.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            try {
-                eDate = format.parse(endDate.getText());
-            } catch (ParseException ex) {
-                Logger.getLogger(addCampaign.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
+            Date sDate = format.parse(startDate.getText());
+            Date eDate = format.parse(endDate.getText());
             PreparedStatement ps = con.prepareStatement(insert);
             ps.setString(1,campaignTitle.getText());
             ps.setTimestamp(2,new Timestamp(sDate.getTime()));
@@ -204,9 +187,9 @@ public class addCampaign extends javax.swing.JFrame {
             ps.setString(5,financialGoal.getText());
             ps.executeUpdate();
         
-            con.commit();
-            con.close();
-        } catch (SQLException ex) {
+            this.con.commit();
+            this.con.close();
+        } catch (SQLException | ParseException | ClassNotFoundException ex) {
             Logger.getLogger(addCampaign.class.getName()).log(Level.SEVERE, null, ex);
         }
         
@@ -276,4 +259,6 @@ public class addCampaign extends javax.swing.JFrame {
     private javax.swing.JButton saveCampaign;
     private javax.swing.JTextField startDate;
     // End of variables declaration//GEN-END:variables
+    Connection con;
+    String DBLoc1, DBLoc2, DBLoc3, DBLoc4, DBLoc5, MainDBLoc;
 }

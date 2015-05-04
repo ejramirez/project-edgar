@@ -85,6 +85,7 @@
                           <Component id="jButton8" alignment="0" pref="160" max="32767" attributes="0"/>
                           <Component id="jButton1" alignment="0" pref="160" max="32767" attributes="0"/>
                           <Component id="jButton6" alignment="0" max="32767" attributes="0"/>
+                          <Component id="viewEvents" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jScrollPane1" pref="554" max="32767" attributes="0"/>
@@ -121,7 +122,9 @@
                       <Component id="jButton8" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jButton6" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="169" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="viewEvents" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="140" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="jScrollPane1" max="32767" attributes="0"/>
@@ -231,6 +234,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton6ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="viewEvents">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="View Events"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewEventsActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
