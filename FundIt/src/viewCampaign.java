@@ -25,24 +25,25 @@ public class viewCampaign extends javax.swing.JFrame {
     public viewCampaign() {
         initComponents();
         campaigns.removeAllItems();
-        
+        this.DBLoc1 = "jdbc:ucanaccess://C:\\Users\\Alexander\\Documents\\GitHub\\project-edgar\\Project-Edgar-Database.accdb"; // Alex
+        this.DBLoc2 = "jdbc:ucanaccess://C:\\Users\\Owner\\Desktop\\project-edgar\\Project-Edgar-Database.accdb"; // Mercedes
+        this.DBLoc3 = "jdbc:ucanaccess://C:\\Users\\aung\\Desktop\\project-edgar\\Project-Edgar-Database.accdb"; // Aung
+        this.DBLoc4 = "jcbc:ucanaccess://C:"; // Alissa (Insert Location)
+        this.DBLoc5 = "jdbc:ucanaccess://C:"; // Eric (Insert Location)
+        this.MainDBLoc = "jdbc:ucanaccess://C:"; // Warren Achievement (Insert Location)
         try {
             try {
                 Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(viewDonations.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Connection con;
-            con = DriverManager.getConnection(
-                    "jdbc:ucanaccess://C:\\Users\\Alexander\\Documents\\GitHub\\project-edgar\\Project-Edgar-Database.accdb");
-            
-            Statement s = con.createStatement();
+            this.con = DriverManager.getConnection(this.DBLoc1); // DATABASE LOCATION          
+            Statement s = this.con.createStatement();
             ResultSet rs = s.executeQuery("SELECT CampaignTitle FROM Campaign");
             while(rs.next()) {
                 campaigns.addItem(rs.getString(1));
             }
-            con.close();
-
+            this.con.close();
         } catch (SQLException ex) {
             Logger.getLogger(addCE.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -161,14 +162,7 @@ public class viewCampaign extends javax.swing.JFrame {
    //button 2 - show campaigns
     private void viewCampaignsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewCampaignsActionPerformed
         try {
-            Connection con;
-            String DBLoc1, DBLoc2, DBLoc3, DBLoc4, DBLoc5;
-            DBLoc1 = "jdbc:ucanaccess://C:\\Users\\Alexander\\Documents\\GitHub\\project-edgar\\Project-Edgar-Database.accdb";
-            DBLoc2 = ""; // Mercedes
-            DBLoc3 = ""; // Aung
-            DBLoc4 = ""; // Eric
-            DBLoc5 = ""; // Alissa
-            con = DriverManager.getConnection(DBLoc1);
+            this.con = DriverManager.getConnection(DBLoc1); // DATABASE LOCATION
             Statement s = con.createStatement();
             ResultSet rs = s.executeQuery("SELECT * FROM Campaign");
             while (rs.next()) {
@@ -186,7 +180,7 @@ public class viewCampaign extends javax.swing.JFrame {
                               + "-------------------------------"
                               + "-------------------------------" + "\n");
             }
-            con.close();
+            this.con.close();
         } catch (SQLException ex) {
             Logger.getLogger(viewCampaign.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -255,4 +249,6 @@ public class viewCampaign extends javax.swing.JFrame {
     private javax.swing.JButton viewCampaigns;
     private javax.swing.JButton viewSpecificCampaign;
     // End of variables declaration//GEN-END:variables
+    private Connection con; 
+    String DBLoc1, DBLoc2, DBLoc3, DBLoc4, DBLoc5, MainDBLoc;
 }
