@@ -7,6 +7,9 @@ import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -65,7 +68,7 @@ public class viewDonations extends javax.swing.JFrame {
                 //    "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
            //
             con = DriverManager.getConnection(
-                    "jdbc:ucanaccess://C:\\Users\\Alexander\\Documents\\GitHub\\project-edgar\\Project-Edgar-Database.accdb",
+                    "jdbc:ucanaccess://C:\\Users\\aung\\Desktop\\project-edgar\\Project-Edgar-Database.accdb",
                     "","");
                  Statement s = con.createStatement();
             ResultSet rs = s.executeQuery("SELECT CampaignTitle FROM Campaign");
@@ -343,7 +346,7 @@ public class viewDonations extends javax.swing.JFrame {
                     "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
             */
             con = DriverManager.getConnection(
-                    "jdbc:ucanaccess://C:\\Users\\Alexander\\Documents\\GitHub\\project-edgar\\Project-Edgar-Database.accdb",
+                    "jdbc:ucanaccess://C:\\Users\\aung\\Desktop\\project-edgar\\Project-Edgar-Database.accdb",
                     "","");
             
             if(jRadioButton1.isSelected()){
@@ -353,38 +356,49 @@ public class viewDonations extends javax.swing.JFrame {
                     + "EventName, EventDate FROM Donations");
             System.out.println("Is connection closed: " + con.isClosed());
             System.out.println("Connection to DB established...");
-                  
+            jTextArea1.setText(null);      
             while (rs.next()) {
+              ArrayList<String> temprs= new ArrayList<String>();  
+                temprs.add(rs.getString(1));
+                temprs.add(rs.getString(2));
+                temprs.add(rs.getString(3));
+                temprs.add(rs.getString(4));
+                temprs.add(rs.getString(5));
+                temprs.add(rs.getString(6));
+                RS.add(temprs);
+            }
+            sort(RS);
+            for(ArrayList<String> x:RS){   
             DateFormat format = new SimpleDateFormat("yyyy-MM-dd");  
             Date datemin = format.parse(jFormattedTextField1.getText());
             System.out.println("datemin"+datemin);
             Date datemax = format.parse(jFormattedTextField2.getText());
             System.out.println("datemax"+datemax);
-            Date datetar = format.parse(rs.getString(3).substring(0,10));
+            Date datetar = format.parse(x.get(2).substring(0,10));
             System.out.println("datetar"+datetar);
             if(datetar.after(datemin) && datetar.before(datemax)){
                             
-                //Campaign Title
-                  System.out.print(rs.getString(1) + " \n");
-                  jTextArea1.append(rs.getString(1) + " \n");
+                 //Campaign Title
+                System.out.print("Campaign Title: " +x.get(0) + " \n");
+                jTextArea1.append("Campaign Title: " +x.get(0) + " \n");
                    
                 //Amount, DDate   
-                   System.out.print(rs.getString(2) + " ");
-                   jTextArea1.append(rs.getString(2) + " ");
-                   System.out.print(rs.getString(3).substring(0,10) + " \n");
-                   jTextArea1.append(rs.getString(3).substring(0,10) + " \n");
+                System.out.print("Amount: " +x.get(1) + " \n");
+                jTextArea1.append("Amount: " +x.get(1) + " \n");
+                System.out.print("Donation Date: "+x.get(2).substring(0,10) + " \n");
+                jTextArea1.append("Donation Date: "+x.get(2).substring(0,10) + " \n");
                    
                 //Notes
-                   System.out.print(rs.getString(4) + " \n");
-                   jTextArea1.append(rs.getString(4)+ " \n");
+                System.out.print("Notes: "+x.get(3) + " \n");
+                jTextArea1.append("Notes: "+x.get(3)+ " \n");
                    
                 //Event Name, Event Date
-                   System.out.print(rs.getString(5) + " ");
-                   jTextArea1.append(rs.getString(5) + " ");
-                   System.out.print(rs.getString(6).substring(0,10) + " \n");
-                   jTextArea1.append(rs.getString(6).substring(0,10) + " \n");
+                System.out.print("Event Name: "+x.get(4) + " \n");
+                jTextArea1.append("Event Name: "+x.get(4) + " \n");
+                System.out.print("Event Date: "+x.get(5).substring(0,10) + " \n");
+                jTextArea1.append("Event Date: "+x.get(5).substring(0,10) + " \n");
                   
-                   jTextArea1.append("\n");
+                jTextArea1.append("\n");
             }
             }
             }
@@ -397,31 +411,41 @@ public class viewDonations extends javax.swing.JFrame {
                     + "EventName, EventDate FROM Donations");
             System.out.println("Is connection closed: " + con.isClosed());
             System.out.println("Connection to DB established...");
-                  
+            jTextArea1.setText(null);      
             while (rs.next()) {
-                
-                if(jComboBox1.getSelectedItem().toString().equals(rs.getString(1))) {
-                 //Campaign Title             
-                  System.out.print(rs.getString(1) + " \n");
-                  jTextArea1.append(rs.getString(1) + " \n");
+                 ArrayList<String> temprs= new ArrayList<String>();  
+                temprs.add(rs.getString(1));
+                temprs.add(rs.getString(2));
+                temprs.add(rs.getString(3));
+                temprs.add(rs.getString(4));
+                temprs.add(rs.getString(5));
+                temprs.add(rs.getString(6));
+                RS.add(temprs);
+            }
+            sort(RS);
+            for(ArrayList<String> x:RS){
+                if(jComboBox1.getSelectedItem().toString().equals(x.get(0))) {
+               //Campaign Title:
+                System.out.print("Campaign Title: " +x.get(0) + " \n");
+                jTextArea1.append("Campaign Title: " +x.get(0) + " \n");
                    
                 //Amount, DDate   
-                   System.out.print(rs.getString(2) + " ");
-                   jTextArea1.append(rs.getString(2) + " ");
-                   System.out.print(rs.getString(3).substring(0,10) + " \n");
-                   jTextArea1.append(rs.getString(3).substring(0,10) + " \n");
+                System.out.print("Amount: " +x.get(1) + " \n");
+                jTextArea1.append("Amount: " +x.get(1) + " \n");
+                System.out.print("Donation Date: "+x.get(2).substring(0,10) + " \n");
+                jTextArea1.append("Donation Date: "+x.get(2).substring(0,10) + " \n");
                    
                 //Notes
-                   System.out.print(rs.getString(4) + " \n");
-                   jTextArea1.append(rs.getString(4)+ " \n");
+                System.out.print("Notes: "+x.get(3) + " \n");
+                jTextArea1.append("Notes: "+x.get(3)+ " \n");
                    
                 //Event Name, Event Date
-                   System.out.print(rs.getString(5) + " ");
-                   jTextArea1.append(rs.getString(5) + " ");
-                   System.out.print(rs.getString(6).substring(0,10) + " \n");
-                   jTextArea1.append(rs.getString(6).substring(0,10) + " \n");
+                System.out.print("Event Name: "+x.get(4) + " \n");
+                jTextArea1.append("Event Name: "+x.get(4) + " \n");
+                System.out.print("Event Date: "+x.get(5).substring(0,10) + " \n");
+                jTextArea1.append("Event Date: "+x.get(5).substring(0,10) + " \n");
                   
-                   jTextArea1.append("\n");
+                jTextArea1.append("\n");
             }
             }
             }
@@ -434,32 +458,42 @@ public class viewDonations extends javax.swing.JFrame {
                     + "EventName, EventDate FROM Donations");
             System.out.println("Is connection closed: " + con.isClosed());
             System.out.println("Connection to DB established...");
-                  
+            jTextArea1.setText(null);      
             while (rs.next()) {
-                
-                if(Double.parseDouble(jTextField1.getText())<=Double.parseDouble(rs.getString(2))&&
-                        Double.parseDouble(jTextField2.getText())>=Double.parseDouble(rs.getString(2))) {
-                 //Campaign Title             
-                  System.out.print(rs.getString(1) + " \n");
-                  jTextArea1.append(rs.getString(1) + " \n");
+                ArrayList<String> temprs= new ArrayList<String>();  
+                temprs.add(rs.getString(1));
+                temprs.add(rs.getString(2));
+                temprs.add(rs.getString(3));
+                temprs.add(rs.getString(4));
+                temprs.add(rs.getString(5));
+                temprs.add(rs.getString(6));
+                RS.add(temprs);
+            }
+            sort(RS);
+            for(ArrayList<String> x:RS){
+                if(Double.parseDouble(jTextField1.getText())<=Double.parseDouble(x.get(1))&&
+                        Double.parseDouble(jTextField2.getText())>=Double.parseDouble(x.get(1))) {
+                //Campaign Title:
+                System.out.print("Campaign Title: " +x.get(0) + " \n");
+                jTextArea1.append("Campaign Title: " +x.get(0) + " \n");
                    
                 //Amount, DDate   
-                   System.out.print(rs.getString(2) + " ");
-                   jTextArea1.append(rs.getString(2) + " ");
-                   System.out.print(rs.getString(3).substring(0,10) + " \n");
-                   jTextArea1.append(rs.getString(3).substring(0,10) + " \n");
+                System.out.print("Amount: " +x.get(1) + " \n");
+                jTextArea1.append("Amount: " +x.get(1) + " \n");
+                System.out.print("Donation Date: "+x.get(2).substring(0,10) + " \n");
+                jTextArea1.append("Donation Date: "+x.get(2).substring(0,10) + " \n");
                    
                 //Notes
-                   System.out.print(rs.getString(4) + " \n");
-                   jTextArea1.append(rs.getString(4)+ " \n");
+                System.out.print("Notes: "+x.get(3) + " \n");
+                jTextArea1.append("Notes: "+x.get(3)+ " \n");
                    
                 //Event Name, Event Date
-                   System.out.print(rs.getString(5) + " ");
-                   jTextArea1.append(rs.getString(5) + " ");
-                   System.out.print(rs.getString(6).substring(0,10) + " \n");
-                   jTextArea1.append(rs.getString(6).substring(0,10) + " \n");
+                System.out.print("Event Name: "+x.get(4) + " \n");
+                jTextArea1.append("Event Name: "+x.get(4) + " \n");
+                System.out.print("Event Date: "+x.get(5).substring(0,10) + " \n");
+                jTextArea1.append("Event Date: "+x.get(5).substring(0,10) + " \n");
                   
-                   jTextArea1.append("\n");
+                jTextArea1.append("\n");
             }
             }
             }
@@ -471,56 +505,67 @@ public class viewDonations extends javax.swing.JFrame {
                     + "EventName, EventDate FROM Donations");
             System.out.println("Is connection closed: " + con.isClosed());
             System.out.println("Connection to DB established...");
-                  
+            jTextArea1.setText(null);      
             while (rs.next()) {
-                
-                if(Double.parseDouble(jTextField3.getText())>=Double.parseDouble(rs.getString(2))&&
-                        jComboBox2.getSelectedItem().toString().equals("Below")) {
-                 //Campaign Title             
-                  System.out.print(rs.getString(1) + " \n");
-                  jTextArea1.append(rs.getString(1) + " \n");
-                   
-                //Amount, DDate   
-                   System.out.print(rs.getString(2) + " ");
-                   jTextArea1.append(rs.getString(2) + " ");
-                   System.out.print(rs.getString(3).substring(0,10) + " \n");
-                   jTextArea1.append(rs.getString(3).substring(0,10) + " \n");
-                   
-                //Notes
-                   System.out.print(rs.getString(4) + " \n");
-                   jTextArea1.append(rs.getString(4)+ " \n");
-                   
-                //Event Name, Event Date
-                   System.out.print(rs.getString(5) + " ");
-                   jTextArea1.append(rs.getString(5) + " ");
-                   System.out.print(rs.getString(6).substring(0,10) + " \n");
-                   jTextArea1.append(rs.getString(6).substring(0,10) + " \n");
-                  
-                   jTextArea1.append("\n");
+                ArrayList<String> temprs= new ArrayList<String>();  
+                temprs.add(rs.getString(1));
+                temprs.add(rs.getString(2));
+                temprs.add(rs.getString(3));
+                temprs.add(rs.getString(4));
+                temprs.add(rs.getString(5));
+                temprs.add(rs.getString(6));
+                RS.add(temprs);
             }
-                else if(Double.parseDouble(jTextField3.getText())<=Double.parseDouble(rs.getString(2))&&
-                        jComboBox2.getSelectedItem().toString().equals("Above")) {
-                 //Campaign Title             
-                  System.out.print(rs.getString(1) + " \n");
-                  jTextArea1.append(rs.getString(1) + " \n");
+            sort(RS);
+            for(ArrayList<String> x:RS){
+                
+                if(Double.parseDouble(jTextField3.getText())>=Double.parseDouble(x.get(1))&&
+                        jComboBox2.getSelectedItem().toString().equals("Below")) {
+                //Campaign Title:
+                System.out.print("Campaign Title: " +x.get(0) + " \n");
+                jTextArea1.append("Campaign Title: " +x.get(0) + " \n");
                    
                 //Amount, DDate   
-                   System.out.print(rs.getString(2) + " ");
-                   jTextArea1.append(rs.getString(2) + " ");
-                   System.out.print(rs.getString(3).substring(0,10) + " \n");
-                   jTextArea1.append(rs.getString(3).substring(0,10) + " \n");
+                System.out.print("Amount: " +x.get(1) + " \n");
+                jTextArea1.append("Amount: " +x.get(1) + " \n");
+                System.out.print("Donation Date: "+x.get(2).substring(0,10) + " \n");
+                jTextArea1.append("Donation Date: "+x.get(2).substring(0,10) + " \n");
                    
                 //Notes
-                   System.out.print(rs.getString(4) + " \n");
-                   jTextArea1.append(rs.getString(4)+ " \n");
+                System.out.print("Notes: "+x.get(3) + " \n");
+                jTextArea1.append("Notes: "+x.get(3)+ " \n");
                    
                 //Event Name, Event Date
-                   System.out.print(rs.getString(5) + " ");
-                   jTextArea1.append(rs.getString(5) + " ");
-                   System.out.print(rs.getString(6).substring(0,10) + " \n");
-                   jTextArea1.append(rs.getString(6).substring(0,10) + " \n");
+                System.out.print("Event Name: "+x.get(4) + " \n");
+                jTextArea1.append("Event Name: "+x.get(4) + " \n");
+                System.out.print("Event Date: "+x.get(5).substring(0,10) + " \n");
+                jTextArea1.append("Event Date: "+x.get(5).substring(0,10) + " \n");
                   
-                   jTextArea1.append("\n");
+                jTextArea1.append("\n");
+            }
+                else if(Double.parseDouble(jTextField3.getText())<=Double.parseDouble(x.get(1))&&
+                        jComboBox2.getSelectedItem().toString().equals("Above")) {
+                //Campaign Title:
+                System.out.print("Campaign Title: " +x.get(0) + " \n");
+                jTextArea1.append("Campaign Title: " +x.get(0) + " \n");
+                   
+                //Amount, DDate   
+                System.out.print("Amount: " +x.get(1) + " \n");
+                jTextArea1.append("Amount: " +x.get(1) + " \n");
+                System.out.print("Donation Date: "+x.get(2).substring(0,10) + " \n");
+                jTextArea1.append("Donation Date: "+x.get(2).substring(0,10) + " \n");
+                   
+                //Notes
+                System.out.print("Notes: "+x.get(3) + " \n");
+                jTextArea1.append("Notes: "+x.get(3)+ " \n");
+                   
+                //Event Name, Event Date
+                System.out.print("Event Name: "+x.get(4) + " \n");
+                jTextArea1.append("Event Name: "+x.get(4) + " \n");
+                System.out.print("Event Date: "+x.get(5).substring(0,10) + " \n");
+                jTextArea1.append("Event Date: "+x.get(5).substring(0,10) + " \n");
+                  
+                jTextArea1.append("\n");
             }
             }
             }
@@ -548,39 +593,56 @@ public class viewDonations extends javax.swing.JFrame {
              //       "jdbc:ucanaccess://C:\\Users\\aung\\Desktop\\data\\project-edgar\\Project-Edgar-Database.accdb",
                //     "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
            con = DriverManager.getConnection(
-                    "jdbc:ucanaccess://C:\\Users\\Alexander\\Documents\\GitHub\\project-edgar\\Project-Edgar-Database.accdb",
+                    "jdbc:ucanaccess://C:\\Users\\aung\\Desktop\\project-edgar\\Project-Edgar-Database.accdb",
                     "","");
             //
             Statement s = con.createStatement();
-            ResultSet rs = s.executeQuery("SELECT CampaignTitle, "
+            ResultSet rs = s.executeQuery("SELECT Fname, CampaignTitle, "
                     + "Amount, DDate, Notes, "
-                    + "EventName, EventDate FROM Donations");
+                    + "EventName, EventDate "
+                    + "FROM Donation "
+                    + "left outer join Donor on (Donation.DonorID = Donor.DonorID)"
+                    + "left outer join Individual on(Donor.DonorID=Individual.DonorID)");
             System.out.println("Is connection closed: " + con.isClosed());
             System.out.println("Connection to DB established...");
+            jTextArea1.setText(null); 
             while (rs.next()) {
-                //Campaign Title
-                   System.out.print(rs.getString(1) + " \n");
-                   jTextArea1.append(rs.getString(1) + " \n");
+                  ArrayList<String> temprs= new ArrayList<String>();  
+                temprs.add(rs.getString(1));
+                temprs.add(rs.getString(2));
+                temprs.add(rs.getString(3));
+                temprs.add(rs.getString(4));
+                temprs.add(rs.getString(5));
+                temprs.add(rs.getString(6));
+                temprs.add(rs.getString(7));
+                RS.add(temprs);                  
+            }
+           // sort(RS);
+            for(ArrayList<String> x:RS){
+              //Campaign Title:
+                System.out.print("Fname: " +x.get(0) + " \n");
+                jTextArea1.append("Fname: " +x.get(0) + " \n");
                    
+                System.out.print("Campaign Title: " +x.get(1) + " \n");
+                jTextArea1.append("Campaign Title: " +x.get(1) + " \n");  
                 //Amount, DDate   
-                   System.out.print(rs.getString(2) + " ");
-                   jTextArea1.append(rs.getString(2) + " ");
-                   System.out.print(rs.getString(3).substring(0,10) + " \n");
-                   jTextArea1.append(rs.getString(3).substring(0,10) + " \n");
+                System.out.print("Amount: " +x.get(2) + " \n");
+                jTextArea1.append("Amount: " +x.get(2) + " \n");
+                System.out.print("Donation Date: "+x.get(3).substring(0,10) + " \n");
+                jTextArea1.append("Donation Date: "+x.get(3).substring(0,10) + " \n");
                    
                 //Notes
-                   System.out.print(rs.getString(4) + " \n");
-                   jTextArea1.append(rs.getString(4)+ " \n");
+                System.out.print("Notes: "+x.get(4) + " \n");
+                jTextArea1.append("Notes: "+x.get(4)+ " \n");
                    
                 //Event Name, Event Date
-                   System.out.print(rs.getString(5) + " ");
-                   jTextArea1.append(rs.getString(5) + " ");
-                   System.out.print(rs.getString(6).substring(0,10) + " \n");
-                   jTextArea1.append(rs.getString(6).substring(0,10) + " \n");
+                System.out.print("Event Name: "+x.get(5) + " \n");
+                jTextArea1.append("Event Name: "+x.get(5) + " \n");
+                System.out.print("Event Date: "+x.get(6).substring(0,10) + " \n");
+                jTextArea1.append("Event Date: "+x.get(6).substring(0,10) + " \n");
                   
-                   jTextArea1.append("\n");
+                jTextArea1.append("\n");
             }
-           //
             con.close();
             System.out.println("Is connection closed: " + con.isClosed());
         } catch (SQLException ex) {
@@ -662,9 +724,62 @@ public class viewDonations extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+         jTextArea1.append("View Pledges \n");
+          try {
+            try {
+                Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(viewDonations.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Connection con;
+           // con = DriverManager.getConnection(
+             //       "jdbc:ucanaccess://C:\\Users\\aung\\Desktop\\data\\project-edgar\\Project-Edgar-Database.accdb",
+               //     "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
+           con = DriverManager.getConnection(
+                    "jdbc:ucanaccess://C:\\Users\\aung\\Desktop\\project-edgar\\Project-Edgar-Database.accdb",
+                    "","");
+            //
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("SELECT Amount, "
+                    + "PaymentFrequency, "
+                    + "PayToDate FROM Pledges");
+    //ResultSet rs = s.executeQuery("SELECT CampaignTitle, "
+      //              + "Amount, DDate, Notes, "
+        //            + "EventName, EventDate FROM Donations");
+                   
+            System.out.println("Is connection closed: " + con.isClosed());
+            System.out.println("Connection to DB established...");
+            jTextArea1.setText(null); 
+            while (rs.next()) {
+                
+                System.out.print("Amount: " +rs.getString(1) + " \n ");
+                    jTextArea1.append("Amount: " +rs.getString(1) + " \n");
+                    System.out.print("PaymentFrequency: " +rs.getString(2) + " \n");
+                    jTextArea1.append("PaymentFrequency: " +rs.getString(2) + " \n");
+                    //address
+                    System.out.print("PayToDate" +rs.getString(3) + " \n");
+                    jTextArea1.append("PayToDate" +rs.getString(3) + " \n");
+                
+                  
+                jTextArea1.append("\n");
+            }
+            con.close();
+            System.out.println("Is connection closed: " + con.isClosed());
+        } catch (SQLException ex) {
+            Logger.getLogger(userLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
+    }//GEN-LAST:event_jButton4ActionPerformed
+    private void sort(ArrayList<ArrayList<String>> arraylist){
+         //ArrayList<ArrayList<String>> yourlist= arraylist; 
+         Collections.sort(arraylist, new Comparator<ArrayList<String>>() {
+      public int compare(ArrayList<String> one, ArrayList<String> two) {
+          Double p = Double.parseDouble(one.get(1));
+          Double q = Double.parseDouble(two.get(1));
+        return p.compareTo(q);
+    }
+});  
+    }
     /**
      * @param args the command line arguments
      */
@@ -703,7 +818,8 @@ public class viewDonations extends javax.swing.JFrame {
             }
         });
     }
-
+     
+    private ArrayList<ArrayList<String>> RS= new ArrayList<ArrayList<String>>();
     private MaskFormatter dateMask1;
     private MaskFormatter dateMask2;
     // Variables declaration - do not modify//GEN-BEGIN:variables

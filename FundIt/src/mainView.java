@@ -2,6 +2,14 @@
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -56,6 +64,7 @@ public class mainView extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
         jButton8 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jButton6 = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
@@ -130,6 +139,13 @@ public class mainView extends javax.swing.JFrame {
         jLabel1.setMinimumSize(new java.awt.Dimension(175, 22));
         jLabel1.setPreferredSize(new java.awt.Dimension(175, 22));
 
+        jButton6.setText("Export to TextFile");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         fileMenu.setMnemonic('f');
         fileMenu.setText("File");
 
@@ -166,24 +182,23 @@ public class mainView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 554, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                            .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 554, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,7 +220,9 @@ public class mainView extends javax.swing.JFrame {
                         .addComponent(jButton5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton8)
-                        .addGap(0, 198, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton6)
+                        .addGap(0, 169, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1)
                         .addContainerGap())))
@@ -257,7 +274,125 @@ public class mainView extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    
+        
+        try {
+            try {
+                Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(viewDonations.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Connection con;
+           // con = DriverManager.getConnection(
+             //       "jdbc:ucanaccess://C:\\Users\\aung\\Desktop\\data\\project-edgar\\Project-Edgar-Database.accdb",
+               //     "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
+           con = DriverManager.getConnection(
+                    "jdbc:ucanaccess://C:\\Users\\aung\\Desktop\\project-edgar\\Project-Edgar-Database.accdb",
+                    "","");
+            //
+        Statement s = con.createStatement();
+        ResultSet rs = s.executeQuery("SELECT Fname, Minit, Lname,"
+                    + "Title, PreferredHouseholdName, "
+                    + "Street, "
+                    + "City, State, ZipCode,"
+                    + "Phone, "
+                    + "EmailAddress,"
+                    + "UserStatus, Solicitation,"
+                    + "PreferredMailStreet,"
+                    + "PreferredMailCity, PreferredMailState, PreferredMailZipCode,"
+                    + "PreferredPhone, PreferredEmail FROM Individual left outer join Donor on (Individual.DonorID = Donor.DonorID)");
 
+            System.out.println("Is connection closed: " + con.isClosed());
+            System.out.println("Connection to DB established...");
+            jTextArea1.setText(null); 
+           FileOutputStream fop = null;
+		File file;
+		String content; 
+      try {
+ 
+			file = new File("C:\\Users\\aung\\Desktop\\project-edgar\\EXPORT.txt");
+			fop = new FileOutputStream(file);
+ 
+			// if file doesnt exists, then create it
+			if (!file.exists()) {
+				file.createNewFile();
+			}
+        
+        
+         while (rs.next()) {   
+            for(int i=1;i<20;i++){
+         content = rs.getString(i);
+          byte[] contentInBytes = content.getBytes();
+ 
+			fop.write(contentInBytes);
+                        fop.write('\n');
+            }
+            fop.write('\n');
+            fop.write('\n');
+         }
+         fop.flush();
+			fop.close();
+         } catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (fop != null) {
+					fop.close();
+		}
+			} catch (IOException e) {
+				e.printStackTrace();
+                        }
+                }
+        con.close();
+            System.out.println("Is connection closed: " + con.isClosed());
+        } catch (SQLException ex) {
+            Logger.getLogger(userLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    /*
+        FileOutputStream fop = null;
+		File file;
+		String content = "This is the text content";
+ 
+		try {
+ 
+			file = new File("C:\\Users\\aung\\Desktop\\project-edgar\\EXPORT.txt");
+			fop = new FileOutputStream(file);
+ 
+			// if file doesnt exists, then create it
+			if (!file.exists()) {
+				file.createNewFile();
+			}
+ 
+			// get the content in bytes
+			byte[] contentInBytes = content.getBytes();
+ 
+			fop.write(contentInBytes);
+                        fop.write('\n');
+                        fop.write(contentInBytes);
+			fop.flush();
+			fop.close();
+ 
+			System.out.println("Done");
+ 
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (fop != null) {
+					fop.close();
+		}
+			} catch (IOException e) {
+				e.printStackTrace();
+                        }
+                }
+    
+      */ 
+    }//GEN-LAST:event_jButton6ActionPerformed
+    
+
+        
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
@@ -266,6 +401,7 @@ public class mainView extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;

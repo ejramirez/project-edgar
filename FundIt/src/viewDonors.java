@@ -137,7 +137,7 @@ public class viewDonors extends javax.swing.JFrame {
             */
             // Alex Database Location
             con = DriverManager.getConnection(
-                    "jdbc:ucanaccess://C:\\Users\\Alexander\\Documents\\GitHub\\project-edgar\\Project-Edgar-Database.accdb",
+                    "jdbc:ucanaccess://C:\\Users\\aung\\Desktop\\project-edgar\\Project-Edgar-Database.accdb",
                     "","");
             
             
