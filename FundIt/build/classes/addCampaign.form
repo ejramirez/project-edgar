@@ -92,7 +92,7 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="backToMain">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Back to Main!"/>
+        <Property name="text" type="java.lang.String" value="Back to Main"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backToMainActionPerformed"/>

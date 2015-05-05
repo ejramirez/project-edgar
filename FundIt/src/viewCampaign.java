@@ -24,30 +24,26 @@ public class viewCampaign extends javax.swing.JFrame {
      */
     public viewCampaign() {
         initComponents();
-        campaigns.removeAllItems();
-        this.DBLoc1 = "jdbc:ucanaccess://C:\\Users\\Alexander\\Documents\\GitHub\\project-edgar\\Project-Edgar-Database.accdb"; // Alex
-        this.DBLoc2 = "jdbc:ucanaccess://C:\\Users\\Owner\\Desktop\\project-edgar\\Project-Edgar-Database.accdb"; // Mercedes
-        this.DBLoc3 = "jdbc:ucanaccess://C:\\Users\\aung\\Desktop\\project-edgar\\Project-Edgar-Database.accdb"; // Aung
-        this.DBLoc4 = "jcbc:ucanaccess://C:"; // Alissa (Insert Location)
-        this.DBLoc5 = "jdbc:ucanaccess://C:"; // Eric (Insert Location)
-        this.MainDBLoc = "jdbc:ucanaccess://C:"; // Warren Achievement (Insert Location)
+        this.campaigns.removeAllItems();
+        String DBLoc1 = "jdbc:ucanaccess://C:\\Users\\Alexander\\Documents\\GitHub\\project-edgar\\Project-Edgar-Database.accdb"; // Alex
+        String DBLoc2 = "jdbc:ucanaccess://C:\\Users\\Owner\\Desktop\\project-edgar\\Project-Edgar-Database.accdb"; // Mercedes
+        String DBLoc3 = "jdbc:ucanaccess://C:\\Users\\aung\\Desktop\\project-edgar\\Project-Edgar-Database.accdb"; // Aung
+        String DBLoc4 = "jcbc:ucanaccess://C:"; // Alissa (Insert Location)
+        String DBLoc5 = "jdbc:ucanaccess://C:"; // Eric (Insert Location)
+        String MainDBLoc = "jdbc:ucanaccess://C:"; // Warren Achievement (Insert Location)
         try {
-            try {
-                Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(viewDonations.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            this.con = DriverManager.getConnection(this.DBLoc1); // DATABASE LOCATION          
-            Statement s = this.con.createStatement();
-            ResultSet rs = s.executeQuery("SELECT CampaignTitle FROM Campaign");
+            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+            this.con = DriverManager.getConnection(DBLoc1); // DATABASE LOCATION          
+            this.st = this.con.createStatement();
+            ResultSet rs = this.st.executeQuery("SELECT CampaignTitle FROM Campaign");
             while(rs.next()) {
-                campaigns.addItem(rs.getString(1));
+                this.campaigns.addItem(rs.getString(1));
             }
-            this.con.close();
         } catch (SQLException ex) {
             Logger.getLogger(addCE.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(viewCampaign.class.getName()).log(Level.SEVERE, null, ex);
+        }   
     }
 
     /**
@@ -161,40 +157,32 @@ public class viewCampaign extends javax.swing.JFrame {
    //button 2 - show campaigns
     private void viewCampaignsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewCampaignsActionPerformed
         try {
-            try {
-                Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(viewCampaign.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            this.con = DriverManager.getConnection(DBLoc1); // DATABASE LOCATION
-            Statement s = con.createStatement();
-            ResultSet rs = s.executeQuery("SELECT * FROM Campaign");
+            ResultSet rs = this.st.executeQuery("SELECT * FROM Campaign");
             while (rs.next()) {
-                // Campaign Title
                 textArea.append("CAMPAIGN TITLE: " + rs.getString(1) + " \n");
-                // Start Date
                 textArea.append("START DATE: " + rs.getString(2).substring(0,10) + " \n");
-                // End Date
                 textArea.append("END DATE: " + rs.getString(3).substring(0,10) + " \n");
-                // Goal
                 textArea.append("FINANCIAL GOAL: $" + rs.getString(4) + " \n");
-                // Description
                 textArea.append("DESCRIPTION: " + rs.getString(5) + " \n");
-                textArea.append("-------------------------------" 
-                              + "-------------------------------"
-                              + "-------------------------------" + "\n");
+                textArea.append("-------------------------------"
+                        + "-------------------------------"
+                        + "-------------------------------" + "\n");
             }
-            this.con.close();
         } catch (SQLException ex) {
             Logger.getLogger(viewCampaign.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_viewCampaignsActionPerformed
 
     private void clearTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearTextActionPerformed
-        textArea.setText("");
+        this.textArea.setText("");
     }//GEN-LAST:event_clearTextActionPerformed
 
     private void backToMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToMainActionPerformed
+        try {
+            this.con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(viewCampaign.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.setVisible(false);
         new mainView().setVisible(true);
     }//GEN-LAST:event_backToMainActionPerformed
@@ -205,25 +193,17 @@ public class viewCampaign extends javax.swing.JFrame {
 
     private void viewSpecificCampaignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewSpecificCampaignActionPerformed
         try {
-            this.con = DriverManager.getConnection(this.DBLoc1); // DATABASE LOCATION
-            Statement s = this.con.createStatement();
-            ResultSet rs = s.executeQuery("SELECT * FROM Campaign WHERE Campaign.CampaignTitle LIKE '" + this.campaigns.getSelectedItem().toString() + "' ");
+            ResultSet rs = this.st.executeQuery("SELECT * FROM Campaign WHERE Campaign.CampaignTitle LIKE '" + this.campaigns.getSelectedItem().toString() + "' ");
             while (rs.next()) {
-                // Campaign Title
-                textArea.append("CAMPAIGN TITLE: " + rs.getString(1) + " \n");
-                // Start Date
-                textArea.append("START DATE: " + rs.getString(2).substring(0,10) + " \n");
-                // End Date
-                textArea.append("END DATE: " + rs.getString(3).substring(0,10) + " \n");
-                // Goal
-                textArea.append("FINANCIAL GOAL: $" + rs.getString(4) + " \n");
-                // Description
-                textArea.append("DESCRIPTION: " + rs.getString(5) + " \n");
-                textArea.append("-------------------------------" 
+                this.textArea.append("CAMPAIGN TITLE: " + rs.getString(1) + " \n");
+                this.textArea.append("START DATE: " + rs.getString(2).substring(0,10) + " \n");
+                this.textArea.append("END DATE: " + rs.getString(3).substring(0,10) + " \n");
+                this.textArea.append("FINANCIAL GOAL: $" + rs.getString(4) + " \n");
+                this.textArea.append("DESCRIPTION: " + rs.getString(5) + " \n");
+                this.textArea.append("-------------------------------" 
                               + "-------------------------------"
                               + "-------------------------------" + "\n");
             }
-            this.con.close();
         } catch (SQLException ex) {
             Logger.getLogger(viewCampaign.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -276,5 +256,5 @@ public class viewCampaign extends javax.swing.JFrame {
     private javax.swing.JButton viewSpecificCampaign;
     // End of variables declaration//GEN-END:variables
     private Connection con; 
-    String DBLoc1, DBLoc2, DBLoc3, DBLoc4, DBLoc5, MainDBLoc;
+    private Statement st;
 }

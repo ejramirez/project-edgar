@@ -1,3 +1,12 @@
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,14 +18,34 @@
  * @author Alexander
  */
 public class viewEvents extends javax.swing.JFrame {
-
-    /**
-     * Creates new form viewEvents
-     */
+    
     public viewEvents() {
         initComponents();
         this.campaigns.removeAllItems();
         this.events.removeAllItems();
+        String DBLoc1 = "jdbc:ucanaccess://C:\\Users\\Alexander\\Documents\\GitHub\\project-edgar\\Project-Edgar-Database.accdb"; // Alex
+        String DBLoc2 = "jdbc:ucanaccess://C:\\Users\\Owner\\Desktop\\project-edgar\\Project-Edgar-Database.accdb"; // Mercedes
+        String DBLoc3 = "jdbc:ucanaccess://C:\\Users\\aung\\Desktop\\project-edgar\\Project-Edgar-Database.accdb"; // Aung
+        String DBLoc4 = "jcbc:ucanaccess://C:"; // Alissa (Insert Location)
+        String DBLoc5 = "jdbc:ucanaccess://C:"; // Eric (Insert Location)
+        String MainDBLoc = "jdbc:ucanaccess://C:"; // Warren Achievement (Insert Location)
+        try {
+            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+            this.con = DriverManager.getConnection(DBLoc1); // DATABASE LOCATION          
+            this.st = this.con.createStatement();
+            ResultSet rs = this.st.executeQuery("SELECT CampaignTitle FROM Campaign");
+            while(rs.next()) {
+                this.campaigns.addItem(rs.getString(1));
+            }
+            rs = this.st.executeQuery("SELECT EventName FROM Events");
+            while (rs.next()) {
+                this.events.addItem(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(addCE.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(viewEvents.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -30,7 +59,7 @@ public class viewEvents extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         textArea = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        viewAllEvents = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         events = new javax.swing.JComboBox();
         viewEvent = new javax.swing.JButton();
@@ -46,11 +75,21 @@ public class viewEvents extends javax.swing.JFrame {
         textArea.setRows(5);
         jScrollPane1.setViewportView(textArea);
 
-        jButton1.setText("View All Events");
+        viewAllEvents.setText("View All Events");
+        viewAllEvents.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewAllEventsActionPerformed(evt);
+            }
+        });
 
         events.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         viewEvent.setText("View Event");
+        viewEvent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewEventActionPerformed(evt);
+            }
+        });
 
         backToMain.setText("Back to Main");
         backToMain.addActionListener(new java.awt.event.ActionListener() {
@@ -69,6 +108,11 @@ public class viewEvents extends javax.swing.JFrame {
         campaigns.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         eventByCampaign.setText("View Event");
+        eventByCampaign.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eventByCampaignActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -82,7 +126,7 @@ public class viewEvents extends javax.swing.JFrame {
                             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(events, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(viewAllEvents, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(campaigns, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -112,7 +156,7 @@ public class viewEvents extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(viewAllEvents)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -143,7 +187,66 @@ public class viewEvents extends javax.swing.JFrame {
     private void backToMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToMainActionPerformed
         this.setVisible(false);
         new mainView().setVisible(true);
+        try {
+            this.con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(viewEvents.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_backToMainActionPerformed
+
+    private void viewEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewEventActionPerformed
+        try {
+            ResultSet rs = this.st.executeQuery("SELECT * FROM Events WHERE Events.EventName LIKE '" + this.events.getSelectedItem().toString() + "' ");
+            while (rs.next()) {
+                this.textArea.append("EVENT NAME: " + rs.getString(1) + " \n");
+                this.textArea.append("DATE: " + rs.getString(2).substring(0,10) + " \n");
+                this.textArea.append("DESCRIPTION: " + rs.getString(3) + " \n");
+                this.textArea.append("MONEY RAISED: $" + rs.getString(4) + " \n");
+                this.textArea.append("CAMPAIGN TITLE: " + rs.getString(5) + " \n");
+                this.textArea.append("-------------------------------" 
+                              + "-------------------------------"
+                              + "-------------------------------" + "\n");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(viewCampaign.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_viewEventActionPerformed
+
+    private void eventByCampaignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eventByCampaignActionPerformed
+        try {
+            ResultSet rs = this.st.executeQuery("SELECT * FROM Events WHERE Events.CampaignTitle LIKE '" + this.campaigns.getSelectedItem().toString() + "' ");
+            while (rs.next()) {
+                this.textArea.append("EVENT NAME: " + rs.getString(1) + " \n");
+                this.textArea.append("DATE: " + rs.getString(2).substring(0,10) + " \n");
+                this.textArea.append("DESCRIPTION: " + rs.getString(3) + " \n");
+                this.textArea.append("MONEY RAISED: $" + rs.getString(4) + " \n");
+                this.textArea.append("CAMPAIGN TITLE: " + rs.getString(5) + " \n");
+                this.textArea.append("-------------------------------" 
+                              + "-------------------------------"
+                              + "-------------------------------" + "\n");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(viewCampaign.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_eventByCampaignActionPerformed
+
+    private void viewAllEventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewAllEventsActionPerformed
+        try {
+            ResultSet rs = this.st.executeQuery("SELECT * FROM Events");
+            while (rs.next()) {
+                this.textArea.append("EVENT NAME: " + rs.getString(1) + " \n");
+                this.textArea.append("DATE: " + rs.getString(2).substring(0,10) + " \n");
+                this.textArea.append("DESCRIPTION: " + rs.getString(3) + " \n");
+                this.textArea.append("MONEY RAISED: $" + rs.getString(4) + " \n");
+                this.textArea.append("CAMPAIGN TITLE: " + rs.getString(5) + " \n");
+                this.textArea.append("-------------------------------" 
+                              + "-------------------------------"
+                              + "-------------------------------" + "\n");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(viewCampaign.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_viewAllEventsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -186,11 +289,13 @@ public class viewEvents extends javax.swing.JFrame {
     private javax.swing.JButton clearTextArea;
     private javax.swing.JButton eventByCampaign;
     private javax.swing.JComboBox events;
-    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextArea textArea;
+    private javax.swing.JButton viewAllEvents;
     private javax.swing.JButton viewEvent;
     // End of variables declaration//GEN-END:variables
+    private Connection con;
+    private Statement st;
 }

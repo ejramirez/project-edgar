@@ -24,30 +24,24 @@ import java.util.logging.Logger;
  */
 public class addCE extends javax.swing.JFrame {
 
-    /**
-     * Creates new form addCE
-     */
     public addCE() {
         initComponents();
-        campaign.removeAllItems();
+        this.campaign.removeAllItems();
+        String DBLoc1 = "jdbc:ucanaccess://C:\\Users\\Alexander\\Documents\\GitHub\\project-edgar\\Project-Edgar-Database.accdb"; // Alex
+        String DBLoc2 = "jdbc:ucanaccess://C:\\Users\\Owner\\Desktop\\project-edgar\\Project-Edgar-Database.accdb"; // Mercedes
+        String DBLoc3 = "jdbc:ucanaccess://C:\\Users\\aung\\Desktop\\project-edgar\\Project-Edgar-Database.accdb"; // Aung
+        String DBLoc4 = "jcbc:ucanaccess://C:"; // Alissa (Insert Location)
+        String DBLoc5 = "jdbc:ucanaccess://C:"; // Eric (Insert Location)
+        String MainDBLoc = "jdbc:ucanaccess://C:"; // Warren Achievement (Insert Location)
         try {
-             try {
-                Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(viewDonations.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            Connection con;
-            con = DriverManager.getConnection(
-                    "jdbc:ucanaccess://C:\\Users\\Alexander\\Documents\\GitHub\\project-edgar\\Project-Edgar-Database.accdb",
-                    "","");
-            
-            Statement s = con.createStatement();
-            ResultSet rs = s.executeQuery("SELECT CampaignTitle FROM Campaign");
+            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+            this.con = DriverManager.getConnection(DBLoc1);
+            this.st = this.con.createStatement();
+            ResultSet rs = this.st.executeQuery("SELECT CampaignTitle FROM Campaign");
             while(rs.next()) {
-                campaign.addItem(rs.getString(1));
+                this.campaign.addItem(rs.getString(1));
             }
-            con.close();
-        } catch (SQLException ex) {
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(addCE.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -79,7 +73,7 @@ public class addCE extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        backToMain.setText("Back to Main!");
+        backToMain.setText("Back to Main");
         backToMain.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backToMainActionPerformed(evt);
@@ -202,48 +196,32 @@ public class addCE extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     //button 1 - main
     private void backToMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToMainActionPerformed
+        try {
+            this.con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(addCE.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.setVisible(false); 
         new mainView().setVisible(true);
     }//GEN-LAST:event_backToMainActionPerformed
     //button 2 - add CE
     private void addCampaignEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCampaignEventActionPerformed
         try {
-            try {
-                Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(addCampaign.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            Connection con;
-            con = DriverManager.getConnection(
-                    "jdbc:ucanaccess://C:\\Users\\Alexander\\Documents\\GitHub\\project-edgar\\Project-Edgar-Database.accdb",
-                    "","");
-            
             String insert = "INSERT INTO Events(EventName,EventDate,Description,MoneyRaised,CampaignTitle) Values(?,?,?,?,?)";
             SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
-            
-            Date eDate = null;
-            
-            try {
-                eDate = format.parse(date.getText());
-            } catch (ParseException ex) {
-                Logger.getLogger(addCampaign.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            PreparedStatement ps = con.prepareStatement(insert);
-            ps.setString(1,eventName.getText());
+            Date eDate = format.parse(this.date.getText());
+            PreparedStatement ps = this.con.prepareStatement(insert);
+            ps.setString(1,this.eventName.getText());
             ps.setTimestamp(2,new Timestamp(eDate.getTime()));
-            ps.setString(3, description.getText());
-            ps.setString(4,moneyRaised.getText());
-            ps.setString(5, (String) campaign.getSelectedItem());
+            ps.setString(3, this.description.getText());
+            ps.setString(4,this.moneyRaised.getText());
+            ps.setString(5, (String) this.campaign.getSelectedItem());
             ps.executeUpdate();
-        
-            con.commit();
-            con.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(addCampaign.class.getName()).log(Level.SEVERE, null, ex);
+            this.con.commit();
+            this.con.close();
+        } catch (ParseException | SQLException ex) {
+            Logger.getLogger(addCE.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
         this.setVisible(false);
         new mainView().setVisible(true);
     }//GEN-LAST:event_addCampaignEventActionPerformed
@@ -304,4 +282,6 @@ public class addCE extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField moneyRaised;
     // End of variables declaration//GEN-END:variables
+    private Connection con;
+    private Statement st;
 }

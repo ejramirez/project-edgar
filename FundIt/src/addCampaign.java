@@ -23,12 +23,20 @@ public class addCampaign extends javax.swing.JFrame {
      */
     public addCampaign() {
         initComponents();
-        this.DBLoc1 = "jdbc:ucanaccess://C:\\Users\\Alexander\\Documents\\GitHub\\project-edgar\\Project-Edgar-Database.accdb"; // Alex
-        this.DBLoc2 = "jdbc:ucanaccess://C:\\Users\\Owner\\Desktop\\project-edgar\\Project-Edgar-Database.accdb"; // Mercedes
-        this.DBLoc3 = "jdbc:ucanaccess://C:\\Users\\aung\\Desktop\\project-edgar\\Project-Edgar-Database.accdb"; // Aung
-        this.DBLoc4 = "jcbc:ucanaccess://C:"; // Alissa (Insert Location)
-        this.DBLoc5 = "jdbc:ucanaccess://C:"; // Eric (Insert Location)
-        this.MainDBLoc = "jdbc:ucanaccess://C:"; // Warren Achievement (Insert Location)
+        String DBLoc1 = "jdbc:ucanaccess://C:\\Users\\Alexander\\Documents\\GitHub\\project-edgar\\Project-Edgar-Database.accdb"; // Alex
+        String DBLoc2 = "jdbc:ucanaccess://C:\\Users\\Owner\\Desktop\\project-edgar\\Project-Edgar-Database.accdb"; // Mercedes
+        String DBLoc3 = "jdbc:ucanaccess://C:\\Users\\aung\\Desktop\\project-edgar\\Project-Edgar-Database.accdb"; // Aung
+        String DBLoc4 = "jcbc:ucanaccess://C:"; // Alissa (Insert Location)
+        String DBLoc5 = "jdbc:ucanaccess://C:"; // Eric (Insert Location)
+        String MainDBLoc = "jdbc:ucanaccess://C:"; // Warren Achievement (Insert Location)
+        try {
+            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+            this.con = DriverManager.getConnection(DBLoc1); // DATABASE LOCATION          
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(viewCampaign.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(addCampaign.class.getName()).log(Level.SEVERE, null, ex);
+        }   
     }
 
     /**
@@ -56,7 +64,7 @@ public class addCampaign extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        backToMain.setText("Back to Main!");
+        backToMain.setText("Back to Main");
         backToMain.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backToMainActionPerformed(evt);
@@ -125,10 +133,9 @@ public class addCampaign extends javax.swing.JFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(campaignTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(financialGoal, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(endDate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
-                                    .addComponent(startDate, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addComponent(financialGoal)
+                                .addComponent(endDate, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+                                .addComponent(startDate)
                                 .addComponent(jScrollPane1)))))
                 .addContainerGap(342, Short.MAX_VALUE))
         );
@@ -167,32 +174,33 @@ public class addCampaign extends javax.swing.JFrame {
     
     //button 1 - back to main
     private void backToMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToMainActionPerformed
+        try {
+            this.con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(addCampaign.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.setVisible(false); 
         new mainView().setVisible(true);
     }//GEN-LAST:event_backToMainActionPerformed
     //button 2 - save new tuple
     private void saveCampaignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveCampaignActionPerformed
         try {
-            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            this.con = DriverManager.getConnection(this.DBLoc1); // DATABASE LOCATION
             String insert = "INSERT INTO Campaign(CampaignTitle,StartDate,EndDate,Description,Goal) Values(?,?,?,?,?)";
             SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
-            Date sDate = format.parse(startDate.getText());
-            Date eDate = format.parse(endDate.getText());
-            PreparedStatement ps = con.prepareStatement(insert);
-            ps.setString(1,campaignTitle.getText());
+            Date sDate = format.parse(this.startDate.getText());
+            Date eDate = format.parse(this.endDate.getText());
+            PreparedStatement ps = this.con.prepareStatement(insert);
+            ps.setString(1,this.campaignTitle.getText());
             ps.setTimestamp(2,new Timestamp(sDate.getTime()));
             ps.setTimestamp(3,new Timestamp(eDate.getTime()));
-            ps.setString(4,description.getText());
-            ps.setString(5,financialGoal.getText());
+            ps.setString(4,this.description.getText());
+            ps.setString(5,this.financialGoal.getText());
             ps.executeUpdate();
-        
             this.con.commit();
             this.con.close();
-        } catch (SQLException | ParseException | ClassNotFoundException ex) {
+        } catch (ParseException | SQLException ex) {
             Logger.getLogger(addCampaign.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
         this.setVisible(false);
         new mainView().setVisible(true);
     }//GEN-LAST:event_saveCampaignActionPerformed
@@ -259,6 +267,6 @@ public class addCampaign extends javax.swing.JFrame {
     private javax.swing.JButton saveCampaign;
     private javax.swing.JTextField startDate;
     // End of variables declaration//GEN-END:variables
-    Connection con;
-    String DBLoc1, DBLoc2, DBLoc3, DBLoc4, DBLoc5, MainDBLoc;
+    private Connection con;
+    private Statement st;
 }
