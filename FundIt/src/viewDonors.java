@@ -121,6 +121,7 @@ public class viewDonors extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
     //button 2 - cnt, show donors info, discnt
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        jTextArea1.setText("");
         jTextArea1.append("First M Last | Preferred Name \n");
         
         try {
@@ -136,10 +137,13 @@ public class viewDonors extends javax.swing.JFrame {
                     "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
             */
             // Alex Database Location
-            con = DriverManager.getConnection(
+           /* con = DriverManager.getConnection(
                     "jdbc:ucanaccess://C:\\Users\\aung\\Desktop\\project-edgar\\Project-Edgar-Database.accdb",
                     "","");
-            
+//            */
+            //Mercedes's DB location
+            con = DriverManager.getConnection("jdbc:ucanaccess://C:\\Users\\Owner\\Desktop\\project-edgar\\Project-Edgar-Database.accdb", 
+                    "","");
             
             Statement s = con.createStatement();
             ResultSet rs = s.executeQuery("SELECT Fname, Minit, Lname,"
@@ -169,6 +173,7 @@ public class viewDonors extends javax.swing.JFrame {
                     jTextArea1.append(rs.getString(3) + " \n");
                     
                     //title, p. HH name
+                    jTextArea1.append("Donor Title, Pref. Household Name: \n");
                     System.out.print(rs.getString(4) + " ");
                     jTextArea1.append(rs.getString(4) + " ");
                     System.out.print(rs.getString(5) + " \n");
@@ -192,11 +197,12 @@ public class viewDonors extends javax.swing.JFrame {
                     
                     //user status, solicitation
                     System.out.print(rs.getString(12) + ", ");
-                    jTextArea1.append(rs.getString(12) + ". ");
+                    jTextArea1.append("User status: " + rs.getString(12) + ". ");
                     System.out.print(rs.getString(13) + " \n");
-                    jTextArea1.append(rs.getString(13) + " \n");
+                    jTextArea1.append("Solicitation allowed: " + rs.getString(13) + " \n");
                     
                     //preferred address
+                    jTextArea1.append("Preferred Address/Phone/Email: \n");
                     System.out.print(rs.getString(14) + ", ");
                     jTextArea1.append(rs.getString(14) + ", ");
                     System.out.print(rs.getString(15) + ", ");
@@ -225,6 +231,7 @@ public class viewDonors extends javax.swing.JFrame {
 
     //connect, show corporate/organization donors
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        jTextArea1.setText("");
         jTextArea1.append("C/O Name, Primary Contact, ... \n");
         
         try {
@@ -234,16 +241,20 @@ public class viewDonors extends javax.swing.JFrame {
                 Logger.getLogger(viewDonors.class.getName()).log(Level.SEVERE, null, ex);
             }
             Connection con;
-            /*
+            /*Aung
             con = DriverManager.getConnection(
                     "jdbc:ucanaccess://C:\\Users\\aung\\Desktop\\data\\project-edgar\\Project-Edgar-Database.accdb",
                     "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
             */
-            // Alex Database Location
+            /*// Alex Database Location
             con = DriverManager.getConnection(
                     "jdbc:ucanaccess://C:\\Users\\Alexander\\Documents\\GitHub\\project-edgar\\Project-Edgar-Database.accdb",
                     "","");
+            */
             
+            //Mercedes's DB location
+            con = DriverManager.getConnection("jdbc:ucanaccess://C:\\Users\\Owner\\Desktop\\project-edgar\\Project-Edgar-Database.accdb", 
+                    "","");
             
             Statement s = con.createStatement();
             ResultSet rs = s.executeQuery("SELECT OrgName, PrimaryContact,"
@@ -265,6 +276,7 @@ public class viewDonors extends javax.swing.JFrame {
                 //for(int i = 1; i < 17; i++){
                     //jTextArea1.append(null);
                     //C.O. name, Primary contact
+                    jTextArea1.append("C.O. Contact Info: \n");
                     System.out.print(rs.getString(1) + ", ");
                     jTextArea1.append(rs.getString(1) + ", ");
                     System.out.print(rs.getString(2) + " \n");
@@ -285,10 +297,11 @@ public class viewDonors extends javax.swing.JFrame {
                     jTextArea1.append(rs.getString(8) + " \n");
                     //User Stat, Solici. 
                     System.out.print(rs.getString(9) + ", ");
-                    jTextArea1.append(rs.getString(9) + ", ");
+                    jTextArea1.append("User status: " + rs.getString(9) + ", ");
                     System.out.print(rs.getString(10) + " \n");
-                    jTextArea1.append(rs.getString(10) + " \n");
+                    jTextArea1.append("Solicitation allowed: " + rs.getString(10) + " \n");
                     //Preferred Address
+                    jTextArea1.append("Preferred Address/Phone/Email: \n");
                     System.out.print(rs.getString(11) + ", ");
                     jTextArea1.append(rs.getString(11) + ", ");
                     System.out.print(rs.getString(12) + ", ");
@@ -316,6 +329,7 @@ public class viewDonors extends javax.swing.JFrame {
 
     //connect, show all grant donor information
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        jTextArea1.setText("");
         jTextArea1.append("Grant Name, Primary Contact, ... \n");
         
         try {
@@ -331,10 +345,13 @@ public class viewDonors extends javax.swing.JFrame {
                     "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
             */
             // Alex Database Location
-            con = DriverManager.getConnection(
+            /*con = DriverManager.getConnection(
                     "jdbc:ucanaccess://C:\\Users\\Alexander\\Documents\\GitHub\\project-edgar\\Project-Edgar-Database.accdb",
                     "","");
-            
+            */
+            //Mercedes's DB location
+            con = DriverManager.getConnection("jdbc:ucanaccess://C:\\Users\\Owner\\Desktop\\project-edgar\\Project-Edgar-Database.accdb", 
+                    "","");
             
             Statement s = con.createStatement();
             ResultSet rs = s.executeQuery("SELECT GrantName, GrantNumber, "
@@ -357,16 +374,18 @@ public class viewDonors extends javax.swing.JFrame {
                // for(int i = 1; i < 20; i++){
                     //Grant Name, No. 
                     System.out.print(rs.getString(1) + ", ");
-                    jTextArea1.append(rs.getString(1) + ", ");
+                    jTextArea1.append("Grant Name: " + rs.getString(1) + ", ");
                     System.out.print(rs.getString(2) + " ");
-                    jTextArea1.append(rs.getString(2) + " \n");
+                    jTextArea1.append("Grant No.: " + rs.getString(2) + " \n");
+                    
                     //grant start, end, report dates
-                    System.out.print(rs.getString(3) + ", ");
-                    jTextArea1.append(rs.getString(3) + ", ");
-                    System.out.print(rs.getString(4) + ", ");
-                    jTextArea1.append(rs.getString(4) + ", ");
-                    System.out.print(rs.getString(5) + " \n");
-                    jTextArea1.append(rs.getString(5) + " \n");
+                    System.out.print(rs.getString(3).substring(0,10) + ", ");
+                    jTextArea1.append("Start Date: " + rs.getString(3).substring(0,10) + ", ");
+                    System.out.print(rs.getString(4).substring(0,10) + ", ");
+                    jTextArea1.append("End Date: " + rs.getString(4).substring(0,10) + ", ");
+                    System.out.print(rs.getString(5).substring(0,10) + " \n");
+                    jTextArea1.append("Next Report Date: " + rs.getString(5).substring(0,10) + " \n");
+                   
                     //Address
                     System.out.print(rs.getString(6) + ", ");
                     jTextArea1.append(rs.getString(6) + ", ");
@@ -382,11 +401,12 @@ public class viewDonors extends javax.swing.JFrame {
                     System.out.print(rs.getString(11) + " \n");
                     jTextArea1.append(rs.getString(11) + " \n");
                     //User state, solicitation
-                    System.out.print(rs.getString(12) + ", ");
-                    jTextArea1.append(rs.getString(12) + ", ");
+                    System.out.print( rs.getString(12) + ", ");
+                    jTextArea1.append("User Status: " + rs.getString(12) + ", ");
                     System.out.print(rs.getString(13) + " \n");
-                    jTextArea1.append(rs.getString(13) + " \n");
+                    jTextArea1.append("Solicitation allowed: " + rs.getString(13) + " \n");
                     //Preferred Address
+                    jTextArea1.append("Preferred Address/Phone/Email: \n");
                     System.out.print(rs.getString(14) + ", ");
                     jTextArea1.append(rs.getString(14) + ", ");
                     System.out.print(rs.getString(15) + ", ");
