@@ -74,7 +74,6 @@ public class mainView extends javax.swing.JFrame {
         exitMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(3000, 3000));
         setMinimumSize(new java.awt.Dimension(3000, 3000));
 
         jButton1.setText("View Donations");
@@ -140,7 +139,7 @@ public class mainView extends javax.swing.JFrame {
         jLabel1.setMinimumSize(new java.awt.Dimension(175, 22));
         jLabel1.setPreferredSize(new java.awt.Dimension(175, 22));
 
-        jButton6.setText("Export to TextFile");
+        jButton6.setText("Export to Text File");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
@@ -286,8 +285,6 @@ public class mainView extends javax.swing.JFrame {
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-    
-        
         try {
             try {
                 Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
@@ -360,45 +357,7 @@ public class mainView extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(userLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
-    /*
-        FileOutputStream fop = null;
-		File file;
-		String content = "This is the text content";
- 
-		try {
- 
-			file = new File("C:\\Users\\aung\\Desktop\\project-edgar\\EXPORT.txt");
-			fop = new FileOutputStream(file);
- 
-			// if file doesnt exists, then create it
-			if (!file.exists()) {
-				file.createNewFile();
-			}
- 
-			// get the content in bytes
-			byte[] contentInBytes = content.getBytes();
- 
-			fop.write(contentInBytes);
-                        fop.write('\n');
-                        fop.write(contentInBytes);
-			fop.flush();
-			fop.close();
- 
-			System.out.println("Done");
- 
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (fop != null) {
-					fop.close();
-		}
-			} catch (IOException e) {
-				e.printStackTrace();
-                        }
-                }
-    
-      */ 
+        jTextArea1.append("Export to Text File is done");
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void viewEventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewEventsActionPerformed
