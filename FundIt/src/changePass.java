@@ -1,6 +1,6 @@
 
 import java.awt.Color;
-import java.util.Arrays;
+import java.util.*;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -161,7 +161,13 @@ public class changePass extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         userLogin userL = new userLogin();
-        if(jTextField1.equals(userL.getUN()) && Arrays.equals(jPasswordField1.getPassword(), userL.getPwd())){
+        System.out.println("User login is: " + userL.getUN());
+        String pass = String.valueOf(userL.getPwd()); 
+        System.out.println("User pass is: " + pass);
+        String newPass = String.valueOf(jPasswordField1.getPassword());
+        System.out.println("New user pass is: " + newPass);
+        if(jTextField1.getText().equalsIgnoreCase(userL.getUN()) && pass.equalsIgnoreCase(newPass)){
+            System.out.println("");
             if(Arrays.equals(jPasswordField2.getPassword(), jPasswordField3.getPassword())){
                 userL.setPwd(jPasswordField2.getPassword());
                 userL.setHint(jTextField5.getText());

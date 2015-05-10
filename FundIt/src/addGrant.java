@@ -386,10 +386,11 @@ public class addGrant extends javax.swing.JFrame {
                 donorID=rs.getString(1);
             }
             
-            String insert = "INSERT INTO Grant(DonorID, GrantNumber, GrantName, StartDate, EndDate, NextReportDate) "
-                    + "Values(?, ?, ?, ?, ?, ?)";
-            SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+           
             try {
+                String insert = "INSERT INTO Grant(DonorID, GrantNumber, GrantName, StartDate, EndDate, NextReportDate) "
+                    + "Values(?, ?, ?, ?, ?, ?)";
+                SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
                 Date reportDate = format.parse(this.jTextField1.getText()); 
                 Date sDate = format.parse(this.jTextField2.getText());
                 Date eDate = format.parse(this.jTextField3.getText());
