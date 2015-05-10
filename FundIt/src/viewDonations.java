@@ -70,7 +70,7 @@ public class viewDonations extends javax.swing.JFrame {
             con = DriverManager.getConnection(
                     "jdbc:ucanaccess://C:\\Users\\aung\\Desktop\\project-edgar\\Project-Edgar-Database.accdb",
                     "","");
-                 Statement s = con.createStatement();
+            Statement s = con.createStatement();
             ResultSet rs = s.executeQuery("SELECT CampaignTitle FROM Campaign");
             System.out.println("Is connection closed: " + con.isClosed());
             System.out.println("Connection to DB established...");

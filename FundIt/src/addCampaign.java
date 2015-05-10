@@ -31,7 +31,7 @@ public class addCampaign extends javax.swing.JFrame {
         String MainDBLoc = "jdbc:ucanaccess://C:"; // Warren Achievement (Insert Location)
         try {
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            this.con = DriverManager.getConnection(DBLoc1); // DATABASE LOCATION          
+            this.con = DriverManager.getConnection(DBLoc3); // DATABASE LOCATION          
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(viewCampaign.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
