@@ -30,7 +30,7 @@ public class addCE extends javax.swing.JFrame {
         String DBLoc1 = "jdbc:ucanaccess:///Users/Alexander/Documents/Projects/Project-Edgar/Project-Edgar-Database.accdb"; // Alex
         String DBLoc2 = "jdbc:ucanaccess://C:\\Users\\Owner\\Desktop\\project-edgar\\Project-Edgar-Database.accdb"; // Mercedes
         String DBLoc3 = "jdbc:ucanaccess://C:\\Users\\aung\\Desktop\\project-edgar\\Project-Edgar-Database.accdb"; // Aung
-        String DBLoc4 = "jcbc:ucanaccess://C:"; // Alissa (Insert Location)
+        String DBLoc4 = "jcbc:ucanaccess://C:\\Users\\death_000\\Documents\\GitHub\\project-edgar"; // Alissa (Insert Location)
         String DBLoc5 = "jdbc:ucanaccess://C:"; // Eric (Insert Location)
         String MainDBLoc = "jdbc:ucanaccess://C:"; // Warren Achievement (Insert Location)
         try {

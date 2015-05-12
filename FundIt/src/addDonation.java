@@ -246,9 +246,6 @@ public class addDonation extends javax.swing.JFrame {
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
         // TODO add your handling code here:
-        if(jButton1.isSelected()){
-            
-        }
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     /**
