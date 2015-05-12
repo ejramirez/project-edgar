@@ -219,13 +219,20 @@ public class addDonation extends javax.swing.JFrame {
     // button 2 - back to main
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         //connect to db, then add donation information tuples, close connection
-        try {
+       /* try {
             try {
                 Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            } catch (ClassNotFoundException ex) {
-                Log.getLogger(viewDonors.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {Log.getLogger(viewDonors.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
+        Connection con;
+        
+        con = DriverManager.getConnection("jdbc:ucanaccess://C:\\Users\\Owner\\Desktop\\project-edgar\\Project-Edgar-Database.accdb",
+                    "", "");
+        boolean sol = false;
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(addDonation.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
     }//GEN-LAST:event_jButton2ActionPerformed
     //button 1 - save new donation(s)
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -239,6 +246,9 @@ public class addDonation extends javax.swing.JFrame {
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
         // TODO add your handling code here:
+        if(jButton1.isSelected()){
+            
+        }
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     /**
