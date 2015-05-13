@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  * @author Owner
  */
 public class addGrant extends javax.swing.JFrame {
-
+    int donor = 0;
     /**
      * Creates new form addGrant
      */
@@ -380,14 +380,15 @@ public class addGrant extends javax.swing.JFrame {
             //Textfield3,2,1 are all dates
             ResultSet rs = s.executeQuery("select DonorID From Donor where Donor.Street like '" + jTextField6.getText()+ "' "
                     + "AND Donor.Phone like '" + jTextField9.getText() + "' ");
-            String donorID = ""; 
+
             while(rs.next()){
                 System.out.println("Donor id for insert is: " + rs.getString(1)); 
-                donorID=rs.getString(1);
+                donor=rs.getInt(1);
             }
             
            
             try {
+                System.out.println("donor int is: " + donor);
                 String insert = "INSERT INTO Grant(DonorID, GrantNumber, GrantName, StartDate, EndDate, NextReportDate) "
                     + "Values(?, ?, ?, ?, ?, ?)";
                 SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
@@ -395,8 +396,8 @@ public class addGrant extends javax.swing.JFrame {
                 Date sDate = format.parse(this.jTextField2.getText());
                 Date eDate = format.parse(this.jTextField3.getText());
                 PreparedStatement ps = con.prepareStatement(insert);
-                ps.setString(1, donorID);
-                ps.setString(2, jTextField5.getText());
+                ps.setInt(1, donor);
+                ps.setInt(2, Integer.parseInt(jTextField5.getText()));
                 ps.setString(3, jTextField4.getText());
                 ps.setTimestamp(4, new Timestamp(reportDate.getTime()));
                 ps.setTimestamp(5, new Timestamp(sDate.getTime()));
@@ -412,6 +413,18 @@ public class addGrant extends javax.swing.JFrame {
             Logger.getLogger(userLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
         jLabel1.setText("Saved.");
+        //reset all fields to empty
+        jTextField1.removeAll();
+        jTextField2.removeAll();
+        jTextField3.removeAll();
+        jTextField4.removeAll();
+        jTextField5.removeAll();
+        jTextField6.removeAll();
+        jTextField7.removeAll();
+        jTextField8.removeAll();
+        jTextField9.removeAll();
+        jTextField10.removeAll();
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed

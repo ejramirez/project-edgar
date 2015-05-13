@@ -33,9 +33,10 @@ public class addDonation extends javax.swing.JFrame {
         Events.addItem("No Event");
         Donors.removeAllItems();
         try {
+            String DBLoc2 = "jdbc:ucanaccess://C:\\Users\\Owner\\Desktop\\project-edgar\\Project-Edgar-Database.accdb"; // Mercedes
             String DBLoc4 = "jdbc:ucanaccess://C:\\Users\\death_000\\Documents\\GitHub\\project-edgar\\Project-Edgar-Database.accdb";
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            this.con = DriverManager.getConnection(DBLoc4);
+            this.con = DriverManager.getConnection(DBLoc2);
             this.st = this.con.createStatement();
             ResultSet rs = this.st.executeQuery("SELECT CampaignTitle FROM Campaign");
             while(rs.next()) {
@@ -228,8 +229,21 @@ public class addDonation extends javax.swing.JFrame {
     // button 2 - back to main
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
-            ResultSet rs = st.executeQuery("SELECT DonorID FROM Donor WHERE Donor.Fname like '" + Donors.getSelectedItem() + "");
-            ResultSet sr = st.executeQuery("SELECT EventDate FROM Events WHERE Event.EventName like" + Events.getSelectedIndex() + "");
+            //Look at all three possible kinds of Donor that can be selected in the ComboBox
+            ResultSet findInd = st.executeQuery("SELECT DonorID FROM Individual WHERE Individual.Lname like '" + Donors.getSelectedItem().toString() + "'");
+            ResultSet findCO = st.executeQuery("SELECT DonorID FROM Corporate_Organization WHERE Corporate_Organization.OrgName like '" + Donors.getSelectedItem().toString() + "'");
+            ResultSet findGrant = st.executeQuery("SELECT DonorID FROM Grant WHERE Grant.GrantName like '" + Donors.getSelectedItem().toString() + "'");
+            
+            //See which one it is, the one that was selected will return true here
+            System.out.println("Was an Individual picked: " + findInd.next());
+            System.out.println("Was a Corp_Org picked: " + findCO.next());
+            System.out.println("Was a Grant picked: " + findGrant.next());
+            
+            //Use the above .next() test to determine which donorID to use when entering the donation
+            //To do this you'll use the code below (with minor changes), but surrounded by a if(findInd.next() == true)...etc for each type of donor
+            //so that you know which donorID to use. 
+            
+           /* ResultSet sr = st.executeQuery("SELECT EventDate FROM Events WHERE Event.EventName like '" + Events.getSelectedIndex() + "'");
             //connect to db, then add donation information tuples, close connection
             String insert = "INSERT INTO Donations(DonorID, Amount, DDate, Notes, CampaignTitle, PaymentTypeID, EventName, EventDate) Values(?,?,?,?,?)";
             PreparedStatement ps = this.con.prepareStatement(insert);
@@ -242,12 +256,12 @@ public class addDonation extends javax.swing.JFrame {
             ps.setString(5,(String) this.Campaigns.getSelectedItem());
             ps.setInt(6, 1);
             ps.setString(7, (String) this.Events.getSelectedItem());
-            ps.setString(8, (sr.getString(1)));
+            ps.setString(8, (sr.getString(1)));*/
         } catch (SQLException ex) {
             Logger.getLogger(addDonation.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParseException ex) {
+        } /*catch (ParseException ex) {
             Logger.getLogger(addDonation.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
         
     }//GEN-LAST:event_jButton2ActionPerformed
     //button 1 - save new donation(s)
