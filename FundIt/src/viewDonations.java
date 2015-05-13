@@ -1489,7 +1489,7 @@ public class viewDonations extends javax.swing.JFrame {
       public int compare(ArrayList<String> one, ArrayList<String> two) {
           Double p = Double.parseDouble(one.get(6));
           Double q = Double.parseDouble(two.get(6));
-        return p.compareTo(q);
+        return q.compareTo(p);
       }
          });       
     }
@@ -1499,7 +1499,7 @@ public class viewDonations extends javax.swing.JFrame {
       public int compare(ArrayList<String> one, ArrayList<String> two) {
           Double p = Double.parseDouble(one.get(3));
           Double q = Double.parseDouble(two.get(3));
-        return p.compareTo(q);
+        return q.compareTo(p);
       }
          });       
     }
@@ -1509,7 +1509,7 @@ public class viewDonations extends javax.swing.JFrame {
       public int compare(ArrayList<String> one, ArrayList<String> two) {
           Double p = Double.parseDouble(one.get(3));
           Double q = Double.parseDouble(two.get(3));
-        return p.compareTo(q);
+        return q.compareTo(p);
       }
          });       
     }
