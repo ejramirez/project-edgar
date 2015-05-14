@@ -24,6 +24,7 @@ public class viewCampaign extends javax.swing.JFrame {
      */
     public viewCampaign() {
         initComponents();
+        this.textArea.setEditable(false);
         this.campaigns.removeAllItems();
         String DBLoc1 = "jdbc:ucanaccess:///Users/Alexander/Documents/Projects/Project-Edgar/Project-Edgar-Database.accdb"; // Alex
         String DBLoc2 = "jdbc:ucanaccess://C:\\Users\\Owner\\Desktop\\project-edgar\\Project-Edgar-Database.accdb"; // Mercedes

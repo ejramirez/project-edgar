@@ -1,4 +1,5 @@
 
+import java.awt.Color;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -10,6 +11,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JFrame;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -22,26 +24,24 @@ import java.sql.Statement;
  * @author Owner
  */
 
-
-
-/*
-commentsssss testing commentssssssss
-adsgisdfiuhamdiasfhdvinsdughakfm
-sdginsdgiuhaimraoskdmosihcosihdc
-AEisndfusdjgnstkoIKt
-soighsidfhsk
-sdgsjopdgoijsg
-sdgihsgisgikjdfgijdrgas
-gSKDNszikgnszfg
-
-*/
 public class mainView extends javax.swing.JFrame {
 
     /**
      * Creates new form mainView
      */
     public mainView() {
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         initComponents();
+        String instructions = "Below you will find all the documentation that you will need in order to navigate around "
+                + "the application and understand all if its functionality. It's highly recommended that you thoroughly read this guide! If a t"
+                + "any point you are confused on some aspect of the application make sure to come back to this menu and find the solution "
+                + "to your confusion here. \n"
+                + "------------------------------------------------------------------------------------------------------------------------";
+        this.documentation.setText("");
+        this.documentation.setBackground(Color.white);
+        this.documentation.setText(instructions);
+        this.documentation.setEnabled(true);
+        this.documentation.setEditable(false);
     }
 
     
@@ -54,6 +54,8 @@ public class mainView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -61,7 +63,7 @@ public class mainView extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        documentation = new javax.swing.JTextArea();
         jButton8 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
@@ -73,6 +75,10 @@ public class mainView extends javax.swing.JFrame {
         saveMenuItem = new javax.swing.JMenuItem();
         saveAsMenuItem = new javax.swing.JMenuItem();
         exitMenuItem = new javax.swing.JMenuItem();
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane2.setViewportView(jTextArea1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(3000, 3000));
@@ -119,13 +125,12 @@ public class mainView extends javax.swing.JFrame {
             }
         });
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("Insert directions, discussing where specific functionality is located, how to use, overall \"help\" documentation here. ");
-        jTextArea1.setWrapStyleWord(true);
-        jTextArea1.setEnabled(false);
-        jScrollPane1.setViewportView(jTextArea1);
+        documentation.setColumns(20);
+        documentation.setLineWrap(true);
+        documentation.setRows(5);
+        documentation.setWrapStyleWord(true);
+        documentation.setEnabled(false);
+        jScrollPane1.setViewportView(documentation);
 
         jButton8.setText("Add Donor");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
@@ -266,7 +271,7 @@ public class mainView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-         this.setVisible(false); 
+        this.setVisible(false); 
         new addCE().setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -323,7 +328,6 @@ public class mainView extends javax.swing.JFrame {
 
             System.out.println("Is connection closed: " + con.isClosed());
             System.out.println("Connection to DB established...");
-            jTextArea1.setText(null); 
            FileOutputStream fop = null;
 		File file;
 		String content; 
@@ -367,7 +371,6 @@ public class mainView extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(userLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
-        jTextArea1.append("Export to Text File is done");
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void viewEventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewEventsActionPerformed
@@ -385,6 +388,7 @@ public class mainView extends javax.swing.JFrame {
         
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea documentation;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JButton jButton1;
@@ -398,6 +402,7 @@ public class mainView extends javax.swing.JFrame {
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem openMenuItem;

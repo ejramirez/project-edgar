@@ -1,9 +1,12 @@
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Frame;
 import java.sql.*;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import net.ucanaccess.converters.TypesMap.AccessType;

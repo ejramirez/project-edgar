@@ -23,6 +23,7 @@ public class viewEvents extends javax.swing.JFrame {
         initComponents();
         this.campaigns.removeAllItems();
         this.events.removeAllItems();
+        this.textArea.setEditable(false);
         String DBLoc1 = "jdbc:ucanaccess:///Users/Alexander/Documents/Projects/Project-Edgar/Project-Edgar-Database.accdb"; // Alex
         String DBLoc2 = "jdbc:ucanaccess://C:\\Users\\Owner\\Desktop\\project-edgar\\Project-Edgar-Database.accdb"; // Mercedes
         String DBLoc3 = "jdbc:ucanaccess://C:\\Users\\aung\\Desktop\\project-edgar\\Project-Edgar-Database.accdb"; // Aung
