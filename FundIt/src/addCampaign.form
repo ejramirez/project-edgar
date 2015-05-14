@@ -40,10 +40,10 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="campaignTitle" pref="250" max="32767" attributes="0"/>
-                              <Component id="financialGoal" alignment="0" max="32767" attributes="0"/>
-                              <Component id="endDate" alignment="0" pref="95" max="32767" attributes="0"/>
-                              <Component id="startDate" alignment="0" max="32767" attributes="0"/>
                               <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
+                              <Component id="endDate" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="startDate" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="financialGoal" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -92,7 +92,7 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="backToMain">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Back to Main"/>
+        <Property name="text" type="java.lang.String" value=" Cancel - Back to Main"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backToMainActionPerformed"/>

@@ -28,43 +28,39 @@ public class addDonation extends javax.swing.JFrame {
      */
     public addDonation() {
         initComponents();
-        Campaigns.removeAllItems();
-        Events.removeAllItems();
-        Events.addItem("No Event");
-        Donors.removeAllItems();
+        String DBLoc1 = "jdbc:ucanaccess:///Users/Alexander/Documents/Projects/Project-Edgar/Project-Edgar-Database.accdb"; // Alex
+        String DBLoc2 = "jdbc:ucanaccess://C:\\Users\\Owner\\Desktop\\project-edgar\\Project-Edgar-Database.accdb"; // Mercedes
+        this.donors.removeAllItems();
+        this.campaigns.removeAllItems();
+        this.campaigns.addItem("None");
+        this.events.removeAllItems();
+        this.events.addItem("None");
+        this.paymentFreq.removeAllItems();
+        this.paymentFreq.addItem("Monthly");
+        this.paymentFreq.addItem("Biweekly");
+        this.paymentFreq.addItem("Weekly");
+        this.paymentFreq.setEditable(false);
+        this.paymentFreq.setEnabled(false);
+        this.paymentFreq.setBackground(Color.lightGray);
+        this.amountPaid.setEditable(false);
+        this.amountPaid.setBackground(Color.lightGray);
+        this.lastPaymentDate.setEditable(false);
+        this.lastPaymentDate.setBackground(Color.lightGray);
         try {
-            String DBLoc2 = "jdbc:ucanaccess://C:\\Users\\Owner\\Desktop\\project-edgar\\Project-Edgar-Database.accdb"; // Mercedes
-            String DBLoc4 = "jdbc:ucanaccess://C:\\Users\\death_000\\Documents\\GitHub\\project-edgar\\Project-Edgar-Database.accdb";
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            this.con = DriverManager.getConnection(DBLoc2);
+            this.con = DriverManager.getConnection(DBLoc1);
             this.st = this.con.createStatement();
             ResultSet rs = this.st.executeQuery("SELECT CampaignTitle FROM Campaign");
             while(rs.next()) {
-                this.Campaigns.addItem(rs.getString(1));
+                this.campaigns.addItem(rs.getString(1));
             }
             rs = this.st.executeQuery("SELECT EventName FROM Events");
             while(rs.next()) {
-                this.Events.addItem(rs.getString(1));
+                this.events.addItem(rs.getString(1));
             }
-            rs = this.st.executeQuery("SELECT Lname FROM Individual");
-            while(rs.next()) {
-                this.Donors.addItem(rs.getString(1));
-            }
-            rs = this.st.executeQuery("SELECT OrgName FROM Corporate_Organization");
-            while(rs.next()) {
-                this.Donors.addItem(rs.getString(1));
-            }
-            rs = this.st.executeQuery("SELECT GrantName FROM Grant");
-            while(rs.next()) {
-                this.Donors.addItem(rs.getString(1));
-            }
-            
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(addDonation.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(addDonation.class.getName()).log(Level.SEVERE, null, ex);
         }       
-        
     }
 
     /**
@@ -76,203 +72,310 @@ public class addDonation extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        donorType = new javax.swing.ButtonGroup();
+        jLabel1 = new javax.swing.JLabel();
+        individual = new javax.swing.JRadioButton();
+        corp_org = new javax.swing.JRadioButton();
+        grant = new javax.swing.JRadioButton();
+        donors = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
+        amount = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        Amount = new javax.swing.JTextField();
+        date = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        campaigns = new javax.swing.JComboBox();
         jLabel5 = new javax.swing.JLabel();
-        Events = new javax.swing.JComboBox();
-        Campaigns = new javax.swing.JComboBox();
-        Donors = new javax.swing.JComboBox();
-        Date = new javax.swing.JTextField();
+        events = new javax.swing.JComboBox();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        Notes = new javax.swing.JTextArea();
-        jLabel1 = new javax.swing.JLabel();
+        jTextArea1 = new javax.swing.JTextArea();
+        pledge = new javax.swing.JCheckBox();
+        jLabel7 = new javax.swing.JLabel();
+        paymentFreq = new javax.swing.JComboBox();
+        jLabel8 = new javax.swing.JLabel();
+        amountPaid = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        lastPaymentDate = new javax.swing.JTextField();
+        addDonationPledge = new javax.swing.JButton();
+        backToMain = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Back to Main");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jLabel1.setText("Donor");
+
+        donorType.add(individual);
+        individual.setText("Individual");
+        individual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                individualActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Add Donation");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        donorType.add(corp_org);
+        corp_org.setText("Corporate/Organization");
+        corp_org.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                corp_orgActionPerformed(evt);
             }
         });
 
-        jLabel2.setText("Select  Donor from List:");
-
-        jLabel3.setText("Enter Amount:");
-
-        jLabel4.setText("Choose Campaign:");
-
-        jLabel5.setText("Choose Event (optional):");
-
-        Events.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        Events.addActionListener(new java.awt.event.ActionListener() {
+        donorType.add(grant);
+        grant.setText("Grant");
+        grant.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EventsActionPerformed(evt);
+                grantActionPerformed(evt);
             }
         });
 
-        Campaigns.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        donors.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        Donors.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jLabel2.setText("Amount");
 
-        Date.setText("MM/DD/YYYY");
+        jLabel3.setText("Date");
 
-        jLabel6.setText("Date");
+        date.setText("MM/DD/YYYY");
 
-        Notes.setColumns(20);
-        Notes.setRows(5);
-        jScrollPane1.setViewportView(Notes);
+        jLabel4.setText("Campaign");
 
-        jLabel1.setText("Notes");
+        campaigns.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        campaigns.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campaignsActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Event");
+
+        events.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        events.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eventsActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Notes");
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        pledge.setText("Pledge");
+        pledge.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pledgeActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setText("Payment Frequency");
+
+        paymentFreq.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel8.setText("Amount Paid");
+
+        jLabel9.setText("Last Payment Date");
+
+        lastPaymentDate.setText("MM/DD/YYYY");
+
+        addDonationPledge.setText("Save");
+        addDonationPledge.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addDonationPledgeActionPerformed(evt);
+            }
+        });
+
+        backToMain.setText("Cancel - Back To Main");
+        backToMain.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backToMainActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(addDonationPledge)
+                .addGap(22, 22, 22))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(Amount))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addGap(151, 151, 151)
-                                    .addComponent(Donors, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(17, 17, 17)
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(backToMain)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pledge)
+                            .addComponent(donors, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(amount, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(events, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(paymentFreq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lastPaymentDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(22, 22, 22)
-                                .addComponent(jLabel6)
-                                .addGap(18, 18, 18)
-                                .addComponent(Date, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel4))
-                                .addGap(29, 29, 29)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Campaigns, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Events, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(91, 227, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addGap(11, 11, 11)))
-                .addGap(13, 13, 13))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(individual)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(corp_org))
+                                    .addComponent(amountPaid, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(grant))
+                            .addComponent(campaigns, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1)
-                .addGap(36, 36, 36)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(8, 8, 8)
+                .addComponent(backToMain)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(donors, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(individual)
+                    .addComponent(corp_org)
+                    .addComponent(grant))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(Donors, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
+                    .addComponent(amount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Amount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(jLabel3)
+                    .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(Campaigns, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(Events, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(campaigns, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabel5)
+                    .addComponent(events, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addComponent(jLabel1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addContainerGap())
+                    .addComponent(jLabel6)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(pledge)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(paymentFreq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(amountPaid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(lastPaymentDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(addDonationPledge)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    // button 2 - back to main
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+    private void individualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_individualActionPerformed
         try {
-            //Look at all three possible kinds of Donor that can be selected in the ComboBox
-            ResultSet findInd = st.executeQuery("SELECT DonorID FROM Individual WHERE Individual.Lname like '" + Donors.getSelectedItem().toString() + "'");
-            ResultSet findCO = st.executeQuery("SELECT DonorID FROM Corporate_Organization WHERE Corporate_Organization.OrgName like '" + Donors.getSelectedItem().toString() + "'");
-            ResultSet findGrant = st.executeQuery("SELECT DonorID FROM Grant WHERE Grant.GrantName like '" + Donors.getSelectedItem().toString() + "'");
-            
-            //See which one it is, the one that was selected will return true here
-            System.out.println("Was an Individual picked: " + findInd.next());
-            System.out.println("Was a Corp_Org picked: " + findCO.next());
-            System.out.println("Was a Grant picked: " + findGrant.next());
-            
-            //Use the above .next() test to determine which donorID to use when entering the donation
-            //To do this you'll use the code below (with minor changes), but surrounded by a if(findInd.next() == true)...etc for each type of donor
-            //so that you know which donorID to use. 
-            
-           /* ResultSet sr = st.executeQuery("SELECT EventDate FROM Events WHERE Event.EventName like '" + Events.getSelectedIndex() + "'");
-            //connect to db, then add donation information tuples, close connection
-            String insert = "INSERT INTO Donations(DonorID, Amount, DDate, Notes, CampaignTitle, PaymentTypeID, EventName, EventDate) Values(?,?,?,?,?)";
-            PreparedStatement ps = this.con.prepareStatement(insert);
-            ps.setInt(1, rs.getInt(1));
-            ps.setString(2, this.Amount.getText());
-            SimpleDateFormat format = new SimpleDateFormat("MM/DD/YYYY");
-            Date doDate = format.parse(this.Date.getText());
-            ps.setTimestamp(3, new Timestamp(doDate.getTime()));
-            ps.setString(4, this.Notes.getText());
-            ps.setString(5,(String) this.Campaigns.getSelectedItem());
-            ps.setInt(6, 1);
-            ps.setString(7, (String) this.Events.getSelectedItem());
-            ps.setString(8, (sr.getString(1)));*/
+            this.donors.removeAllItems();
+            ResultSet rs = this.st.executeQuery("SELECT Fname FROM Individual");
+            while(rs.next()) {
+                this.donors.addItem(rs.getString(1));
+            }
         } catch (SQLException ex) {
             Logger.getLogger(addDonation.class.getName()).log(Level.SEVERE, null, ex);
-        } /*catch (ParseException ex) {
+        }
+    }//GEN-LAST:event_individualActionPerformed
+
+    private void corp_orgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_corp_orgActionPerformed
+        try {
+            this.donors.removeAllItems();
+            ResultSet rs = this.st.executeQuery("SELECT OrgName FROM Corporate_Organization");
+            while(rs.next()) {
+                this.donors.addItem(rs.getString(1));
+            }
+        } catch (SQLException ex) {
             Logger.getLogger(addDonation.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
-        
-    }//GEN-LAST:event_jButton2ActionPerformed
-    //button 1 - save new donation(s)
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        }
+    }//GEN-LAST:event_corp_orgActionPerformed
+
+    private void grantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_grantActionPerformed
+        try {
+            this.donors.removeAllItems();
+            ResultSet rs = this.st.executeQuery("SELECT GrantName FROM Grant");
+            while(rs.next()) {
+                this.donors.addItem(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(addDonation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_grantActionPerformed
+
+    private void campaignsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campaignsActionPerformed
+
+    }//GEN-LAST:event_campaignsActionPerformed
+
+    private void eventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eventsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_eventsActionPerformed
+
+    private void pledgeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pledgeActionPerformed
+        if (this.pledge.isSelected()) { 
+            this.paymentFreq.setEditable(true);
+            this.paymentFreq.setBackground(Color.white);
+            this.paymentFreq.setEnabled(true);
+            this.amountPaid.setEditable(true);
+            this.amountPaid.setBackground(Color.white);
+            this.lastPaymentDate.setEditable(true);
+            this.lastPaymentDate.setBackground(Color.white); 
+        }
+        else {
+            this.paymentFreq.setEditable(false);
+            this.paymentFreq.setBackground(Color.lightGray);
+            this.paymentFreq.setEnabled(false);
+            this.amountPaid.setEditable(false);
+            this.amountPaid.setBackground(Color.lightGray);
+            this.lastPaymentDate.setEditable(false);
+            this.lastPaymentDate.setBackground(Color.lightGray); 
+        }
+    }//GEN-LAST:event_pledgeActionPerformed
+
+    private void backToMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToMainActionPerformed
+        try {
+            this.con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(addDonation.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.setVisible(false);
         new mainView().setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_backToMainActionPerformed
 
-    private void EventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EventsActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_EventsActionPerformed
+    private void addDonationPledgeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDonationPledgeActionPerformed
+        try {
+            this.con.commit();
+            this.con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(addDonation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.setVisible(false);
+        new addDonation().setVisible(true);
+    }//GEN-LAST:event_addDonationPledgeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -310,22 +413,32 @@ public class addDonation extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField Amount;
-    private javax.swing.JComboBox Campaigns;
-    private javax.swing.JTextField Date;
-    private javax.swing.JComboBox Donors;
-    private javax.swing.JComboBox Events;
-    private javax.swing.JTextArea Notes;
-    private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton addDonationPledge;
+    private javax.swing.JTextField amount;
+    private javax.swing.JTextField amountPaid;
+    private javax.swing.JButton backToMain;
+    private javax.swing.JComboBox campaigns;
+    private javax.swing.JRadioButton corp_org;
+    private javax.swing.JTextField date;
+    private javax.swing.ButtonGroup donorType;
+    private javax.swing.JComboBox donors;
+    private javax.swing.JComboBox events;
+    private javax.swing.JRadioButton grant;
+    private javax.swing.JRadioButton individual;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextField lastPaymentDate;
+    private javax.swing.JComboBox paymentFreq;
+    private javax.swing.JCheckBox pledge;
     // End of variables declaration//GEN-END:variables
     private Connection con;
     private Statement st;

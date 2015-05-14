@@ -73,14 +73,14 @@ public class addCE extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        backToMain.setText("Back to Main");
+        backToMain.setText("Cancel - Back to Main");
         backToMain.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backToMainActionPerformed(evt);
             }
         });
 
-        addCampaignEvent.setText("Add");
+        addCampaignEvent.setText("Save");
         addCampaignEvent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addCampaignEventActionPerformed(evt);
@@ -150,7 +150,7 @@ public class addCE extends javax.swing.JFrame {
                                 .addComponent(jScrollPane1)
                                 .addComponent(moneyRaised, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(campaign, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(eventName)))))
                 .addContainerGap(367, Short.MAX_VALUE))
         );

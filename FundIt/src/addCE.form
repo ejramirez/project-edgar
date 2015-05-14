@@ -70,7 +70,7 @@
                               <Component id="jScrollPane1" max="32767" attributes="0"/>
                               <Component id="moneyRaised" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
                               <Component id="campaign" alignment="0" min="-2" pref="133" max="-2" attributes="0"/>
-                              <Component id="date" alignment="0" min="-2" pref="86" max="-2" attributes="0"/>
+                              <Component id="date" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="eventName" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -131,7 +131,7 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="backToMain">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Back to Main"/>
+        <Property name="text" type="java.lang.String" value="Cancel - Back to Main"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backToMainActionPerformed"/>
@@ -139,7 +139,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="addCampaignEvent">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Add"/>
+        <Property name="text" type="java.lang.String" value="Save"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addCampaignEventActionPerformed"/>
