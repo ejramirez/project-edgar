@@ -7,10 +7,8 @@ import java.awt.Color;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import java.util.Date;
 
 import net.ucanaccess.converters.TypesMap.AccessType;
@@ -88,7 +86,7 @@ public class addDonation extends javax.swing.JFrame {
         events = new javax.swing.JComboBox();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        notes = new javax.swing.JTextArea();
         pledge = new javax.swing.JCheckBox();
         jLabel7 = new javax.swing.JLabel();
         paymentFreq = new javax.swing.JComboBox();
@@ -155,9 +153,9 @@ public class addDonation extends javax.swing.JFrame {
 
         jLabel6.setText("Notes");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        notes.setColumns(20);
+        notes.setRows(5);
+        jScrollPane1.setViewportView(notes);
 
         pledge.setText("Pledge");
         pledge.addActionListener(new java.awt.event.ActionListener() {
@@ -368,9 +366,33 @@ public class addDonation extends javax.swing.JFrame {
 
     private void addDonationPledgeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDonationPledgeActionPerformed
         try {
+            ResultSet donor = null;
+            if (this.individual.isSelected()) {
+                donor = this.st.executeQuery("SELECT DonorID FROM Individual WHERE Individual.Fname LIKE '" + this.donors.getSelectedItem() + "' ");
+            }
+            else if(this.grant.isSelected()) {
+                donor = this.st.executeQuery("SELECT DonorID FROM Grant WHERE Grant.GrantName LIKE '" + this.donors.getSelectedItem() + "' ");
+            }
+            else {
+                donor = this.st.executeQuery("SELECT DonorID FROM Corporate_Organization WHERE Corporate_Organization.OrgName LIKE '" + this.donors.getSelectedItem() + "' ");
+            }
+            donor.next();
+            String donorID = donor.getString(1);
+            String donationInsert = "INSERT INTO Donations(DonorID,Amount,DDate,Notes,CampaignTitle,PaymentTypeID,EventName) Values(?,?,?,?,?,?,?)";
+            SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+            Date dDate = format.parse(this.date.getText());
+            PreparedStatement ps = this.con.prepareStatement(donationInsert);
+            ps.setString(1,donorID);
+            ps.setString(2,this.amount.getText());
+            ps.setTimestamp(3,new Timestamp(dDate.getTime()));
+            ps.setString(4,this.notes.getText());
+            ps.setString(5,this.campaigns.getSelectedItem().toString());
+            ps.setString(6,"1");
+            ps.setString(7,this.events.getSelectedItem().toString());
+            ps.executeUpdate();
             this.con.commit();
             this.con.close();
-        } catch (SQLException ex) {
+        } catch (SQLException | ParseException ex) {
             Logger.getLogger(addDonation.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.setVisible(false);
@@ -435,8 +457,8 @@ public class addDonation extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField lastPaymentDate;
+    private javax.swing.JTextArea notes;
     private javax.swing.JComboBox paymentFreq;
     private javax.swing.JCheckBox pledge;
     // End of variables declaration//GEN-END:variables
