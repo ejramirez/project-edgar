@@ -378,18 +378,56 @@ public class addDonation extends javax.swing.JFrame {
             }
             donor.next();
             String donorID = donor.getString(1);
-            String donationInsert = "INSERT INTO Donations(DonorID,Amount,DDate,Notes,CampaignTitle,PaymentTypeID,EventName) Values(?,?,?,?,?,?,?)";
+            String donationInsert = "INSERT INTO Donations(DonorID,Amount,DDate,Notes,PaymentTypeID";
+            if ((this.campaigns.getSelectedItem().toString().equalsIgnoreCase("None") == false) && (this.events.getSelectedItem().toString().equalsIgnoreCase("None") == false)) {
+                donationInsert = donationInsert + ",CampaignTitle,EventName) Values(?,?,?,?,?,?,?)";
+            }
+            else if((this.campaigns.getSelectedItem().toString().equalsIgnoreCase("None") == false) && (this.events.getSelectedItem().toString().equalsIgnoreCase("None") == true)) {
+                donationInsert = donationInsert + ",CampaignTitle) Values(?,?,?,?,?,?)";
+            }
+            else if((this.campaigns.getSelectedItem().toString().equalsIgnoreCase("None") == true) && (this.events.getSelectedItem().toString().equalsIgnoreCase("None") == false)) {
+                donationInsert = donationInsert +",EventName) Values(?,?,?,?,?,?)";
+            }
+            else {
+                donationInsert = donationInsert +") Values(?,?,?,?,?)";
+            }
             SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
             Date dDate = format.parse(this.date.getText());
-            PreparedStatement ps = this.con.prepareStatement(donationInsert);
+            PreparedStatement ps;
+            ps = this.con.prepareStatement(donationInsert);
             ps.setString(1,donorID);
             ps.setString(2,this.amount.getText());
             ps.setTimestamp(3,new Timestamp(dDate.getTime()));
             ps.setString(4,this.notes.getText());
-            ps.setString(5,this.campaigns.getSelectedItem().toString());
-            ps.setString(6,"1");
-            ps.setString(7,this.events.getSelectedItem().toString());
+            ps.setString(5,"1");
+            if (this.campaigns.getSelectedItem().toString().equalsIgnoreCase("None") == false) {
+                ps.setString(6,this.campaigns.getSelectedItem().toString());
+            }
+            if (this.events.getSelectedItem().toString().equalsIgnoreCase("None") == false) {
+                int loc;
+                if (this.campaigns.getSelectedItem().toString().equalsIgnoreCase("None") == true) {
+                    loc = 6;
+                }
+                else {
+                    loc = 7;
+                }
+                ps.setString(loc,this.events.getSelectedItem().toString());
+            }
             ps.executeUpdate();
+            if (this.pledge.isSelected()) {
+                ResultSet donation = this.st.executeQuery("SELECT DonationID FROM Donations WHERE Donations.DonorID LIKE '" + donorID + "' "
+                + "AND Donations.Amount LIKE '" + this.amount.getText() + "' " + "AND Donations.Notes LIKE '" + this.notes.getText() + "' ");
+                donation.next();
+                String donationID = donation.getString(1);
+                Date lastPayDate = format.parse(this.lastPaymentDate.getText());
+                String pledgeInsert =  "INSERT INTO Pledges(PaymentFrequency,PayToDate,LastPaymentDate,DonationID) Values(?,?,?,?)";
+                ps = this.con.prepareCall(pledgeInsert);
+                ps.setString(1,this.paymentFreq.getSelectedItem().toString());
+                ps.setString(2,this.amountPaid.getText());
+                ps.setTimestamp(3, new Timestamp(lastPayDate.getTime()));
+                ps.setString(4,donationID);
+                ps.executeUpdate();
+            }
             this.con.commit();
             this.con.close();
         } catch (SQLException | ParseException ex) {
