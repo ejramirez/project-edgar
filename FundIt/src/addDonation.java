@@ -416,12 +416,13 @@ public class addDonation extends javax.swing.JFrame {
             ps.executeUpdate();
             if (this.pledge.isSelected()) {
                 ResultSet donation = this.st.executeQuery("SELECT DonationID FROM Donations WHERE Donations.DonorID LIKE '" + donorID + "' "
-                + "AND Donations.Amount LIKE '" + this.amount.getText() + "' " + "AND Donations.Notes LIKE '" + this.notes.getText() + "' ");
+                + "AND Donations.Notes LIKE '" + this.notes.getText() + "' ");
                 donation.next();
                 String donationID = donation.getString(1);
                 Date lastPayDate = format.parse(this.lastPaymentDate.getText());
                 String pledgeInsert =  "INSERT INTO Pledges(PaymentFrequency,PayToDate,LastPaymentDate,DonationID) Values(?,?,?,?)";
-                ps = this.con.prepareCall(pledgeInsert);
+                ps = this.con.prepareStatement(pledgeInsert);
+                
                 ps.setString(1,this.paymentFreq.getSelectedItem().toString());
                 ps.setString(2,this.amountPaid.getText());
                 ps.setTimestamp(3, new Timestamp(lastPayDate.getTime()));
