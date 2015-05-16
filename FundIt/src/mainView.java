@@ -11,6 +11,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 
 /*
@@ -300,6 +301,9 @@ public class mainView extends javax.swing.JFrame {
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+         ArrayList<ArrayList<String>> R1= new ArrayList<ArrayList<String>>();
+        ArrayList<ArrayList<String>> R2= new ArrayList<ArrayList<String>>();
+        ArrayList<ArrayList<String>> R3= new ArrayList<ArrayList<String>>();
         try {
             try {
                 Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
@@ -328,11 +332,99 @@ public class mainView extends javax.swing.JFrame {
 
             System.out.println("Is connection closed: " + con.isClosed());
             System.out.println("Connection to DB established...");
+            jTextArea1.setText(null); 
+             while (rs.next()) {
+                  ArrayList<String> temprs= new ArrayList<String>();  
+                temprs.add(rs.getString(1));
+                temprs.add(rs.getString(2));
+                temprs.add(rs.getString(3));
+                temprs.add(rs.getString(4));
+                temprs.add(rs.getString(5));
+                temprs.add(rs.getString(6));
+                temprs.add(rs.getString(7));
+                temprs.add(rs.getString(8));
+                temprs.add(rs.getString(9));
+                temprs.add(rs.getString(10));
+                temprs.add(rs.getString(11));
+                temprs.add(rs.getString(12));
+                temprs.add(rs.getString(13));
+                temprs.add(rs.getString(14));
+                temprs.add(rs.getString(15));
+                temprs.add(rs.getString(16));
+                temprs.add(rs.getString(17));
+                temprs.add(rs.getString(18));
+                
+                R1.add(temprs);                  
+            }
+             
+            ResultSet Rs = s.executeQuery("SELECT OrgName, PrimaryContact,"
+                    + "Street, "
+                    + "City, State, ZipCode,"
+                    + "Phone, "
+                    + "EmailAddress,"
+                    + "UserStatus, Solicitation,"
+                    + "PreferredMailStreet,"
+                    + "PreferredMailCity, PreferredMailState, PreferredMailZipCode,"
+                    + "PreferredPhone, PreferredEmail FROM Corporate_Organization left outer join Donor on (Corporate_Organization.DonorID = Donor.DonorID)");
+           
+            while (Rs.next()) {
+                  ArrayList<String> temprs= new ArrayList<String>();  
+                temprs.add(Rs.getString(1));
+                temprs.add(Rs.getString(2));
+                temprs.add(Rs.getString(3));
+                temprs.add(Rs.getString(4));
+                temprs.add(Rs.getString(5));
+                temprs.add(Rs.getString(6));
+                temprs.add(Rs.getString(7));
+                temprs.add(Rs.getString(8));
+                temprs.add(Rs.getString(9));
+                temprs.add(Rs.getString(10));
+                temprs.add(Rs.getString(11));
+                temprs.add(Rs.getString(12));
+                temprs.add(Rs.getString(13));
+                temprs.add(Rs.getString(14));
+                temprs.add(Rs.getString(15));
+                temprs.add(Rs.getString(16));                
+                R2.add(temprs);                  
+            }
+             ResultSet Result = s.executeQuery("SELECT GrantName, GrantNumber, "
+                    + "StartDate, EndDate, NextReportDate, "
+                    + "Street, "
+                    + "City, State, ZipCode,"
+                    + "Phone, "
+                    + "EmailAddress, "
+                    + "UserStatus, Solicitation,"
+                    + "PreferredMailStreet,"
+                    + "PreferredMailCity, PreferredMailState, PreferredMailZipCode,"
+                    + "PreferredPhone, PreferredEmail FROM Grant left outer join Donor on (Grant.DonorID = Donor.DonorID)");
+             
+            while (Result.next()) {
+                  ArrayList<String> temprs= new ArrayList<String>();  
+                temprs.add(Result.getString(1));
+                temprs.add(Result.getString(2));
+                temprs.add(Result.getString(3));
+                temprs.add(Result.getString(4));
+                temprs.add(Result.getString(5));
+                temprs.add(Result.getString(6));
+                temprs.add(Result.getString(7));
+                temprs.add(Result.getString(8));
+                temprs.add(Result.getString(9));
+                temprs.add(Result.getString(10));
+                temprs.add(Result.getString(11));
+                temprs.add(Result.getString(12));
+                temprs.add(Result.getString(13));
+                temprs.add(Result.getString(14));
+                temprs.add(Result.getString(15));
+                temprs.add(Result.getString(16));
+                temprs.add(Result.getString(17));
+                temprs.add(Result.getString(18));
+                temprs.add(Result.getString(19));
+                R3.add(temprs);                  
+            }
            FileOutputStream fop = null;
 		File file;
 		String content; 
       try {
- 
 			file = new File("C:\\Users\\aung\\Desktop\\project-edgar\\EXPORT.txt");
 			fop = new FileOutputStream(file);
  
@@ -342,9 +434,31 @@ public class mainView extends javax.swing.JFrame {
 			}
         
         
-         while (rs.next()) {   
-            for(int i=1;i<20;i++){
-         content = rs.getString(i);
+         for(ArrayList<String> x : R1){   
+            for(int i=0;i<x.size();i++){
+         content = x.get(i);
+          byte[] contentInBytes = content.getBytes();
+ 
+			fop.write(contentInBytes);
+                        fop.write('\n');
+            }
+            fop.write('\n');
+            fop.write('\n');
+         }
+         for(ArrayList<String> x : R2){   
+            for(int i=0;i<x.size();i++){
+         content = x.get(i);
+          byte[] contentInBytes = content.getBytes();
+ 
+			fop.write(contentInBytes);
+                        fop.write('\n');
+            }
+            fop.write('\n');
+            fop.write('\n');
+         }
+         for(ArrayList<String> x : R3){   
+            for(int i=0;i<x.size();i++){
+         content = x.get(i);
           byte[] contentInBytes = content.getBytes();
  
 			fop.write(contentInBytes);
@@ -354,7 +468,7 @@ public class mainView extends javax.swing.JFrame {
             fop.write('\n');
          }
          fop.flush();
-			fop.close();
+         fop.close();
          } catch (IOException e) {
 			e.printStackTrace();
 		} finally {
@@ -371,6 +485,8 @@ public class mainView extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(userLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
+        jTextArea1.append("Export to Text File is done");
+    
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void viewEventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewEventsActionPerformed
