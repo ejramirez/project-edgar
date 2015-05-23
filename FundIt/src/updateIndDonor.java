@@ -29,7 +29,47 @@ public class updateIndDonor extends javax.swing.JFrame {
         jComboBox2.removeAllItems();
         jComboBox3.removeAllItems();
         jComboBox4.removeAllItems();
-        //jComboBox5.removeAllItems();
+        jComboBox5.removeAllItems();
+        
+        try {
+            try {
+                Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(viewDonors.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Connection con;
+            con = DriverManager.getConnection(
+                    "jdbc:ucanaccess://C:\\Users\\Bandgeek\\Documents\\Github\\project-edgar\\Project-Edgar-Database.accdb",
+                    "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
+          
+            Statement s = con.createStatement();  
+            System.out.println("Connection to DB established...");
+            
+            ResultSet rs = s.executeQuery("SELECT Fname, Minit, Lname,"
+                    + "Title, PreferredHouseholdName, "
+                    + "Street, "
+                    + "City, State, ZipCode,"
+                    + "Phone, "
+                    + "EmailAddress,"
+                    + "UserStatus, Solicitation,"
+                    + "PreferredMailStreet,"
+                    + "PreferredMailCity, PreferredMailState, PreferredMailZipCode,"
+                    + "PreferredPhone, PreferredEmail FROM Individual left outer join Donor on (Individual.DonorID = Donor.DonorID)"); 
+            
+            System.out.println("Is connection closed: " + con.isClosed());
+            System.out.println("Connection to DB established...");
+            while(rs.next()){
+                
+                //Fname, Minit, Lname
+                System.out.print(rs.getString(1) + " ");
+                jComboBox5.addItem(rs.getString(1) + ", " + rs.getString(2) + " " + rs.getString(3));
+            }
+            
+            con.close();
+            System.out.println("Is connection closed: " + con.isClosed());
+        } catch (SQLException ex) {
+            Logger.getLogger(userLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -311,6 +351,7 @@ public class updateIndDonor extends javax.swing.JFrame {
 
     private void jComboBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox5ActionPerformed
         // TODO add your handling code here:
+        /*
         try {
             try {
                 Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
@@ -319,7 +360,7 @@ public class updateIndDonor extends javax.swing.JFrame {
             }
             Connection con;
             con = DriverManager.getConnection(
-                    "jdbc:ucanaccess://C:\\Users\\Eric\\Documents\\Github\\project-edgar\\Project-Edgar-Database.accdb",
+                    "jdbc:ucanaccess://C:\\Users\\Bandgeek\\Documents\\Github\\project-edgar\\Project-Edgar-Database.accdb",
                     "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
           
             Statement s = con.createStatement();  
@@ -380,7 +421,7 @@ public class updateIndDonor extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(userLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        */
         //jLabel17.setText("Saved.");
     }//GEN-LAST:event_jComboBox5ActionPerformed
 
