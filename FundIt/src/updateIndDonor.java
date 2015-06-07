@@ -2,6 +2,7 @@
 import java.awt.event.ItemEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -24,7 +25,7 @@ public class updateIndDonor extends javax.swing.JFrame {
      * Creates new form updateIndDonor
      */
     
-    private String[] options = {};
+    
     public updateIndDonor() {
         initComponents();
         
@@ -36,8 +37,8 @@ public class updateIndDonor extends javax.swing.JFrame {
         jComboBox6.removeAllItems();
         String selectDonor = "(Select Donor)";
         jComboBox5.addItem(selectDonor);
-        int i = 0;
         
+        //This is to pull all the names of the donors from the database, this has to be done before the frame appears.
         try {
             try {
                 Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
@@ -71,30 +72,17 @@ public class updateIndDonor extends javax.swing.JFrame {
                 //Fname, Minit, Lname
                 System.out.print(rs.getString(1) + " ");
                 jComboBox5.addItem(rs.getString(20) + "     , " + rs.getString(1) + ", " + rs.getString(3) + " " + rs.getString(2));
-                
-                
-                //System.out.print(rs.getString(4) + " ");
-                //jComboBox1.addItem(rs.getString(4));
-                
-                //System.out.print(rs.getString(8) + " ");
-                //jComboBox2.addItem(rs.getString(8));
-                
-                //System.out.print(rs.getString(12) + " ");
-                //jComboBox3.addItem(rs.getString(12));
-                
-                //System.out.print(rs.getString(16) + " ");
-                //jComboBox6.addItem(rs.getString(16));
-                
+                    
             }
-            
-            //options[i] = rs.getString(20) + ", " + rs.getString(1) + ", " + rs.getString(3) + " " + rs.getString(2);
-            //i++;
             
             con.close();
             System.out.println("Is connection closed: " + con.isClosed());
         } catch (SQLException ex) {
             Logger.getLogger(userLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        //This needs to be added, when the database connection is done if the program sees that it is one of these instead of pulling from the
+        //database it will instead compare itself to these until it finds the one that it's equal to which will then be used in the updates
         jComboBox1.addItem(" ");
         jComboBox1.addItem("Ms");
         jComboBox1.addItem("Miss");
@@ -268,6 +256,7 @@ public class updateIndDonor extends javax.swing.JFrame {
         jComboBox6 = new javax.swing.JComboBox();
         jLabel18 = new javax.swing.JLabel();
         jTextField14 = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -331,6 +320,11 @@ public class updateIndDonor extends javax.swing.JFrame {
         jTextField9.setText("jTextField9");
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox3ActionPerformed(evt);
+            }
+        });
 
         jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox4.addActionListener(new java.awt.event.ActionListener() {
@@ -339,7 +333,7 @@ public class updateIndDonor extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Cancel");
+        jButton1.setText("Back to Update Menu");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -402,72 +396,13 @@ public class updateIndDonor extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel10)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel11)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField7))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField5)
-                                        .addGap(102, 102, 102))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField4))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel12)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel13)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField10))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField8, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
-                                    .addComponent(jTextField9)
-                                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(78, 78, 78))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField4))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel16)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -486,13 +421,72 @@ public class updateIndDonor extends javax.swing.JFrame {
                                 .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel19)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton1))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel15)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField12)))
-                        .addGap(35, 35, 35))))
+                                .addComponent(jTextField12))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(35, 35, 35))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel12)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel13)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField10))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextField8, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
+                                    .addComponent(jTextField9)
+                                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel10)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel11)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextField7))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -564,7 +558,8 @@ public class updateIndDonor extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(jLabel19))
                 .addGap(19, 19, 19))
         );
 
@@ -584,6 +579,97 @@ public class updateIndDonor extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         
+        //Getting everything from the Textfields and comboboxes
+        String Fname, Minit, Lname;
+        String Title;
+        String PreferredHHName;
+        String Street, City, State, Zipcode;
+        String Phone, Email, Status, Solicitation;
+        String pStreet, pCity, pState, pZipcode;
+        String pPhone, pEmail;
+        String DonorID;
+        
+        Fname = jTextField1.getText();
+        Minit = jTextField2.getText();
+        Lname = jTextField3.getText();
+        PreferredHHName = jTextField4.getText();
+        
+        Street = jTextField5.getText();
+        City = jTextField6.getText();
+        Zipcode = jTextField7.getText();
+        
+        Phone = jTextField8.getText();
+        Email = jTextField9.getText();
+        
+        pStreet = jTextField10.getText();
+        pCity = jTextField11.getText();
+        pZipcode = jTextField14.getText();
+        
+        pPhone = jTextField12.getText();
+        pEmail = jTextField13.getText();
+        
+        Title = jComboBox1.getSelectedItem().toString();
+        State = jComboBox2.getSelectedItem().toString();
+        Status = jComboBox3.getSelectedItem().toString();
+        Solicitation = jComboBox4.getSelectedItem().toString();
+        pState = jComboBox6.getSelectedItem().toString();
+        
+        DonorID = jComboBox5.getSelectedItem().toString().substring(0, 5);
+        
+        //Start of Connection
+        //This is how UPDATES in UCANACCESS are done.
+        try {
+            try {
+                Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(viewDonors.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Connection con;
+            con = DriverManager.getConnection(
+                    "jdbc:ucanaccess://C:\\Users\\Eric\\Documents\\GitHub\\project-edgar\\Project-Edgar-Database.accdb",
+                    "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
+          
+            Statement s = con.createStatement();
+            
+            System.out.println("Connection to DB established...");
+            
+            s.executeUpdate("UPDATE [Donor] SET " //Very syntactial, Table names must always have brackets around them when using the executeUpdate method
+                    + "Donor.Street = " + "'" + Street + "',"
+                    + "Donor.City = " + "'" + City + "',"
+                    + "Donor.State = " + "'" + State + "',"
+                    + "Donor.ZipCode = " + "'" + Zipcode + "',"
+                    + "Donor.Phone = " + "'" + Phone + "',"
+                    + "Donor.EmailAddress = " + "'" + Email + "',"
+                    + "Donor.UserStatus = " + "'" + Status + "',"
+                    + "Donor.Solicitation = " + "'" + Solicitation + "',"
+                    + "Donor.PreferredPhone = " + "'" + pPhone + "',"
+                    + "Donor.PreferredEmail = " + "'" + pEmail + "',"
+                    + "Donor.PreferredMailStreet = " + "'" + pStreet + "',"
+                    + "Donor.PreferredMailCity = " + "'" + pCity + "',"
+                    + "Donor.PreferredMailState = " + "'" + pState + "',"
+                    + "Donor.PreferredMailZipCode = " + "'" + pZipcode + "'"
+                    + "WHERE (Donor.DonorID = '" + DonorID + "')");
+            
+            s.executeUpdate("UPDATE [Individual] SET " //also remember to space everything correctly, program was reading SETIND instead of SET
+                    + "Individual.Fname = " + "'" + Fname + "',"
+                    + "Individual.Minit = " + "'" + Minit + "',"
+                    + "Individual.Lname = " + "'" + Lname + "',"
+                    + "Individual.PreferredHouseholdName = " + "'" + PreferredHHName + "',"
+                    + "Individual.Title = " + "'" + Title + "'"
+                    + "WHERE (Individual.DonorID = '" + DonorID + "')");
+            
+            System.out.println("Is connection closed: " + con.isClosed());
+            System.out.println("Connection to DB established...");
+            System.out.println("Update Executed.");
+            
+            con.commit();
+            con.close();
+            System.out.println("Is connection closed: " + con.isClosed());
+        } catch (SQLException ex) {
+            Logger.getLogger(userLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        jLabel19.setText("Updated.");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
@@ -593,86 +679,8 @@ public class updateIndDonor extends javax.swing.JFrame {
 
     private void jComboBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox5ActionPerformed
         // TODO add your handling code here:
-        /*
-        if(evt.getSource() == jComboBox5){
-            for(int i = 0; i )
-            if(jComboBox5.getSelectedItem().equals()){
-            
-            }
-        }
-        */
-        /*
-        try {
-            try {
-                Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(viewDonors.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            Connection con;
-            con = DriverManager.getConnection(
-                    "jdbc:ucanaccess://C:\\Users\\Bandgeek\\Documents\\Github\\project-edgar\\Project-Edgar-Database.accdb",
-                    "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
-          
-            Statement s = con.createStatement();  
-            System.out.println("Connection to DB established...");
-            
-            ResultSet rs = s.executeQuery("SELECT Fname, Minit, Lname,"
-                    + "Title, PreferredHouseholdName, "
-                    + "Street, "
-                    + "City, State, ZipCode,"
-                    + "Phone, "
-                    + "EmailAddress,"
-                    + "UserStatus, Solicitation,"
-                    + "PreferredMailStreet,"
-                    + "PreferredMailCity, PreferredMailState, PreferredMailZipCode,"
-                    + "PreferredPhone, PreferredEmail FROM Individual left outer join Donor on (Individual.DonorID = Donor.DonorID)"); 
-            
-            System.out.println("Is connection closed: " + con.isClosed());
-            System.out.println("Connection to DB established...");
-            while(rs.next()){
-                
-                //Fname, Minit, Lname
-                System.out.print(rs.getString(1) + " ");
-                jTextField1.setText(rs.getString(1) + "");
-                System.out.print(rs.getString(2) + " ");
-                jTextField2.setText(rs.getString(2) + "");
-                System.out.print(rs.getString(3) + " ");
-                jTextField3.setText(rs.getString(3) + "");
-                
-                //title, p. HH name
-                System.out.print(rs.getString(4) + " ");
-                jComboBox1.addItem(rs.getString(4));
-                System.out.print(rs.getString(5) + " ");
-                jTextField4.setText(rs.getString(5) + "");
-                
-                //street,city, state, zipcode
-                System.out.print(rs.getString(6) + " ");
-                jTextField5.setText(rs.getString(6) + "");
-                System.out.print(rs.getString(7) + " ");
-                jTextField6.setText(rs.getString(7) + "");
-                System.out.print(rs.getString(8) + " ");
-                jComboBox2.addItem(rs.getString(8));
-                System.out.print(rs.getString(9) + " ");
-                jTextField7.setText(rs.getString(9) + "");
-                
-                //phone, email, status, solicitation
-                System.out.print(rs.getString(10) + " ");
-                jTextField8.setText(rs.getString(10) + "");
-                System.out.print(rs.getString(11) + " ");
-                jTextField9.setText(rs.getString(11) + "");
-                System.out.print(rs.getString(12) + " ");
-                jComboBox3.addItem(rs.getString(12));
-                System.out.print(rs.getString(13) + " ");
-                jComboBox4.addItem(rs.getString(13));
-            }
-            
-            con.close();
-            System.out.println("Is connection closed: " + con.isClosed());
-        } catch (SQLException ex) {
-            Logger.getLogger(userLogin.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        */
-        //jLabel17.setText("Saved.");
+        jLabel19.setText("");
+        
     }//GEN-LAST:event_jComboBox5ActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
@@ -682,6 +690,7 @@ public class updateIndDonor extends javax.swing.JFrame {
     private void jComboBox5ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox5ItemStateChanged
         // TODO add your handling code here:
         
+        //This is how you do ItemStateChanges when calling from a database with UCANACCESS
         
         if (evt.getStateChange() == ItemEvent.SELECTED) {
             System.out.print("; Selected " + evt.getItem());
@@ -790,6 +799,10 @@ public class updateIndDonor extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox4ActionPerformed
 
+    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -844,6 +857,7 @@ public class updateIndDonor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
