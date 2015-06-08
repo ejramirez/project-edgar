@@ -529,7 +529,7 @@ public class addIndividual extends javax.swing.JFrame {
             }
             Connection con;
             con = DriverManager.getConnection(
-                    "jdbc:ucanaccess://C:\\Users\\Owner\\Desktop\\project-edgar\\Project-Edgar-Database.accdb",
+                    "jdbc:ucanaccess://C:\\Users\\Eric\\Documents\\GitHub\\project-edgar\\Project-Edgar-Database.accdb",
                     "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
           
             boolean sol = false;
@@ -570,6 +570,7 @@ public class addIndividual extends javax.swing.JFrame {
             con.commit();
         
             con.close();
+            System.out.println("INSERT COMPLETE");
             System.out.println("Is connection closed: " + con.isClosed());
         } catch (SQLException ex) {
             Logger.getLogger(userLogin.class.getName()).log(Level.SEVERE, null, ex);
