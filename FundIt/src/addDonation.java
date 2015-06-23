@@ -155,6 +155,11 @@ public class addDonation extends javax.swing.JFrame {
 
         notes.setColumns(20);
         notes.setRows(5);
+        notes.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                notesPropertyChange(evt);
+            }
+        });
         jScrollPane1.setViewportView(notes);
 
         pledge.setText("Pledge");
@@ -437,6 +442,10 @@ public class addDonation extends javax.swing.JFrame {
         this.setVisible(false);
         new addDonation().setVisible(true);
     }//GEN-LAST:event_addDonationPledgeActionPerformed
+
+    private void notesPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_notesPropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_notesPropertyChange
 
     /**
      * @param args the command line arguments

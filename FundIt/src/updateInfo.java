@@ -70,7 +70,12 @@ public class updateInfo extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setText("Update Dontation");
+        jButton5.setText("Update Donation");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setText("Update Event");
 
@@ -146,14 +151,20 @@ public class updateInfo extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new updateCorpOrg().setVisible(true);
+        new updateCorpOrgDonor().setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
-        new updateGrant().setVisible(true);
+        //this.setVisible(false);
+        //new updateGrant().setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new updateDonationMenu().setVisible(true);
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments

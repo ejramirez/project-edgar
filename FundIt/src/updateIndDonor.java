@@ -402,6 +402,11 @@ public class updateIndDonor extends javax.swing.JFrame {
         jTextField14.setText("jTextField14");
 
         jComboBox7.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox7ActionPerformed(evt);
+            }
+        });
 
         jLabel20.setText("DonorID:");
 
@@ -830,6 +835,10 @@ public class updateIndDonor extends javax.swing.JFrame {
     private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox3ActionPerformed
+
+    private void jComboBox7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox7ActionPerformed
 
     /**
      * @param args the command line arguments
