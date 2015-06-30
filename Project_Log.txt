@@ -1,0 +1,19 @@
+Project Edgar Log
+-----------------
+
+Entry 2, 6/28/2015
+
+Figured out how to make it not out of bounds but I don't understand why this works and why the old way didn't. Basically
+what I did is instead of using the removeAllItems function I decided to just remove the preloaded items out individually.
+This made the program work and not give me errors for that part. But then I ran into another problem which is now that
+the jComboBox2 works (The one that has the DonorID's) it's not giving me all the Donations that I want to load from an
+individual into a Donation ComboBox that I made. My idea was that when the donation combobox is set to a donation the
+donation info would be pulled from the database into the Textfields that I put up. For some reason it's not loading up
+all the donations for each individual and it's not loading the donationID's that are associated with them.
+
+Entry 1, 6/27/2015
+
+Working on the updates still. I'm still gettng an error in the ItemStateChanged part of the jComboBox1, it's telling me
+the jComboBox2 is out of bounds but I don't understand how since I loaded it with items before the frame even appears. 
+After Searching the internet I found that if I get an error message that the combobox is out of bounds then that means 
+that the jcombobox is returning -1 which is NULL.

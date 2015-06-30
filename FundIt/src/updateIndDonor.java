@@ -724,6 +724,10 @@ public class updateIndDonor extends javax.swing.JFrame {
         if (evt.getStateChange() == ItemEvent.SELECTED) {
             System.out.print("; Selected " + evt.getItem());
             
+            System.out.print("; " + jComboBox7.getSelectedIndex());
+            System.out.print("; " + jComboBox5.getSelectedIndex());
+            System.out.print("; " + (jComboBox7.getItemCount()));
+            System.out.print("; " + (jComboBox5.getItemCount()));
             jComboBox7.setSelectedIndex(jComboBox5.getSelectedIndex());
             
             String DonorID = jComboBox7.getSelectedItem().toString();//evt.getItem().toString().substring(0, 5); //Remember to get the DonorID, very important if you want to
