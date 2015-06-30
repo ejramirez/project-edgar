@@ -1,6 +1,15 @@
 Project Edgar Log
 -----------------
 
+Entry 3, 6/29/2015
+
+I installed the Jexcel api onto the project (I thought I had already installed it, guess not). As I was about to start on
+the writing to excel part I need to first figure out how I'm gonna lay this out. I'm wondering if I should make it where
+he can chose what he want's on the info or to maybe have it like that in a later version and instead just have him only
+have what I created.
+
+Found a good tutorial covering how to use Jexcelapi, currently reading through it.
+
 Entry 2, 6/28/2015
 
 Figured out how to make it not out of bounds but I don't understand why this works and why the old way didn't. Basically
