@@ -169,6 +169,11 @@ public class mainView extends javax.swing.JFrame {
         });
 
         jButton10.setText("Export Menu");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
 
         fileMenu.setMnemonic('f');
         fileMenu.setText("File");
@@ -505,6 +510,12 @@ public class mainView extends javax.swing.JFrame {
         this.setVisible(false); 
         new updateInfo().setVisible(true);
     }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false); 
+        new exportMenu().setVisible(true);
+    }//GEN-LAST:event_jButton10ActionPerformed
     
 
         

@@ -1,6 +1,19 @@
 Project Edgar Log
 -----------------
 
+Entry 5, 7/6/2015
+
+So far it has loaded what I want into the cells just not at the right positions. At this point it's really just a formatting
+issue. There are some things that don't show up but those shouldn't be that much of a problem to fix. Formatting Still needs
+work but all the data is showing up properly.
+
+Entry 4, 7/2/2015
+
+Read a bit of the Jexcel tutorial, just figuring things out now. Figured out how to make a workbook. Figured out how to
+make a sheet for said workbook. Lots of formatting. Ran into problems with database and Workbook. Problem Solved. Trying
+to figure out how to load all the individual donor's info in the database onto the excel sheet. Ran into problems. Doesn't
+properly load everything into the cells, although it does get the correct positions, mostly.
+
 Entry 3, 6/29/2015
 
 I installed the Jexcel api onto the project (I thought I had already installed it, guess not). As I was about to start on
