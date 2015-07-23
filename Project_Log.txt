@@ -1,6 +1,23 @@
 Project Edgar Log
 -----------------
 
+Entry 7, 7/22/2015
+
+Late Entry,
+
+So I still worked on the jexcel for the program, I was having some problems with the sql, thought it was a problem with
+duplicates but as it turned out it was just giving me back all the donations for a person so each person that showed up on the
+excel sheet multiple times is equal to the number of times they donated. So I finally got that figured out and modified
+the sql a bit and now it works. All I need to do now is make it to where the user can customize an excel sheet, that's not
+too difficult so I will get that done.
+
+Entry 6, 7/13/2015
+
+I didn't get to work on this project as much this weeks as I had to work long hours this week. So far I have just been
+learning more Jexcel and have ran into problems trying to implement a choose your data choice for the user but those
+problems have been resolved and hopefully I should be able to make a good example of this to show to Sean. At the moment
+the problem that I am having is that I am trying to join three tables using SQL but it's giving me back duplicates.
+
 Entry 5, 7/6/2015
 
 So far it has loaded what I want into the cells just not at the right positions. At this point it's really just a formatting

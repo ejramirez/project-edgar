@@ -6,11 +6,13 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import static java.sql.Types.NULL;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jxl.*;
 import jxl.write.*;
+import static net.ucanaccess.converters.Functions.string;
 
 
 /*
@@ -30,6 +32,9 @@ public class exportIndividualInfo extends javax.swing.JFrame {
      */
     public exportIndividualInfo() {
         initComponents();
+        
+        jTextField1.removeAll();
+        jTextField1.setText("output");
     }
 
     /**
@@ -43,6 +48,37 @@ public class exportIndividualInfo extends javax.swing.JFrame {
 
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jCheckBox2 = new javax.swing.JCheckBox();
+        jCheckBox3 = new javax.swing.JCheckBox();
+        jCheckBox4 = new javax.swing.JCheckBox();
+        jCheckBox5 = new javax.swing.JCheckBox();
+        jLabel2 = new javax.swing.JLabel();
+        jCheckBox7 = new javax.swing.JCheckBox();
+        jCheckBox8 = new javax.swing.JCheckBox();
+        jCheckBox9 = new javax.swing.JCheckBox();
+        jCheckBox10 = new javax.swing.JCheckBox();
+        jCheckBox11 = new javax.swing.JCheckBox();
+        jCheckBox12 = new javax.swing.JCheckBox();
+        jLabel3 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jCheckBox13 = new javax.swing.JCheckBox();
+        jCheckBox14 = new javax.swing.JCheckBox();
+        jCheckBox15 = new javax.swing.JCheckBox();
+        jCheckBox16 = new javax.swing.JCheckBox();
+        jCheckBox17 = new javax.swing.JCheckBox();
+        jCheckBox18 = new javax.swing.JCheckBox();
+        jCheckBox19 = new javax.swing.JCheckBox();
+        jCheckBox20 = new javax.swing.JCheckBox();
+        jCheckBox21 = new javax.swing.JCheckBox();
+        jCheckBox22 = new javax.swing.JCheckBox();
+        jCheckBox23 = new javax.swing.JCheckBox();
+        jLabel5 = new javax.swing.JLabel();
+        jCheckBox6 = new javax.swing.JCheckBox();
+        jCheckBox24 = new javax.swing.JCheckBox();
+        jCheckBox25 = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,21 +96,234 @@ public class exportIndividualInfo extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Individual Info:");
+
+        jCheckBox1.setText("First Name");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
+
+        jCheckBox2.setText("Middle Name");
+
+        jCheckBox3.setText("Last Name");
+
+        jCheckBox4.setText("Title");
+
+        jCheckBox5.setText("Preferred Household Name");
+        jCheckBox5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox5ActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Donation Info:");
+
+        jCheckBox7.setText("Amount");
+
+        jCheckBox8.setText("Donation Date");
+
+        jCheckBox9.setText("Notes");
+
+        jCheckBox10.setText("Campaign Title");
+
+        jCheckBox11.setText("Event Name");
+
+        jCheckBox12.setText("CheckID");
+
+        jLabel3.setText("Excel File Name:");
+
+        jTextField1.setText("jTextField1");
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Donor Info:");
+
+        jCheckBox13.setText("Street");
+        jCheckBox13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox13ActionPerformed(evt);
+            }
+        });
+
+        jCheckBox14.setText("City");
+
+        jCheckBox15.setText("State");
+
+        jCheckBox16.setText("ZipCode");
+
+        jCheckBox17.setText("Phone");
+
+        jCheckBox18.setText("Email");
+
+        jCheckBox19.setText("Status");
+
+        jCheckBox20.setText("Solicitation");
+
+        jCheckBox21.setText("Preferred Phone");
+
+        jCheckBox22.setText("Preferred Email");
+
+        jCheckBox23.setText("Preferred Mailing Address");
+        jCheckBox23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox23ActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Options:");
+
+        jCheckBox6.setText("Alphabetize");
+
+        jCheckBox24.setText("Sort By Max");
+        jCheckBox24.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox24ActionPerformed(evt);
+            }
+        });
+
+        jCheckBox25.setText("Sort By Min");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel5)
+                            .addComponent(jButton1))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton2))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(jCheckBox6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCheckBox24)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCheckBox25)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(22, 22, 22)
+                                    .addComponent(jLabel3))
+                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(32, 32, 32)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel1))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCheckBox5)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jCheckBox1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jCheckBox2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jCheckBox3)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCheckBox4))
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jCheckBox13)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCheckBox14)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCheckBox15)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCheckBox16)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCheckBox17)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCheckBox18))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jCheckBox19)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCheckBox20)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCheckBox21)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCheckBox22))
+                            .addComponent(jCheckBox23)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jCheckBox7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCheckBox8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCheckBox9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCheckBox10))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jCheckBox11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCheckBox12)))
+                        .addGap(0, 15, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(387, Short.MAX_VALUE)
+                .addGap(14, 14, 14)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBox1)
+                    .addComponent(jCheckBox2)
+                    .addComponent(jCheckBox3)
+                    .addComponent(jLabel1)
+                    .addComponent(jCheckBox4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBox5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBox13)
+                    .addComponent(jCheckBox14)
+                    .addComponent(jCheckBox15)
+                    .addComponent(jCheckBox16)
+                    .addComponent(jCheckBox17)
+                    .addComponent(jCheckBox18)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBox19)
+                    .addComponent(jCheckBox20)
+                    .addComponent(jCheckBox21)
+                    .addComponent(jCheckBox22))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBox23)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jCheckBox7)
+                    .addComponent(jCheckBox8)
+                    .addComponent(jCheckBox9)
+                    .addComponent(jCheckBox10))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBox11)
+                    .addComponent(jCheckBox12))
+                .addGap(3, 3, 3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jCheckBox6)
+                    .addComponent(jCheckBox24)
+                    .addComponent(jCheckBox25))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -87,7 +336,7 @@ public class exportIndividualInfo extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             // TODO add your handling code here:
-            
+                                    
             String Fname, Minit, Lname;
             String Title;
             String PreferredHHName;
@@ -95,74 +344,18 @@ public class exportIndividualInfo extends javax.swing.JFrame {
             String Phone, Email, Status, Solicitation;
             String pStreet, pCity, pState, pZipcode;
             String pPhone, pEmail;
-            String DonorID;
+            String DonorID, Amount;
+            
+            //TextField Check
             
             //Writing into an excel spreadsheet
-            WritableWorkbook workbook = Workbook.createWorkbook(new File("output.xls"));
+            WritableWorkbook workbook = Workbook.createWorkbook(new File(jTextField1.getText() + ".xls"));
             
-            WritableSheet sheet = workbook.createSheet("Individual Donors",0);
+            WritableSheet sheet = workbook.createSheet("Sheet 1",0);
             
             //Fonts
             WritableFont TimesNewRoman18pt = new WritableFont(WritableFont.TIMES,12);
             WritableCellFormat TimesNewRoman18ptFormat = new WritableCellFormat(TimesNewRoman18pt);
-            
-            //Headers
-            Label FnameHeader = new Label(0,0,"First Name", TimesNewRoman18ptFormat);
-            sheet.addCell(FnameHeader);
-            
-            Label MinitHeader = new Label(1,0,"Middle Initial", TimesNewRoman18ptFormat);
-            sheet.addCell(MinitHeader);
-            
-            Label LnameHeader = new Label(2,0,"Last Name", TimesNewRoman18ptFormat);
-            sheet.addCell(LnameHeader);
-            
-            Label TitleHeader = new Label(3,0,"Title", TimesNewRoman18ptFormat);
-            sheet.addCell(TitleHeader);
-            
-            Label PHHNHeader = new Label(4,0,"PrefferredHHN Name", TimesNewRoman18ptFormat);
-            sheet.addCell(PHHNHeader);
-            
-            Label StreetHeader = new Label(5,0,"Street Name", TimesNewRoman18ptFormat);
-            sheet.addCell(StreetHeader);
-            
-            Label CityHeader = new Label(6,0,"City", TimesNewRoman18ptFormat);
-            sheet.addCell(CityHeader);
-            
-            Label StateHeader = new Label(7,0,"State", TimesNewRoman18ptFormat);
-            sheet.addCell(StateHeader);
-            
-            Label ZipHeader = new Label(8,0,"Zipcode", TimesNewRoman18ptFormat);
-            sheet.addCell(ZipHeader);
-            
-            Label PhoneHeader = new Label(9,0,"Phone", TimesNewRoman18ptFormat);
-            sheet.addCell(PhoneHeader);
-            
-            Label EmailHeader = new Label(10,0,"Email", TimesNewRoman18ptFormat);
-            sheet.addCell(EmailHeader);
-            
-            Label StatusHeader = new Label(11,0,"Status", TimesNewRoman18ptFormat);
-            sheet.addCell(StatusHeader);
-            
-            Label SolicitationHeader = new Label(12,0,"Solicitation", TimesNewRoman18ptFormat);
-            sheet.addCell(SolicitationHeader);
-            
-            Label pStreetHeader = new Label(13,0,"pStreet", TimesNewRoman18ptFormat);
-            sheet.addCell(pStreetHeader);
-            
-            Label pCityHeader = new Label(14,0,"pCity", TimesNewRoman18ptFormat);
-            sheet.addCell(pCityHeader);
-            
-            Label pStateHeader = new Label(15,0,"pState", TimesNewRoman18ptFormat);
-            sheet.addCell(pStateHeader);
-            
-             Label pZipHeader = new Label(16,0,"pZipcode", TimesNewRoman18ptFormat);
-            sheet.addCell(pZipHeader);
-            
-             Label pPhoneHeader = new Label(17,0,"pPhone", TimesNewRoman18ptFormat);
-            sheet.addCell(pPhoneHeader);
-            
-             Label pEmailHeader = new Label(18,0,"pEmail", TimesNewRoman18ptFormat);
-            sheet.addCell(pEmailHeader);
             
             //Moving position
             int xPos = 0; //x-coord
@@ -184,16 +377,20 @@ public class exportIndividualInfo extends javax.swing.JFrame {
             Statement s = con.createStatement();  
             System.out.println("Connection to DB established...");
             
-            ResultSet rs = s.executeQuery("SELECT Fname, Minit, Lname,"
-                    + "Title, PreferredHouseholdName, "
-                    + "Street, "
-                    + "City, State, ZipCode,"
-                    + "Phone, "
-                    + "EmailAddress,"
-                    + "UserStatus, Solicitation,"
-                    + "PreferredMailStreet,"
-                    + "PreferredMailCity, PreferredMailState, PreferredMailZipCode,"
-                    + "PreferredPhone, PreferredEmail, DonorID FROM Individual left outer join Donor on (Individual.DonorID = Donor.DonorID)"); 
+            ResultSet rs = s.executeQuery("SELECT I.Fname, I.Minit, I.Lname,"
+                    + "I.Title, I.PreferredHouseholdName, "
+                    + "D.Street, "
+                    + "D.City, D.State, D.ZipCode,"
+                    + "D.Phone, "
+                    + "D.EmailAddress,"
+                    + "D.UserStatus, D.Solicitation,"
+                    + "D.PreferredMailStreet,"
+                    + "D.PreferredMailCity, D.PreferredMailState, D.PreferredMailZipCode,"
+                    + "D.PreferredPhone, D.PreferredEmail, D.DonorID, SUM(DN.Amount) as TotalAmount FROM Individual as I left outer join Donor as D ON (I.DonorID = D.DonorID) "
+                    + "INNER JOIN Donations as DN ON (D.DonorID = DN.DonorID) "
+                    + "GROUP BY I.Fname, I.Minit, I.Lname, I.Title, I.PreferredHouseholdName, D.Street, D.City, D.State, D.ZipCode, D.Phone, D.EmailAddress,"
+                    + "D.UserStatus, D.Solicitation, D.PreferredMailStreet, D.PreferredMailCity, D.PreferredMailState, D.PreferredMailZipCode,"
+                    + "D.PreferredPhone, D.PreferredEmail, D.DonorID"); 
             
             
             System.out.println("Is connection closed: " + con.isClosed());
@@ -221,66 +418,106 @@ public class exportIndividualInfo extends javax.swing.JFrame {
                 pZipcode = rs.getString(17);
                 pPhone = rs.getString(18);
                 pEmail = rs.getString(19);
+                DonorID = rs.getString(20);
+                Amount = rs.getString(21);
                 
                 //Setting x to the correct starting position
                 xPos = 0;
                 
                 
                 
-            //Writing into the cells
-            
+            //Writing into the cells //I feel like there is an easier way to write these IF statements
+            if(jCheckBox1.isSelected()){
             Label label1 = new Label(xPos,yPos,Fname);
             sheet.addCell(label1);
             xPos++;
+            }else{}
             
+            if(jCheckBox2.isSelected()){
             Label label2 = new Label(xPos,yPos,Minit);
             sheet.addCell(label2);
             xPos++;
+            }else{}
             
+            if(jCheckBox3.isSelected()){
             Label label3 = new Label(xPos,yPos,Lname);
             sheet.addCell(label3);
-            xPos++;
+            xPos++;            
+            }else{}
             
+            if(jCheckBox4.isSelected()){
             Label label4 = new Label(xPos,yPos,Title);
             sheet.addCell(label4);
             xPos++;
+            }else{}
             
+            if(jCheckBox5.isSelected()){
             Label label5 = new Label(xPos,yPos,PreferredHHName);
             sheet.addCell(label5);
             xPos++;
+            }else{}
             
+            if(jCheckBox13.isSelected()){
             Label label6 = new Label(xPos,yPos,Street);
             sheet.addCell(label6);
             xPos++;
+            }else{}
             
+            if(jCheckBox14.isSelected()){
             Label label7 = new Label(xPos,yPos,City);
             sheet.addCell(label7);
             xPos++;
+            }else{}
             
+            if(jCheckBox15.isSelected()){
             Label label8 = new Label(xPos,yPos,State);
             sheet.addCell(label8);
             xPos++;
+            }else{}
             
+            if(jCheckBox16.isSelected()){
             Label label9 = new Label(xPos,yPos,Zipcode);
             sheet.addCell(label9);
             xPos++;
+            }else{}
             
+            if(jCheckBox17.isSelected()){
             Label label10 = new Label(xPos,yPos,Phone);
             sheet.addCell(label10);
             xPos++;
+            }else{}
             
+            if(jCheckBox18.isSelected()){
             Label label11 = new Label(xPos,yPos,Email);
             sheet.addCell(label11);
             xPos++;
+            }else{}
             
+            if(jCheckBox19.isSelected()){
             Label label12 = new Label(xPos,yPos,Status);
             sheet.addCell(label12);
             xPos++;
+            }else{}
             
+            if(jCheckBox20.isSelected()){
             Label label13 = new Label(xPos,yPos,Solicitation);
             sheet.addCell(label13);
             xPos++;
+            }else{}
             
+            if(jCheckBox21.isSelected()){
+            Label label18 = new Label(xPos,yPos,pPhone);
+            sheet.addCell(label18);
+            xPos++;
+            }else{}
+            
+            if(jCheckBox22.isSelected()){
+            Label label19 = new Label(xPos,yPos,pEmail);
+            sheet.addCell(label19);
+            xPos++;
+            }else{}
+            
+            if(jCheckBox23.isSelected()){
             Label label14 = new Label(xPos,yPos,pStreet);
             sheet.addCell(label14);
             xPos++;
@@ -296,17 +533,16 @@ public class exportIndividualInfo extends javax.swing.JFrame {
             Label label17 = new Label(xPos,yPos,pZipcode);
             sheet.addCell(label17);
             xPos++;
+            }
             
-            Label label18 = new Label(xPos,yPos,pPhone);
-            sheet.addCell(label18);
+            Label label20 = new Label(xPos,yPos,Amount);
+            sheet.addCell(label20);
             xPos++;
             
-            Label label19 = new Label(xPos,yPos,pEmail);
-            sheet.addCell(label19);
+            Label label21 = new Label(xPos,yPos,DonorID);
+            sheet.addCell(label21);
             xPos++;
-            
-            
-                
+              
             yPos++;
                     
                 
@@ -318,9 +554,125 @@ public class exportIndividualInfo extends javax.swing.JFrame {
             Logger.getLogger(userLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
             
+            int hxPos = 0;
             
+            //Headers
             
+            if(jCheckBox1.isSelected()){
+            Label FnameHeader = new Label(hxPos,0,"First Name", TimesNewRoman18ptFormat);
+            sheet.addCell(FnameHeader);
+            hxPos++;
+            }else{}
             
+            if(jCheckBox2.isSelected()){
+            Label MinitHeader = new Label(hxPos,0,"Middle Initial", TimesNewRoman18ptFormat);
+            sheet.addCell(MinitHeader);
+            hxPos++;
+            }else{}
+            
+            if(jCheckBox3.isSelected()){
+            Label LnameHeader = new Label(hxPos,0,"Last Name", TimesNewRoman18ptFormat);
+            sheet.addCell(LnameHeader);
+            hxPos++;
+            }
+            
+            if(jCheckBox4.isSelected()){
+            Label TitleHeader = new Label(hxPos,0,"Title", TimesNewRoman18ptFormat);
+            sheet.addCell(TitleHeader);
+            hxPos++;
+            }else{}
+            
+            if(jCheckBox5.isSelected()){
+            Label PHHNHeader = new Label(hxPos,0,"PrefferredHHN Name", TimesNewRoman18ptFormat);
+            sheet.addCell(PHHNHeader);
+            hxPos++;
+            }
+            
+            if(jCheckBox13.isSelected()){
+            Label StreetHeader = new Label(hxPos,0,"Street Name", TimesNewRoman18ptFormat);
+            sheet.addCell(StreetHeader);
+            hxPos++;
+            }else{}
+            
+            if(jCheckBox14.isSelected()){
+            Label CityHeader = new Label(hxPos,0,"City", TimesNewRoman18ptFormat);
+            sheet.addCell(CityHeader);
+            hxPos++;
+            }else{}
+            
+            if(jCheckBox15.isSelected()){
+            Label StateHeader = new Label(hxPos,0,"State", TimesNewRoman18ptFormat);
+            sheet.addCell(StateHeader);
+            hxPos++;
+            }else{}
+            
+            if(jCheckBox16.isSelected()){
+            Label ZipHeader = new Label(hxPos,0,"Zipcode", TimesNewRoman18ptFormat);
+            sheet.addCell(ZipHeader);
+            hxPos++;
+            }else{}
+            
+            if(jCheckBox17.isSelected()){
+            Label PhoneHeader = new Label(hxPos,0,"Phone", TimesNewRoman18ptFormat);
+            sheet.addCell(PhoneHeader);
+            hxPos++;
+            }else{}
+            
+            if(jCheckBox18.isSelected()){
+            Label EmailHeader = new Label(hxPos,0,"Email", TimesNewRoman18ptFormat);
+            sheet.addCell(EmailHeader);
+            hxPos++;
+            }else{}
+            
+            if(jCheckBox19.isSelected()){
+            Label StatusHeader = new Label(hxPos,0,"Status", TimesNewRoman18ptFormat);
+            sheet.addCell(StatusHeader);
+            hxPos++;
+            }else{}
+            
+            if(jCheckBox20.isSelected()){
+            Label SolicitationHeader = new Label(hxPos,0,"Solicitation", TimesNewRoman18ptFormat);
+            sheet.addCell(SolicitationHeader);
+            hxPos++;
+            }else{}
+            
+            if(jCheckBox21.isSelected()){
+            Label pPhoneHeader = new Label(hxPos,0,"pPhone", TimesNewRoman18ptFormat);
+            sheet.addCell(pPhoneHeader);
+            hxPos++;
+            }else{}
+            
+            if(jCheckBox22.isSelected()){
+            Label pEmailHeader = new Label(hxPos,0,"pEmail", TimesNewRoman18ptFormat);
+            sheet.addCell(pEmailHeader);
+            hxPos++;
+            }else{}
+            
+            if(jCheckBox23.isSelected()){
+            Label pStreetHeader = new Label(hxPos,0,"pStreet", TimesNewRoman18ptFormat);
+            sheet.addCell(pStreetHeader);
+            hxPos++;
+            
+            Label pCityHeader = new Label(hxPos,0,"pCity", TimesNewRoman18ptFormat);
+            sheet.addCell(pCityHeader);
+            hxPos++;
+            
+            Label pStateHeader = new Label(hxPos,0,"pState", TimesNewRoman18ptFormat);
+            sheet.addCell(pStateHeader);
+            hxPos++;
+            
+            Label pZipHeader = new Label(hxPos,0,"pZipcode", TimesNewRoman18ptFormat);
+            sheet.addCell(pZipHeader);
+            hxPos++;
+            }else{}
+            
+            Label AmountHeader = new Label(hxPos,0,"Total Amount", TimesNewRoman18ptFormat);
+            sheet.addCell(AmountHeader);
+            hxPos++;
+            
+            Label IDHeader = new Label(hxPos,0,"DonorID", TimesNewRoman18ptFormat);
+            sheet.addCell(IDHeader);
+            hxPos++;
             
             
             
@@ -332,6 +684,8 @@ public class exportIndividualInfo extends javax.swing.JFrame {
             Logger.getLogger(exportIndividualInfo.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -339,6 +693,30 @@ public class exportIndividualInfo extends javax.swing.JFrame {
         this.setVisible(false); 
         new exportMenu().setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
+
+    private void jCheckBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox5ActionPerformed
+
+    private void jCheckBox13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox13ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox13ActionPerformed
+
+    private void jCheckBox23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox23ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox23ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jCheckBox24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox24ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox24ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -379,5 +757,36 @@ public class exportIndividualInfo extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBox10;
+    private javax.swing.JCheckBox jCheckBox11;
+    private javax.swing.JCheckBox jCheckBox12;
+    private javax.swing.JCheckBox jCheckBox13;
+    private javax.swing.JCheckBox jCheckBox14;
+    private javax.swing.JCheckBox jCheckBox15;
+    private javax.swing.JCheckBox jCheckBox16;
+    private javax.swing.JCheckBox jCheckBox17;
+    private javax.swing.JCheckBox jCheckBox18;
+    private javax.swing.JCheckBox jCheckBox19;
+    private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JCheckBox jCheckBox20;
+    private javax.swing.JCheckBox jCheckBox21;
+    private javax.swing.JCheckBox jCheckBox22;
+    private javax.swing.JCheckBox jCheckBox23;
+    private javax.swing.JCheckBox jCheckBox24;
+    private javax.swing.JCheckBox jCheckBox25;
+    private javax.swing.JCheckBox jCheckBox3;
+    private javax.swing.JCheckBox jCheckBox4;
+    private javax.swing.JCheckBox jCheckBox5;
+    private javax.swing.JCheckBox jCheckBox6;
+    private javax.swing.JCheckBox jCheckBox7;
+    private javax.swing.JCheckBox jCheckBox8;
+    private javax.swing.JCheckBox jCheckBox9;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
