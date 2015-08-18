@@ -26,7 +26,7 @@ public class addDonation extends javax.swing.JFrame {
      */
     public addDonation() {
         initComponents();
-        String DBLoc1 = "jdbc:ucanaccess:///Users/Alexander/Documents/Projects/Project-Edgar/Project-Edgar-Database.accdb"; // Alex
+        String DBLoc1 = "jdbc:ucanaccess:///Users/Eric/Documents/GitHub/Project-Edgar/Project-Edgar-Database.accdb"; // Alex
         String DBLoc2 = "jdbc:ucanaccess://C:\\Users\\Owner\\Desktop\\project-edgar\\Project-Edgar-Database.accdb"; // Mercedes
         this.donors.removeAllItems();
         this.campaigns.removeAllItems();

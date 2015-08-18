@@ -10,6 +10,7 @@ import static java.sql.Types.NULL;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ButtonGroup;
 import jxl.*;
 import jxl.write.*;
 import static net.ucanaccess.converters.Functions.string;
@@ -35,6 +36,17 @@ public class exportIndividualInfo extends javax.swing.JFrame {
         
         jTextField1.removeAll();
         jTextField1.setText("output");
+        
+        //Options Button Groups
+        ButtonGroup MaxMin = new ButtonGroup();
+        MaxMin.add(jRadioButton1);
+        MaxMin.add(jRadioButton2);
+        MaxMin.add(jRadioButton3);
+        
+        ButtonGroup CampEvt = new ButtonGroup();
+        CampEvt.add(jRadioButton4);
+        CampEvt.add(jRadioButton5);
+        CampEvt.add(jRadioButton6);
     }
 
     /**
@@ -76,9 +88,13 @@ public class exportIndividualInfo extends javax.swing.JFrame {
         jCheckBox22 = new javax.swing.JCheckBox();
         jCheckBox23 = new javax.swing.JCheckBox();
         jLabel5 = new javax.swing.JLabel();
-        jCheckBox6 = new javax.swing.JCheckBox();
-        jCheckBox24 = new javax.swing.JCheckBox();
-        jCheckBox25 = new javax.swing.JCheckBox();
+        jLabel6 = new javax.swing.JLabel();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        jRadioButton3 = new javax.swing.JRadioButton();
+        jRadioButton4 = new javax.swing.JRadioButton();
+        jRadioButton5 = new javax.swing.JRadioButton();
+        jRadioButton6 = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -121,16 +137,36 @@ public class exportIndividualInfo extends javax.swing.JFrame {
         jLabel2.setText("Donation Info:");
 
         jCheckBox7.setText("Amount");
+        jCheckBox7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox7ActionPerformed(evt);
+            }
+        });
 
         jCheckBox8.setText("Donation Date");
+        jCheckBox8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox8ActionPerformed(evt);
+            }
+        });
 
         jCheckBox9.setText("Notes");
+        jCheckBox9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox9ActionPerformed(evt);
+            }
+        });
 
         jCheckBox10.setText("Campaign Title");
 
         jCheckBox11.setText("Event Name");
 
         jCheckBox12.setText("CheckID");
+        jCheckBox12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox12ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Excel File Name:");
 
@@ -177,106 +213,135 @@ public class exportIndividualInfo extends javax.swing.JFrame {
 
         jLabel5.setText("Options:");
 
-        jCheckBox6.setText("Alphabetize");
+        jLabel6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel6.setText("Check the boxes of the info that you want to be exported onto an excel sheet.");
 
-        jCheckBox24.setText("Sort By Max");
-        jCheckBox24.addActionListener(new java.awt.event.ActionListener() {
+        jRadioButton1.setText("Sort by MAX");
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox24ActionPerformed(evt);
+                jRadioButton1ActionPerformed(evt);
             }
         });
 
-        jCheckBox25.setText("Sort By Min");
+        jRadioButton2.setText("Sort by MIN");
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
+
+        jRadioButton3.setText("Default");
+        jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton3ActionPerformed(evt);
+            }
+        });
+
+        jRadioButton4.setText("Sort By Event");
+
+        jRadioButton5.setText("Sort By Campaign");
+
+        jRadioButton6.setText("Default");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCheckBox5)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jCheckBox1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCheckBox2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCheckBox3)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBox4))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jCheckBox13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBox14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBox15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBox16)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBox17)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBox18))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jCheckBox19)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBox20)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBox21)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBox22))
+                    .addComponent(jCheckBox23)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jCheckBox7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBox8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBox9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBox10))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jCheckBox11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBox12)))
+                .addGap(48, 48, 48))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel5)
-                            .addComponent(jButton1))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton2))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(jCheckBox6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCheckBox24)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCheckBox25)
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(22, 22, 22)
-                                    .addComponent(jLabel3))
-                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(32, 32, 32)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel1))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCheckBox5)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jCheckBox1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jCheckBox2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jCheckBox3)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCheckBox4))
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jCheckBox13)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCheckBox14)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCheckBox15)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCheckBox16)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCheckBox17)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCheckBox18))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jCheckBox19)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCheckBox20)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCheckBox21)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCheckBox22))
-                            .addComponent(jCheckBox23)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jCheckBox7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCheckBox8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCheckBox9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCheckBox10))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jCheckBox11)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCheckBox12)))
-                        .addGap(0, 15, Short.MAX_VALUE)))
+                                .addGap(22, 22, 22)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(72, 72, 72)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jRadioButton6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jRadioButton5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jRadioButton4))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jRadioButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRadioButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRadioButton1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(14, 14, 14)
+                .addContainerGap()
+                .addComponent(jLabel6)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCheckBox1)
                     .addComponent(jCheckBox2)
@@ -313,13 +378,18 @@ public class exportIndividualInfo extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCheckBox11)
                     .addComponent(jCheckBox12))
-                .addGap(3, 3, 3)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jCheckBox6)
-                    .addComponent(jCheckBox24)
-                    .addComponent(jCheckBox25))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
+                    .addComponent(jRadioButton1)
+                    .addComponent(jRadioButton2)
+                    .addComponent(jRadioButton3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButton4)
+                    .addComponent(jRadioButton5)
+                    .addComponent(jRadioButton6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -345,6 +415,7 @@ public class exportIndividualInfo extends javax.swing.JFrame {
             String pStreet, pCity, pState, pZipcode;
             String pPhone, pEmail;
             String DonorID, Amount;
+            String DDate, Notes, CampaignT, EventName, CheckID;
             
             //TextField Check
             
@@ -352,6 +423,21 @@ public class exportIndividualInfo extends javax.swing.JFrame {
             WritableWorkbook workbook = Workbook.createWorkbook(new File(jTextField1.getText() + ".xls"));
             
             WritableSheet sheet = workbook.createSheet("Sheet 1",0);
+            
+            //ORDER BY CLAUSE
+            String sql = "";
+            
+            /*
+            if(jRadioButton1.isSelected()){
+                sql = "";
+            } else if(jRadioButton2.isSelected()){
+                sql = "ORDER BY MIN(DN.Amount)";
+            }else if (jRadioButton3.isSelected()){
+                sql = "ORDER BY MAX(DN.Amount)";
+            }else{}
+            */
+            
+            
             
             //Fonts
             WritableFont TimesNewRoman18pt = new WritableFont(WritableFont.TIMES,12);
@@ -386,11 +472,12 @@ public class exportIndividualInfo extends javax.swing.JFrame {
                     + "D.UserStatus, D.Solicitation,"
                     + "D.PreferredMailStreet,"
                     + "D.PreferredMailCity, D.PreferredMailState, D.PreferredMailZipCode,"
-                    + "D.PreferredPhone, D.PreferredEmail, D.DonorID, SUM(DN.Amount) as TotalAmount FROM Individual as I left outer join Donor as D ON (I.DonorID = D.DonorID) "
+                    + "D.PreferredPhone, D.PreferredEmail, D.DonorID, DN.DDate, DN.Notes, DN.CampaignTitle,"
+                    + "DN.EventName, DN.CheckID, SUM(DN.Amount) as TotalAmount FROM Individual as I left outer join Donor as D ON (I.DonorID = D.DonorID) "
                     + "INNER JOIN Donations as DN ON (D.DonorID = DN.DonorID) "
                     + "GROUP BY I.Fname, I.Minit, I.Lname, I.Title, I.PreferredHouseholdName, D.Street, D.City, D.State, D.ZipCode, D.Phone, D.EmailAddress,"
                     + "D.UserStatus, D.Solicitation, D.PreferredMailStreet, D.PreferredMailCity, D.PreferredMailState, D.PreferredMailZipCode,"
-                    + "D.PreferredPhone, D.PreferredEmail, D.DonorID"); 
+                    + "D.PreferredPhone, D.PreferredEmail, D.DonorID, DN.DDate, DN.Notes, DN.CampaignTitle, DN.EventName, DN.CheckID " + sql); 
             
             
             System.out.println("Is connection closed: " + con.isClosed());
@@ -419,7 +506,12 @@ public class exportIndividualInfo extends javax.swing.JFrame {
                 pPhone = rs.getString(18);
                 pEmail = rs.getString(19);
                 DonorID = rs.getString(20);
-                Amount = rs.getString(21);
+                Amount = rs.getString(26);
+                DDate = rs.getString(21);
+                Notes = rs.getString(22);
+                CampaignT = rs.getString(23);
+                EventName = rs.getString(24);
+                CheckID = rs.getString(25);
                 
                 //Setting x to the correct starting position
                 xPos = 0;
@@ -535,14 +627,47 @@ public class exportIndividualInfo extends javax.swing.JFrame {
             xPos++;
             }
             
+            if(jCheckBox8.isSelected()){
+            Label label22 = new Label(xPos,yPos,DDate);
+            sheet.addCell(label22);
+            xPos++;
+            }
+            
+            if(jCheckBox9.isSelected()){
+            Label label23 = new Label(xPos,yPos,Notes);
+            sheet.addCell(label23);
+            xPos++;
+            }
+            
+            if(jCheckBox10.isSelected()){
+            Label label24 = new Label(xPos,yPos,CampaignT);
+            sheet.addCell(label24);
+            xPos++;
+            }
+            
+            if(jCheckBox11.isSelected()){
+            Label label25 = new Label(xPos,yPos,EventName);
+            sheet.addCell(label25);
+            xPos++;
+            }
+            
+            if(jCheckBox12.isSelected()){
+            Label label26 = new Label(xPos,yPos,CheckID);
+            sheet.addCell(label26);
+            xPos++;
+            }
+            
+            if(jCheckBox7.isSelected()){
             Label label20 = new Label(xPos,yPos,Amount);
             sheet.addCell(label20);
             xPos++;
+            }else{}
             
+            //DonorID always shows up no matter what
             Label label21 = new Label(xPos,yPos,DonorID);
             sheet.addCell(label21);
             xPos++;
-              
+            
             yPos++;
                     
                 
@@ -666,10 +791,43 @@ public class exportIndividualInfo extends javax.swing.JFrame {
             hxPos++;
             }else{}
             
+            if(jCheckBox8.isSelected()){
+            Label DDateHeader = new Label(hxPos,0,"Due Date", TimesNewRoman18ptFormat);
+            sheet.addCell(DDateHeader);
+            hxPos++;
+            }else{}
+            
+            if(jCheckBox9.isSelected()){
+            Label NotesHeader = new Label(hxPos,0,"Notes", TimesNewRoman18ptFormat);
+            sheet.addCell(NotesHeader);
+            hxPos++;
+            }else{}
+            
+            if(jCheckBox10.isSelected()){
+            Label CampaignTHeader = new Label(hxPos,0,"Campaign Title", TimesNewRoman18ptFormat);
+            sheet.addCell(CampaignTHeader);
+            hxPos++;
+            }else{}
+            
+            if(jCheckBox11.isSelected()){
+            Label EventNameHeader = new Label(hxPos,0,"Event Name", TimesNewRoman18ptFormat);
+            sheet.addCell(EventNameHeader);
+            hxPos++;
+            }else{}
+            
+            if(jCheckBox12.isSelected()){
+            Label CheckIDHeader = new Label(hxPos,0,"CheckID", TimesNewRoman18ptFormat);
+            sheet.addCell(CheckIDHeader);
+            hxPos++;
+            }else{}
+            
+            if(jCheckBox7.isSelected()){
             Label AmountHeader = new Label(hxPos,0,"Total Amount", TimesNewRoman18ptFormat);
             sheet.addCell(AmountHeader);
             hxPos++;
+            }else{}
             
+            //This shows up on the excel sheet no matter what
             Label IDHeader = new Label(hxPos,0,"DonorID", TimesNewRoman18ptFormat);
             sheet.addCell(IDHeader);
             hxPos++;
@@ -714,9 +872,33 @@ public class exportIndividualInfo extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void jCheckBox24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox24ActionPerformed
+    private void jCheckBox7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox7ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox24ActionPerformed
+    }//GEN-LAST:event_jCheckBox7ActionPerformed
+
+    private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton3ActionPerformed
+
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton2ActionPerformed
+
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void jCheckBox8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox8ActionPerformed
+
+    private void jCheckBox9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox9ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox9ActionPerformed
+
+    private void jCheckBox12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox12ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox12ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -773,12 +955,9 @@ public class exportIndividualInfo extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBox21;
     private javax.swing.JCheckBox jCheckBox22;
     private javax.swing.JCheckBox jCheckBox23;
-    private javax.swing.JCheckBox jCheckBox24;
-    private javax.swing.JCheckBox jCheckBox25;
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JCheckBox jCheckBox4;
     private javax.swing.JCheckBox jCheckBox5;
-    private javax.swing.JCheckBox jCheckBox6;
     private javax.swing.JCheckBox jCheckBox7;
     private javax.swing.JCheckBox jCheckBox8;
     private javax.swing.JCheckBox jCheckBox9;
@@ -787,6 +966,13 @@ public class exportIndividualInfo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JRadioButton jRadioButton3;
+    private javax.swing.JRadioButton jRadioButton4;
+    private javax.swing.JRadioButton jRadioButton5;
+    private javax.swing.JRadioButton jRadioButton6;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
