@@ -502,8 +502,8 @@ public class updateIndiDonationImproved extends javax.swing.JFrame {
             Statement s = con.createStatement();  
             System.out.println("Connection to DB established...");
             
-            ResultSet rs = s.executeQuery("SELECT Amount, DDate, Notes "
-                    + "CampaignTitle, PaymentTypeID, EventName, CheckID, DonationID"
+            ResultSet rs = s.executeQuery("SELECT Amount, DDate, Notes, "
+                    + "CampaignTitle, EventName, CheckID, DonationID"
                     + " FROM Donations WHERE (Donations.DonorID = " + DonorID + ") AND (Donations.DonationID = " + DonationID + ")"); 
             
             
@@ -512,14 +512,17 @@ public class updateIndiDonationImproved extends javax.swing.JFrame {
             while(rs.next()){
                 
                 jTextField1.setText(rs.getString(1)); //Amount
-                //jTextField2.setText(rs.getString(7)); //CheckID
                 jTextField3.setText(rs.getString(2)); //Donation Date
                 jTextField4.setText(rs.getString(3)); //Notes
                 
-                System.out.print(rs.getString(6) + " ");
-                jComboBox6.setSelectedItem(rs.getString(6)); //Event Name
                 System.out.print(rs.getString(4) + " ");
                 jComboBox5.setSelectedItem(rs.getString(4)); //Campaign Title
+                
+                System.out.print(rs.getString(5) + " ");
+                jComboBox6.setSelectedItem(rs.getString(5)); //Event Name
+                
+                System.out.print(rs.getString(6) + " ");
+                jTextField2.setText(rs.getString(6)); //CheckID
                 
                 
             }
