@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -25,7 +26,6 @@ public class updateIndiDonationImproved extends javax.swing.JFrame {
      */
     public updateIndiDonationImproved() {
         initComponents();
-        
         
         
         //jComboBox1.removeAllItems();
@@ -52,7 +52,11 @@ public class updateIndiDonationImproved extends javax.swing.JFrame {
         //jComboBox2.addItem("(ID)");
         jComboBox2.setBackground(Color.lightGray);
         jComboBox2.setEditable(false);
-        jComboBox2.setEnabled(true);
+        jComboBox2.setEnabled(false);
+        
+        jComboBox4.setBackground(Color.lightGray);
+        jComboBox4.setEditable(false);
+        jComboBox4.setEnabled(false);
         
         //Donation ComboBox
         jComboBox3.removeItem("Item 2");
@@ -174,6 +178,9 @@ public class updateIndiDonationImproved extends javax.swing.JFrame {
             Logger.getLogger(userLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        
+        jTextField1.setColumns(7);
+        jTextField2.setColumns(7);
     }
 
     /**
@@ -186,6 +193,7 @@ public class updateIndiDonationImproved extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel4 = new javax.swing.JLabel();
+        jOptionPane1 = new javax.swing.JOptionPane();
         jComboBox1 = new javax.swing.JComboBox();
         jComboBox2 = new javax.swing.JComboBox();
         jButton1 = new javax.swing.JButton();
@@ -207,6 +215,7 @@ public class updateIndiDonationImproved extends javax.swing.JFrame {
         jComboBox6 = new javax.swing.JComboBox();
         jButton4 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
+        jButton5 = new javax.swing.JButton();
 
         jLabel4.setText("jLabel4");
 
@@ -302,6 +311,13 @@ public class updateIndiDonationImproved extends javax.swing.JFrame {
             }
         });
 
+        jButton5.setText("Help");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -320,6 +336,8 @@ public class updateIndiDonationImproved extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -392,7 +410,8 @@ public class updateIndiDonationImproved extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton4)
-                    .addComponent(jLabel8))
+                    .addComponent(jLabel8)
+                    .addComponent(jButton5))
                 .addContainerGap())
         );
 
@@ -401,7 +420,7 @@ public class updateIndiDonationImproved extends javax.swing.JFrame {
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
         // TODO add your handling code here:
-        
+        jLabel8.setText("");
         jComboBox2.setSelectedIndex(jComboBox1.getSelectedIndex());
     }//GEN-LAST:event_jComboBox1ItemStateChanged
 
@@ -469,7 +488,7 @@ public class updateIndiDonationImproved extends javax.swing.JFrame {
 
     private void jComboBox3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox3ItemStateChanged
         // TODO add your handling code here:
-        
+        jLabel8.setText("");
         jComboBox4.setSelectedIndex(jComboBox3.getSelectedIndex());
     }//GEN-LAST:event_jComboBox3ItemStateChanged
 
@@ -639,6 +658,18 @@ public class updateIndiDonationImproved extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox5ActionPerformed
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        JOptionPane Help = new JOptionPane();
+        JOptionPane.showMessageDialog(this, "Choose a Donor you wish to update. Once you choose a donor the program will"
+                + "then pull the donor's donation data, which will appear on \nthe second dropdown menu."
+                + "You may then choose a donation from the currently selected donor, then push the Pull Donation Info "
+                + "button.\nOnce this happens the Donation info will show up in the empty textfields and dropdown menus."
+                + " From here you can then modify the donation\ncontents. Then press Update to update the database with"
+                + " the new data you just put in.\n\nFor more information please take a look at the extended manual.");
+        
+    }//GEN-LAST:event_jButton5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -679,6 +710,7 @@ public class updateIndiDonationImproved extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JComboBox jComboBox3;
@@ -693,6 +725,7 @@ public class updateIndiDonationImproved extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JOptionPane jOptionPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
