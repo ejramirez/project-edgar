@@ -599,10 +599,10 @@ public class updateIndiDonationImproved extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         //Getting everything from the Textfields and comboboxes
-        String Amount, DDate, Notes, CampaignTitle, EventName, CheckID;
+        String Amounts, DDate, Notes, CampaignTitle, EventName, CheckID;
         String DonorID, DonationID;
         
-        Amount = jTextField1.getText();
+        Amounts = jTextField1.getText();
         CheckID = jTextField2.getText();
         DDate = jTextField3.getText();
         Notes = jTextField4.getText();
@@ -612,6 +612,9 @@ public class updateIndiDonationImproved extends javax.swing.JFrame {
         
         DonorID = jComboBox2.getSelectedItem().toString(); 
         DonationID = jComboBox4.getSelectedItem().toString();
+        
+        StringCC str = new StringCC();
+        Float Amount = Float.parseFloat(str.CleanUp(Amounts));
         
         //Start of Connection
         //This is how UPDATES in UCANACCESS are done.

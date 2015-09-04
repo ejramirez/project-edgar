@@ -16,6 +16,7 @@ class StringCC {
             Some of this code is paraphrased from a stackoverflow user named MADPROGRAMMER.
             it has been modified to meet the needs of the program.
         */
+        System.out.println("\n" + s);
         
         StringBuilder Combiner = new StringBuilder(s);
         int x = 0;

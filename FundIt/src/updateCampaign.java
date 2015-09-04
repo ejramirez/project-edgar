@@ -253,7 +253,7 @@ public class updateCampaign extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         
-        String CampaignTitle, StartDate, EndDate, Description, Goal;
+        String CampaignTitle, StartDate, EndDate, Description, Goals;
         
         CampaignTitle = jComboBox1.getSelectedItem().toString();
         
@@ -263,7 +263,10 @@ public class updateCampaign extends javax.swing.JFrame {
         Description = jTextField1.getText();
         System.out.print(jTextField1.getText() + " ");
         
-        Goal = jTextField5.getText();
+        Goals = jTextField5.getText();
+        
+        StringCC str = new StringCC();
+        Float Goal = Float.parseFloat(str.CleanUp(Goals));
         
         //Start of Connection
         //This is how UPDATES in UCANACCESS are done.

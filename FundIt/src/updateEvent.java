@@ -324,13 +324,17 @@ public class updateEvent extends javax.swing.JFrame {
         // TODO add your handling code here:
         String EventDate, Description, CampaignTitle;
         String EventName;
-        Float MoneyRaised;
+        String Money = jTextField3.getText();
+        
         
         EventName = jComboBox1.getSelectedItem().toString();
         
         EventDate = jTextField1.getText();
         Description = jTextField2.getText();
-        MoneyRaised = Float.parseFloat(jTextField3.getText());
+        
+        StringCC str = new StringCC();
+        Float MoneyRaised = Float.parseFloat(str.CleanUp(Money));
+        
         CampaignTitle = jComboBox2.getSelectedItem().toString();
         
         System.out.print(jTextField1.getText() + " ");
