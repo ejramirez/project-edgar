@@ -181,7 +181,7 @@ public class mainView extends javax.swing.JFrame {
             }
         });
 
-        jButton11.setText("Backup Database");
+        jButton11.setText("Exit Program");
         jButton11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton11ActionPerformed(evt);
@@ -560,6 +560,7 @@ public class mainView extends javax.swing.JFrame {
             
             //This block of code creates a backup for the database by executing a batch file within
             //the folders of the program
+            /*
             String Backup = "C:\\Users\\Eric\\Documents\\GitHub\\project-edgar\\backupData.bat";
             
             Process commandProcess = Runtime.getRuntime().exec(Backup);
@@ -573,14 +574,11 @@ public class mainView extends javax.swing.JFrame {
                 System.out.println("Backup Failure.");
             }
             
+            System.exit(0);
+            */
+            BackupExit.initialize();
             
-            //Thread.sleep(2500);
-            //jLabel2.setText("");
-            
-            
-        } catch (IOException ex) {
-            Logger.getLogger(mainView.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InterruptedException ex) {
+        } catch (IOException | InterruptedException ex) {
             Logger.getLogger(mainView.class.getName()).log(Level.SEVERE, null, ex);
         }
         
