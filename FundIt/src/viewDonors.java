@@ -142,8 +142,9 @@ public class viewDonors extends javax.swing.JFrame {
                     "","");
 //            */
             //Mercedes's DB location
-            con = DriverManager.getConnection("jdbc:ucanaccess://C:\\Users\\Eric\\Documents\\GitHub\\project-edgar\\Project-Edgar-Database.accdb", 
-                    "","");
+            con = DriverManager.getConnection(
+                    DBcon.Connect(),
+                    DBcon.Login(), DBcon.Pass());
             
             Statement s = con.createStatement();
             ResultSet rs = s.executeQuery("SELECT Fname, Minit, Lname,"
@@ -253,8 +254,9 @@ public class viewDonors extends javax.swing.JFrame {
             */
             
             //Mercedes's DB location
-            con = DriverManager.getConnection("jdbc:ucanaccess://C:\\Users\\aung\\Desktop\\project-edgar\\Project-Edgar-Database.accdb", 
-                    "","");
+            con = DriverManager.getConnection(
+                    DBcon.Connect(),
+                    DBcon.Login(), DBcon.Pass());
             
             Statement s = con.createStatement();
             ResultSet rs = s.executeQuery("SELECT OrgName, PrimaryContact,"
@@ -350,8 +352,9 @@ public class viewDonors extends javax.swing.JFrame {
                     "","");
             */
             //Mercedes's DB location
-            con = DriverManager.getConnection("jdbc:ucanaccess://C:\\Users\\aung\\Desktop\\project-edgar\\Project-Edgar-Database.accdb", 
-                    "","");
+            con = DriverManager.getConnection(
+                    DBcon.Connect(),
+                    DBcon.Login(), DBcon.Pass());
             
             Statement s = con.createStatement();
             ResultSet rs = s.executeQuery("SELECT GrantName, GrantNumber, "

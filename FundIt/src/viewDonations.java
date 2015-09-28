@@ -68,8 +68,8 @@ public class viewDonations extends javax.swing.JFrame {
                 //    "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
            //
             con = DriverManager.getConnection(
-                    "jdbc:ucanaccess://C:\\Users\\aung\\Desktop\\project-edgar\\Project-Edgar-Database.accdb",
-                    "","");
+                    DBcon.Connect(),
+                    DBcon.Login(), DBcon.Pass());
             Statement s = con.createStatement();
             ResultSet rs = s.executeQuery("SELECT CampaignTitle FROM Campaign");
             System.out.println("Is connection closed: " + con.isClosed());
@@ -340,8 +340,8 @@ public class viewDonations extends javax.swing.JFrame {
                     "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
             */
             con = DriverManager.getConnection(
-                    "jdbc:ucanaccess://C:\\Users\\aung\\Desktop\\project-edgar\\Project-Edgar-Database.accdb",
-                    "","");
+                    DBcon.Connect(),
+                    DBcon.Login(), DBcon.Pass());
              Statement s = con.createStatement();
            
             if(jRadioButton1.isSelected()){
@@ -1187,8 +1187,8 @@ public class viewDonations extends javax.swing.JFrame {
             Connection con;
 
            con = DriverManager.getConnection(
-                    "jdbc:ucanaccess://C:\\Users\\aung\\Desktop\\project-edgar\\Project-Edgar-Database.accdb",
-                    "","");
+                    DBcon.Connect(),
+                    DBcon.Login(), DBcon.Pass());
             //
             Statement s = con.createStatement();
             ResultSet rs = s.executeQuery("SELECT Fname, Minit, Lname, "
@@ -1449,8 +1449,8 @@ public class viewDonations extends javax.swing.JFrame {
              //       "jdbc:ucanaccess://C:\\Users\\aung\\Desktop\\data\\project-edgar\\Project-Edgar-Database.accdb",
                //     "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
            con = DriverManager.getConnection(
-                    "jdbc:ucanaccess://C:\\Users\\aung\\Desktop\\project-edgar\\Project-Edgar-Database.accdb",
-                    "","");
+                    DBcon.Connect(),
+                    DBcon.Login(), DBcon.Pass());
             //
             Statement s = con.createStatement();
             ResultSet rs = s.executeQuery("SELECT Amount, "

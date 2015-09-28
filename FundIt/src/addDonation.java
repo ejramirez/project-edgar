@@ -46,7 +46,7 @@ public class addDonation extends javax.swing.JFrame {
         this.lastPaymentDate.setBackground(Color.lightGray);
         try {
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            this.con = DriverManager.getConnection(DBLoc1);
+            this.con = DriverManager.getConnection(DBcon.Connect(),DBcon.Login(),DBcon.Pass());
             this.st = this.con.createStatement();
             ResultSet rs = this.st.executeQuery("SELECT CampaignTitle FROM Campaign");
             while(rs.next()) {

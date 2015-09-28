@@ -35,7 +35,7 @@ public class addCE extends javax.swing.JFrame {
         String MainDBLoc = "jdbc:ucanaccess://C:"; // Warren Achievement (Insert Location)
         try {
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            this.con = DriverManager.getConnection(DBLoc3);
+            this.con = DriverManager.getConnection(DBcon.Connect(), DBcon.Login(), DBcon.Pass());
             this.st = this.con.createStatement();
             ResultSet rs = this.st.executeQuery("SELECT CampaignTitle FROM Campaign");
             while(rs.next()) {

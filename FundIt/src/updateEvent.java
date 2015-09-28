@@ -27,6 +27,8 @@ public class updateEvent extends javax.swing.JFrame {
     public updateEvent() {
         initComponents();
         
+        
+        
         jTextField1.setColumns(10);
         jTextField2.setColumns(10);
         jTextField3.setColumns(10);
@@ -37,6 +39,8 @@ public class updateEvent extends javax.swing.JFrame {
         jComboBox2.removeAllItems();
         jComboBox2.addItem("");
         
+        //"jdbc:ucanaccess://C:\\Users\\Eric\\Documents\\Github\\project-edgar\\Project-Edgar-Database.accdb"
+        
         //Pulling Events
         try {
             try {
@@ -46,8 +50,8 @@ public class updateEvent extends javax.swing.JFrame {
             }
             Connection con;
             con = DriverManager.getConnection(
-                    "jdbc:ucanaccess://C:\\Users\\Eric\\Documents\\Github\\project-edgar\\Project-Edgar-Database.accdb",
-                    "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
+                    DBcon.Connect(),
+                    DBcon.Login(), DBcon.Pass()); //(file path, db login, db password) - since it doesnt have a login, leave it blank
           
             Statement s = con.createStatement();  
             System.out.println("Connection to DB established...");
@@ -81,8 +85,8 @@ public class updateEvent extends javax.swing.JFrame {
             }
             Connection con;
             con = DriverManager.getConnection(
-                    "jdbc:ucanaccess://C:\\Users\\Eric\\Documents\\Github\\project-edgar\\Project-Edgar-Database.accdb",
-                    "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
+                    DBcon.Connect(),
+                    DBcon.Login(), DBcon.Pass()); //(file path, db login, db password) - since it doesnt have a login, leave it blank
           
             Statement s = con.createStatement();  
             System.out.println("Connection to DB established...");
@@ -277,8 +281,8 @@ public class updateEvent extends javax.swing.JFrame {
             }
             Connection con;
             con = DriverManager.getConnection(
-                    "jdbc:ucanaccess://C:\\Users\\Eric\\Documents\\Github\\project-edgar\\Project-Edgar-Database.accdb",
-                    "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
+                    DBcon.Connect(),
+                    DBcon.Login(), DBcon.Pass()); //(file path, db login, db password) - since it doesnt have a login, leave it blank
           
             Statement s = con.createStatement();  
             System.out.println("Connection to DB established...");
@@ -350,8 +354,8 @@ public class updateEvent extends javax.swing.JFrame {
             }
             Connection con;
             con = DriverManager.getConnection(
-                    "jdbc:ucanaccess://C:\\Users\\Eric\\Documents\\GitHub\\project-edgar\\Project-Edgar-Database.accdb",
-                    "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
+                    DBcon.Connect(),
+                    DBcon.Login(), DBcon.Pass()); //(file path, db login, db password) - since it doesnt have a login, leave it blank
           
             Statement s = con.createStatement();
             

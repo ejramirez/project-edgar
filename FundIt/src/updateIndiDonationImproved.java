@@ -78,8 +78,8 @@ public class updateIndiDonationImproved extends javax.swing.JFrame {
             }
             Connection con;
             con = DriverManager.getConnection(
-                    "jdbc:ucanaccess://C:\\Users\\Eric\\Documents\\Github\\project-edgar\\Project-Edgar-Database.accdb",
-                    "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
+                    DBcon.Connect(),
+                    DBcon.Login(), DBcon.Pass()); //(file path, db login, db password) - since it doesnt have a login, leave it blank
           
             Statement s = con.createStatement();  
             System.out.println("Connection to DB established...");
@@ -117,8 +117,8 @@ public class updateIndiDonationImproved extends javax.swing.JFrame {
             }
             Connection con;
             con = DriverManager.getConnection(
-                    "jdbc:ucanaccess://C:\\Users\\Eric\\Documents\\Github\\project-edgar\\Project-Edgar-Database.accdb",
-                    "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
+                    DBcon.Connect(),
+                    DBcon.Login(), DBcon.Pass()); //(file path, db login, db password) - since it doesnt have a login, leave it blank
           
             Statement s = con.createStatement();  
             System.out.println("Connection to DB established...");
@@ -152,8 +152,8 @@ public class updateIndiDonationImproved extends javax.swing.JFrame {
             }
             Connection con;
             con = DriverManager.getConnection(
-                    "jdbc:ucanaccess://C:\\Users\\Eric\\Documents\\Github\\project-edgar\\Project-Edgar-Database.accdb",
-                    "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
+                    DBcon.Connect(),
+                    DBcon.Login(), DBcon.Pass()); //(file path, db login, db password) - since it doesnt have a login, leave it blank
           
             Statement s = con.createStatement();  
             System.out.println("Connection to DB established...");
@@ -455,8 +455,8 @@ public class updateIndiDonationImproved extends javax.swing.JFrame {
             }
             Connection con;
             con = DriverManager.getConnection(
-                    "jdbc:ucanaccess://C:\\Users\\Eric\\Documents\\Github\\project-edgar\\Project-Edgar-Database.accdb",
-                    "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
+                    DBcon.Connect(),
+                    DBcon.Login(), DBcon.Pass()); //(file path, db login, db password) - since it doesnt have a login, leave it blank
           
             Statement s = con.createStatement();  
             System.out.println("Connection to DB established...");
@@ -515,8 +515,8 @@ public class updateIndiDonationImproved extends javax.swing.JFrame {
             }
             Connection con;
             con = DriverManager.getConnection(
-                    "jdbc:ucanaccess://C:\\Users\\Eric\\Documents\\Github\\project-edgar\\Project-Edgar-Database.accdb",
-                    "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
+                    DBcon.Connect(),
+                    DBcon.Login(), DBcon.Pass()); //(file path, db login, db password) - since it doesnt have a login, leave it blank
           
             Statement s = con.createStatement();  
             System.out.println("Connection to DB established...");
@@ -626,8 +626,8 @@ public class updateIndiDonationImproved extends javax.swing.JFrame {
             }
             Connection con;
             con = DriverManager.getConnection(
-                    "jdbc:ucanaccess://C:\\Users\\Eric\\Documents\\GitHub\\project-edgar\\Project-Edgar-Database.accdb",
-                    "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
+                    DBcon.Connect(),
+                    DBcon.Login(), DBcon.Pass()); //(file path, db login, db password) - since it doesnt have a login, leave it blank
           
             Statement s = con.createStatement();
             

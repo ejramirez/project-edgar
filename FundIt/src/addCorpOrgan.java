@@ -457,8 +457,8 @@ public class addCorpOrgan extends javax.swing.JFrame {
             Connection con;
             //Mercedes' DB location
             con = DriverManager.getConnection(
-                    "jdbc:ucanaccess://C:\\Users\\Owner\\Desktop\\project-edgar\\Project-Edgar-Database.accdb",
-                    "", ""); //(file path, db login, db password) - since it doesnt have a login, leave it blank
+                    DBcon.Connect(),
+                    DBcon.Login(), DBcon.Pass()); //(file path, db login, db password) - since it doesnt have a login, leave it blank
           
             boolean sol = false;
             if(jComboBox1.getSelectedItem().toString().equalsIgnoreCase("Yes")){
