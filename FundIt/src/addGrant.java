@@ -9,6 +9,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 /**
  *
  * @author Owner
@@ -20,6 +21,7 @@ public class addGrant extends javax.swing.JFrame {
      */
     public addGrant() {
         initComponents();
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
         jComboBox1.removeAllItems();
         jComboBox1.addItem("Yes");

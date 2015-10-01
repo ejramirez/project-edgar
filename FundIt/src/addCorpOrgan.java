@@ -8,6 +8,7 @@ import java.sql.*;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import net.ucanaccess.converters.TypesMap.AccessType;
@@ -26,6 +27,7 @@ public class addCorpOrgan extends javax.swing.JFrame {
      */
     public addCorpOrgan() {
         initComponents();
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         jComboBox1.removeAllItems();
         jComboBox1.addItem("Yes");
         jComboBox1.addItem("No");
