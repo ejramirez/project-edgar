@@ -255,6 +255,11 @@ public class mainView extends javax.swing.JFrame {
         jMenu4.add(jMenuItem3);
 
         jMenuItem4.setText("View Donations");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem4);
 
         menuBar.add(jMenu4);
@@ -869,6 +874,17 @@ public class mainView extends javax.swing.JFrame {
         this.setVisible(true);
         new addCE().setVisible(true);
     }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        try {
+            // TODO add your handling code here:
+            this.setVisible(false);
+            new viewDonationsImproved().setVisible(true);
+        } catch (ParseException ex) {
+            Logger.getLogger(mainView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
     
 
         
