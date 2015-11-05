@@ -1,0 +1,76 @@
+---------------------------------------------
+1.8.2 (2015-10-19)
+
+- Fix bug parsing "photo_info" in file metadata.
+- Add support for /account/info fields: email, email_verified,
+  name_details.
+
+---------------------------------------------
+1.8.1 (2015-09-21)
+
+- Fix bug in version validation code that caused crash at startup.
+
+---------------------------------------------
+1.8 (2015-09-14)
+
+- Include SDK version in HTTP requests (via the User-Agent header).
+- Fix 'urlState' handling in DbxWebAuth.  Was mistakenly include the
+  '|' separator.
+- Add support for /delta/latest_cursor and /longpoll_delta.
+- Add support for include_media_info=true on /metadata and /delta.
+- Add support for using OkHttp as the underlying HTTP client.
+
+---------------------------------------------
+1.7.7 (2014-09-02)
+
+- Fix encoding of Unicode characters in API request URL paths.  Bug
+  affected systems where Java's "file.encoding" wasn't UTF-8.
+
+---------------------------------------------
+1.7.6 (2013-12-09)
+
+- Stricter SSL: Hard-code the ciphersuites and trusted root
+  certificates (instead of using the system defaults).
+- Add DbxOAuth1Upgrader, which upgrades existing OAuth 1 access tokens
+  to OAuth 2 access tokens.
+- Add support for /delta's new "path_prefix" parameter.
+
+---------------------------------------------
+1.7.5 (2013-09-16)
+
+- Fix crash in getRevisions.
+
+---------------------------------------------
+1.7.4 (2013-09-13)
+
+- Fix crash in getAccountInfo, caused by new quota field "datastores".
+- Fix file uploading by setting Content-Type explicitly.
+
+---------------------------------------------
+1.7.3 (2013-09-05)
+
+- Fix copy/move for folders.
+- Fix getMetadataWithChildren for when the file/folder doesn't exist.
+
+---------------------------------------------
+1.7.2 (2013-08-22)
+
+- Get thumbnails working (they were completely broken).
+
+---------------------------------------------
+1.7.1 (2013-08-21)
+
+- Get chunked uploads working (they were almost completely broken).
+
+---------------------------------------------
+1.7 (2013-07-31)
+
+- Added support for most API calls.
+- A few minor backwards-incompatibilities.
+
+---------------------------------------------
+1.6 (2013-07-07)
+
+- Completely rewritten SDK, focused on web apps (no Android support).
+- Many API calls not yet implemented.
+- Not backwards compatible with previous versions.

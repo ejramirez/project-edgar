@@ -1,4 +1,5 @@
 
+import com.dropbox.core.DbxException;
 import java.awt.Color;
 import java.text.ParseException;
 import java.util.logging.Level;
@@ -791,9 +792,13 @@ public class mainView extends javax.swing.JFrame {
             
             System.exit(0);
             */
+            BackupExit.dropboxSave();
             BackupExit.initialize();
             
+            
         } catch (IOException | InterruptedException ex) {
+            Logger.getLogger(mainView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DbxException ex) {
             Logger.getLogger(mainView.class.getName()).log(Level.SEVERE, null, ex);
         }
         

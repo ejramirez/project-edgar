@@ -538,10 +538,6 @@ public class viewDonationsImproved extends javax.swing.JFrame {
             String dateLft = jFormattedTextField2.getText();
             String dateRht = jFormattedTextField1.getText();
             
-            
-            //Date dateL = new SimpleDateFormat("mm-dd-yyyy").parse(dateLft);
-            //Date dateR = new SimpleDateFormat("mm-dd-yyyy").parse(dateRht);
-            
             SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
             
             Timestamp dateL = new Timestamp(format.parse(dateLft).getTime());

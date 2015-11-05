@@ -30,7 +30,7 @@ public class updateIndDonor extends javax.swing.JFrame {
     
     public updateIndDonor() {
         initComponents();
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        
         
         jComboBox1.removeAllItems();
         jComboBox2.removeAllItems();

@@ -103,6 +103,12 @@ public class addCE extends javax.swing.JFrame {
 
         jLabel6.setText("Money Raised");
 
+        moneyRaised.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                moneyRaisedActionPerformed(evt);
+            }
+        });
+
         jLabel7.setText("Campaign");
 
         campaign.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -216,7 +222,13 @@ public class addCE extends javax.swing.JFrame {
             ps.setString(1,this.eventName.getText());
             ps.setTimestamp(2,new Timestamp(eDate.getTime()));
             ps.setString(3, this.description.getText());
-            ps.setString(4,this.moneyRaised.getText());
+            
+            StringCC str = new StringCC();
+            ps.setString(4,str.CleanUp(this.moneyRaised.getText()));
+            
+            //jOptionPane
+                       
+            
             ps.setString(5, (String) this.campaign.getSelectedItem());
             ps.executeUpdate();
             this.con.commit();
@@ -231,6 +243,10 @@ public class addCE extends javax.swing.JFrame {
     private void campaignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campaignActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_campaignActionPerformed
+
+    private void moneyRaisedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moneyRaisedActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_moneyRaisedActionPerformed
 
     /**
      * @param args the command line arguments

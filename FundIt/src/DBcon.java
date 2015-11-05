@@ -20,7 +20,7 @@ public class DBcon {
         
         String USERHOME = System.getProperty("user.home");
         String USERDIR = System.getProperty("user.dir");
-        String Path = "jdbc:ucanaccess://" + USERHOME + "\\Documents\\GitHub\\project-edgar\\Project-Edgar-Database.accdb";
+        String Path = "jdbc:ucanaccess://" + USERDIR + "\\Project-Edgar-Database.accdb";
         String MainPath = "jdbc:ucanaccess://" + USERDIR + "\\WAC_ScotTrak_Database.accdb";
         
         //return "jdbc:ucanaccess://" + USERDIR + "\\WAC_ScotTrak_Database.accdb";
