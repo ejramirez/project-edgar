@@ -4,6 +4,8 @@ import java.io.IOException;
 import static java.util.concurrent.ThreadLocalRandom.current;
 import com.dropbox.core.*;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -105,15 +107,39 @@ public class BackupExit {
             File inputFile = new File(dBackup);
             FileInputStream inputStream = new FileInputStream(inputFile);
             try {
-                DbxEntry.File uploadedFile = client.uploadFile("/Project-Edgar-Database.accdb",
-                DbxWriteMode.add(), inputFile.length(), inputStream);
+                
+                //check list
+                List<String> filenames = new ArrayList<String>();
+                DbxEntry.WithChildren listing = client.getMetadataWithChildren("/");
+                System.out.println("Files in the root path:");
+                for (DbxEntry child : listing.children) {
+                    //System.out.println("	" + child.name + ": " + child.toString());
+                    filenames.add(child.name);
+                }
+                System.out.println("Files in List:");
+                for (String filename : filenames) {
+                    System.out.println(filename);
+                }
+                //end of check list
+                
+                //Check if file exists, if not write a new one, else overwrite the old one
+                
+                //System.out.println("Overwriting...");
+                DbxEntry.File OverwriteFile = client.uploadFile("/Project-Edgar-Database.accdb",
+                DbxWriteMode.force(), inputFile.length(), inputStream);
+                System.out.println("Uploaded: " + OverwriteFile.toString());
+                        
+                    
+                //DbxEntry.File uploadedFile = client.uploadFile("/Project-Edgar-Database.accdb",
+                //DbxWriteMode.add(), inputFile.length(), inputStream); //change DbxWriteMode to .force() to overwrite exisiting files
                 
                 //I would have to put the code to overwrite and existing file here
                 //but first I would have to check if the file exists at all.
-                System.out.println("Uploaded: " + uploadedFile.toString());
+                //System.out.println("Uploaded: " + uploadedFile.toString());
             } finally {
                 inputStream.close();
             }
+            
             System.out.println("Upload Complete.");
             
         } catch (IOException ex) {
