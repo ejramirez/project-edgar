@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
+import javax.swing.JFrame;
 import javax.swing.text.MaskFormatter;
 
 /*
@@ -34,6 +35,7 @@ public class viewDonations extends javax.swing.JFrame {
      */
     public viewDonations() throws ParseException {
         initComponents();
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         jFormattedTextField1.setEnabled(false);
         jFormattedTextField2.setEnabled(false);
         jComboBox1.setEnabled(false);

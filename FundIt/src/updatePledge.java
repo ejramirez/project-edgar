@@ -11,6 +11,7 @@ import java.text.ParseException;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import org.apache.commons.lang.ArrayUtils;
 import static org.eclipse.persistence.platform.database.oracle.plsql.OraclePLSQLTypes.Int;
@@ -33,6 +34,8 @@ public class updatePledge extends javax.swing.JFrame {
      */
     public updatePledge() {
         initComponents();
+        
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
         jTextField1.setColumns(8);
         jTextField2.setColumns(8);

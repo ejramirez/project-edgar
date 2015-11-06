@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -26,6 +27,7 @@ public class addCE extends javax.swing.JFrame {
 
     public addCE() {
         initComponents();
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.campaign.removeAllItems();
         String DBLoc1 = "jdbc:ucanaccess:///Users/Alexander/Documents/Projects/Project-Edgar/Project-Edgar-Database.accdb"; // Alex
         String DBLoc2 = "jdbc:ucanaccess://C:\\Users\\Owner\\Desktop\\project-edgar\\Project-Edgar-Database.accdb"; // Mercedes

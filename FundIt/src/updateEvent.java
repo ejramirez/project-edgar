@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /*
@@ -26,7 +27,7 @@ public class updateEvent extends javax.swing.JFrame {
      */
     public updateEvent() {
         initComponents();
-        
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
         
         jTextField1.setColumns(10);

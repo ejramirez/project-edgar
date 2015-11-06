@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.Date;
+import javax.swing.JFrame;
 
 import net.ucanaccess.converters.TypesMap.AccessType;
 import net.ucanaccess.ext.FunctionType;
@@ -26,6 +27,7 @@ public class addDonation extends javax.swing.JFrame {
      */
     public addDonation() {
         initComponents();
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         String DBLoc1 = "jdbc:ucanaccess:///Users/Eric/Documents/GitHub/Project-Edgar/Project-Edgar-Database.accdb"; // Alex
         String DBLoc2 = "jdbc:ucanaccess://C:\\Users\\Owner\\Desktop\\project-edgar\\Project-Edgar-Database.accdb"; // Mercedes
         this.donors.removeAllItems();
