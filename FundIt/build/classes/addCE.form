@@ -192,6 +192,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="moneyRaised">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="moneyRaisedActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
       <Properties>

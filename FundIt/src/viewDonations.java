@@ -371,7 +371,7 @@ public class viewDonations extends javax.swing.JFrame {
                 temprs.add(rs.getString(8));
                 temprs.add(rs.getString(9));
                 temprs.add(rs.getString(10));
-                 temprs.add(rs.getString(11));
+                temprs.add(rs.getString(11));
                 R1.add(temprs);                  
             }
            
@@ -545,12 +545,12 @@ public class viewDonations extends javax.swing.JFrame {
             
             //jRadioButton2
             if(jRadioButton2.isSelected()){            
-              ResultSet rs = s.executeQuery("SELECT Fname, Minit, Lname, "
-                    +"Title, PreferredHouseholdName, "
-                    +"CampaignTitle, "
-                    + "Amount, DDate, Notes, "
-                    + "EventName, EventDate "
-                    + "FROM Individual left outer join Donations on (Individual.DonorID = Donations.DonorID)");
+              ResultSet rs = s.executeQuery("SELECT I.Fname, I.Minit, I.Lname, "
+                    +"I.Title, I.PreferredHouseholdName, "
+                    +"D.CampaignTitle, "
+                    + "D.Amount, D.DDate, D.Notes, "
+                    + "I.DonorID "
+                    + "FROM Individual as I left outer join Donations as D on (I.DonorID = D.DonorID)");
                  
             System.out.println("Is connection closed: " + con.isClosed());
             System.out.println("Connection to DB established...");
@@ -567,8 +567,8 @@ public class viewDonations extends javax.swing.JFrame {
                 temprs.add(rs.getString(7));
                 temprs.add(rs.getString(8));
                 temprs.add(rs.getString(9));
-                temprs.add(rs.getString(10));
-                 temprs.add(rs.getString(11));
+                //temprs.add(rs.getString(10));
+                 //temprs.add(rs.getString(11));
                 R1.add(temprs);                  
             }
            
@@ -593,10 +593,10 @@ public class viewDonations extends javax.swing.JFrame {
                 jTextArea1.append("Notes: "+x.get(8)+ " \n");
                    
                 //Event Name, Event Date
-                System.out.print("Event Name: "+x.get(9) + " \n");
-                jTextArea1.append("Event Name: "+x.get(9) + " \n");
-                System.out.print("Event Date: "+x.get(10).substring(0,10) + " \n");
-                jTextArea1.append("Event Date: "+x.get(10).substring(0,10) + " \n");
+                //System.out.print("Event Name: "+x.get(9) + " \n");
+                //jTextArea1.append("Event Name: "+x.get(9) + " \n");
+                //System.out.print("Event Date: "+x.get(10).substring(0,10) + " \n");
+                //jTextArea1.append("Event Date: "+x.get(10).substring(0,10) + " \n");
                   
                 jTextArea1.append("\n");
                 }
