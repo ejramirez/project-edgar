@@ -4,11 +4,13 @@ import java.io.IOException;
 import static java.util.concurrent.ThreadLocalRandom.current;
 import com.dropbox.core.*;
 import java.io.*;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -85,12 +87,22 @@ public class BackupExit {
                     "JavaTutorial/1.0", Locale.getDefault().toString());
             DbxWebAuthNoRedirect webAuth = new DbxWebAuthNoRedirect(config, appInfo);
             
+            
+            
             // Have the user sign in and authorize your app.
             String authorizeUrl = webAuth.start();
-            System.out.println("1. Go to: " + authorizeUrl);
-            System.out.println("2. Click \"Allow\" (you might have to log in first)");
-            System.out.println("3. Copy the authorization code.");
-            String code = new BufferedReader(new InputStreamReader(System.in)).readLine().trim();
+            //System.out.println("1. Go to: " + authorizeUrl);
+            //System.out.println("2. Click \"Allow\" (you might have to log in first)");
+            //System.out.println("3. Copy the authorization code.");
+            //String code = new BufferedReader(new InputStreamReader(System.in)).readLine().trim();
+            
+            URL auth;
+            auth = new URL(authorizeUrl);
+            DesktopBrowse.openWebpage(auth);
+            String code = JOptionPane.showInputDialog("1. A webpage asking you to allow to connect to dropbox will appear."
+                    + "\n2. Click \"Allow\" (you might have to log in first).\n"
+                    + "3. Copy the authorization code.\n4. Paste the code in the input field. (ctrl-v to paste)"
+                    + "\n5. Please wait until uploading is done, the time that it is done in may vary depending on your internet connection.");
             
             // This will fail if the user enters an invalid authorization code.
             DbxAuthFinish authFinish = webAuth.finish(code);

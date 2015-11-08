@@ -83,8 +83,7 @@ public class mainView extends javax.swing.JFrame {
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
-        saveMenuItem = new javax.swing.JMenuItem();
-        saveAsMenuItem = new javax.swing.JMenuItem();
+        jMenuItem23 = new javax.swing.JMenuItem();
         exitMenuItem = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -228,17 +227,16 @@ public class mainView extends javax.swing.JFrame {
         fileMenu.setText("File");
 
         openMenuItem.setMnemonic('o');
-        openMenuItem.setText("Open");
+        openMenuItem.setText("Database Config");
         fileMenu.add(openMenuItem);
 
-        saveMenuItem.setMnemonic('s');
-        saveMenuItem.setText("Save");
-        fileMenu.add(saveMenuItem);
-
-        saveAsMenuItem.setMnemonic('a');
-        saveAsMenuItem.setText("Save As ...");
-        saveAsMenuItem.setDisplayedMnemonicIndex(5);
-        fileMenu.add(saveAsMenuItem);
+        jMenuItem23.setText("Save Database to Cloud");
+        jMenuItem23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem23ActionPerformed(evt);
+            }
+        });
+        fileMenu.add(jMenuItem23);
 
         exitMenuItem.setMnemonic('x');
         exitMenuItem.setText("Exit");
@@ -801,13 +799,13 @@ public class mainView extends javax.swing.JFrame {
             //jProgressBar1.setValue();
             //jProgressBar1.setIndeterminate(true);
             //jProgressBar1.setValue(0);
-            BackupExit.dropboxSave();
+            
+            
+            //BackupExit.dropboxSave();
             BackupExit.initialize();
             
             
         } catch (IOException | InterruptedException ex) {
-            Logger.getLogger(mainView.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (DbxException ex) {
             Logger.getLogger(mainView.class.getName()).log(Level.SEVERE, null, ex);
         }
         
@@ -899,6 +897,18 @@ public class mainView extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem23ActionPerformed
+        try {
+            // TODO add your handling code here:
+            
+            
+            
+            BackupExit.dropboxSave();
+        } catch (DbxException ex) {
+            Logger.getLogger(mainView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenuItem23ActionPerformed
     
 
         
@@ -944,6 +954,7 @@ public class mainView extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem20;
     private javax.swing.JMenuItem jMenuItem21;
     private javax.swing.JMenuItem jMenuItem22;
+    private javax.swing.JMenuItem jMenuItem23;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
@@ -959,8 +970,6 @@ public class mainView extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem openMenuItem;
-    private javax.swing.JMenuItem saveAsMenuItem;
-    private javax.swing.JMenuItem saveMenuItem;
     private javax.swing.JButton viewEvents;
     // End of variables declaration//GEN-END:variables
 
