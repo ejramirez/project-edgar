@@ -1,8 +1,7 @@
 
-import static com.sun.xml.internal.ws.api.pipe.Fiber.current;
 import java.io.IOException;
-import static java.util.concurrent.ThreadLocalRandom.current;
 import com.dropbox.core.*;
+import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
 import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
@@ -11,6 +10,8 @@ import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
+import static org.eclipse.persistence.platform.database.oracle.plsql.OraclePLSQLTypes.Int;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -24,6 +25,7 @@ import javax.swing.JOptionPane;
  */
 public class BackupExit {
     //private Object jLabel2;
+    
     
     public static void initialize() throws InterruptedException, IOException{
         String USERHOME = System.getProperty("user.home");
@@ -158,4 +160,25 @@ public class BackupExit {
             Logger.getLogger(BackupExit.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    /*
+    public static void dropboxThreadStart(){
+        SwingWorker<Double, Void> worker = new SwingWorker<Double, Void>(){
+
+            @Override
+            protected Double doInBackground() throws Exception {
+                
+                BackupExit.dropboxSave();
+                
+                return null;
+            }
+        
+            @Override
+            protected void done(){
+            
+                System.out.println("Done!");
+            }
+            
+        };
+    }
+    */
 }

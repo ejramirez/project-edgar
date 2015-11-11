@@ -403,7 +403,10 @@ public class addDonation extends javax.swing.JFrame {
             PreparedStatement ps;
             ps = this.con.prepareStatement(donationInsert);
             ps.setString(1,donorID);
-            ps.setString(2,this.amount.getText());
+            
+            StringCC str = new StringCC();
+            ps.setString(2,str.CleanUp(this.amount.getText()));
+            
             ps.setTimestamp(3,new Timestamp(dDate.getTime()));
             ps.setString(4,this.notes.getText());
             ps.setString(5,"1");
@@ -431,7 +434,10 @@ public class addDonation extends javax.swing.JFrame {
                 ps = this.con.prepareStatement(pledgeInsert);
                 
                 ps.setString(1,this.paymentFreq.getSelectedItem().toString());
-                ps.setString(2,this.amountPaid.getText());
+                
+                StringCC str2 = new StringCC();
+                ps.setString(2,str2.CleanUp(this.amountPaid.getText()));
+                
                 ps.setTimestamp(3, new Timestamp(lastPayDate.getTime()));
                 ps.setString(4,donationID);
                 ps.executeUpdate();

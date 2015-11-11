@@ -196,7 +196,10 @@ public class addCampaign extends javax.swing.JFrame {
             ps.setTimestamp(2,new Timestamp(sDate.getTime()));
             ps.setTimestamp(3,new Timestamp(eDate.getTime()));
             ps.setString(4,this.description.getText());
-            ps.setString(5,this.financialGoal.getText());
+            
+            StringCC str = new StringCC();
+            ps.setString(5,str.CleanUp(this.financialGoal.getText())); //needs stringCC
+            
             ps.executeUpdate();
             this.con.commit();
             this.con.close();

@@ -157,17 +157,8 @@ public class updateInfo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        try {
-            // TODO add your handling code here:
-            BackupExit.backupNoExit();
-            
-            this.setVisible(false);
-            new mainView().setVisible(true);
-        } catch (IOException ex) {
-            Logger.getLogger(updateInfo.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(updateInfo.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        this.setVisible(false);
+        new mainView().setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

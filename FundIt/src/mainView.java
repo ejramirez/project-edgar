@@ -1,6 +1,7 @@
 
 import com.dropbox.core.DbxException;
 import java.awt.Color;
+import java.beans.PropertyVetoException;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -502,7 +503,7 @@ public class mainView extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.setVisible(false);
         try {
-            new viewDonations().setVisible(true);
+            new viewDonationsImproved().setVisible(true);
         } catch (ParseException ex) {
             Logger.getLogger(mainView.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -821,15 +822,19 @@ public class mainView extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu3ActionPerformed
 
     private void jMenuItem19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem19ActionPerformed
-        // TODO add your handling code here:
-        this.setVisible(true);
-        new MainViewImproved().setVisible(true);
+        try {
+            // TODO add your handling code here:
+            this.setVisible(false);
+            new MainViewImproved().setVisible(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(mainView.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_jMenuItem19ActionPerformed
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
         // TODO add your handling code here:
-        this.setVisible(true);
+        this.setVisible(false);
         new updateIndDonor().setVisible(true);
         
     }//GEN-LAST:event_jMenuItem11ActionPerformed
@@ -842,7 +847,7 @@ public class mainView extends javax.swing.JFrame {
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
         // TODO add your handling code here:
-        this.setVisible(true);
+        this.setVisible(false);
         new updateCorpOrgDonor().setVisible(true);
         
     }//GEN-LAST:event_jMenuItem12ActionPerformed
@@ -853,37 +858,37 @@ public class mainView extends javax.swing.JFrame {
 
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
         // TODO add your handling code here:
-        this.setVisible(true);
+        this.setVisible(false);
         new updateIndiDonationImproved().setVisible(true);
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
     private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
         // TODO add your handling code here:
-        this.setVisible(true);
+        this.setVisible(false);
         new updateCorpOrgDonation().setVisible(true);
     }//GEN-LAST:event_jMenuItem15ActionPerformed
 
     private void jMenuItem20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem20ActionPerformed
         // TODO add your handling code here:
-        this.setVisible(true);
+        this.setVisible(false);
         new updateCampaign().setVisible(true);
     }//GEN-LAST:event_jMenuItem20ActionPerformed
 
     private void jMenuItem21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem21ActionPerformed
         // TODO add your handling code here:
-        this.setVisible(true);
+        this.setVisible(false);
         new updateEvent().setVisible(true);
     }//GEN-LAST:event_jMenuItem21ActionPerformed
 
     private void jMenuItem22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem22ActionPerformed
         // TODO add your handling code here:
-        this.setVisible(true);
+        this.setVisible(false);
         new updatePledge().setVisible(true);
     }//GEN-LAST:event_jMenuItem22ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
         // TODO add your handling code here:
-        this.setVisible(true);
+        this.setVisible(false);
         new addCE().setVisible(true);
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
