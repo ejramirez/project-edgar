@@ -25,10 +25,15 @@ public class updateCampaign extends javax.swing.JFrame {
      */
     public updateCampaign() {
         initComponents();
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        //setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
         jComboBox1.removeAllItems();
         jComboBox1.addItem("");
+        
+        jTextField2.setText("MM/DD/YYYY");
+        jTextField3.setText("MM/DD/YYYY");
+        jTextField1.setText("");
+        jTextField5.setText("");
         
         //Pulling Campaigns
         try {

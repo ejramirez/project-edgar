@@ -27,7 +27,7 @@ public class updateIndiDonationImproved extends javax.swing.JFrame {
      */
     public updateIndiDonationImproved() {
         initComponents();
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        //setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
         //jComboBox1.removeAllItems();
         //jComboBox2.removeAllItems();
@@ -68,7 +68,10 @@ public class updateIndiDonationImproved extends javax.swing.JFrame {
         jComboBox4.removeItem("Item 3");
         jComboBox4.removeItem("Item 4");
         
-        
+        jTextField1.setText("");
+        jTextField2.setText("");
+        jTextField3.setText("MM/DD/YYYY");
+        jTextField4.setText("");
         
         //Getting Donor Names and ID's
         try {

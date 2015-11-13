@@ -24,8 +24,8 @@ public class DBcon {
         String MainPath = "jdbc:ucanaccess://" + USERDIR + "\\WAC_ScotTrak_Database.accdb";
         
         //return "jdbc:ucanaccess://" + USERDIR + "\\WAC_ScotTrak_Database.accdb";
-        System.out.println(Path);
-        return Path; 
+        System.out.println(MainPath);
+        return MainPath; 
         
         //(file path, db login, db password) - since it doesnt have a login, leave it blank
     }

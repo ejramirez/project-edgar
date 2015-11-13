@@ -30,7 +30,7 @@ public class updateCorpOrgDonor extends javax.swing.JFrame {
     
     public updateCorpOrgDonor() {
         initComponents();
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        //setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
         //jComboBox1.removeAllItems();
         jComboBox2.removeAllItems();

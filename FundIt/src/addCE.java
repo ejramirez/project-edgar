@@ -94,6 +94,11 @@ public class addCE extends javax.swing.JFrame {
         jLabel4.setText("Date");
 
         date.setText("MM/DD/YYYY");
+        date.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dateActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Description");
 
@@ -247,6 +252,10 @@ public class addCE extends javax.swing.JFrame {
     private void moneyRaisedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moneyRaisedActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_moneyRaisedActionPerformed
+
+    private void dateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dateActionPerformed
 
     /**
      * @param args the command line arguments

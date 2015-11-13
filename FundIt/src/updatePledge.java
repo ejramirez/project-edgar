@@ -35,10 +35,13 @@ public class updatePledge extends javax.swing.JFrame {
     public updatePledge() {
         initComponents();
         
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        //setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
         jTextField1.setColumns(8);
         jTextField2.setColumns(8);
+        
+        jTextField1.setText("MM/DD/YYYY");
+        jTextField2.setText("MM/DD/YYYY");
         
         jComboBox1.removeAllItems();
         jComboBox1.addItem("Item 1");

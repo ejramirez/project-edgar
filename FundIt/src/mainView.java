@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -50,6 +51,8 @@ public class mainView extends javax.swing.JFrame {
         this.documentation.setText(instructions);
         this.documentation.setEnabled(true);
         this.documentation.setEditable(false);
+        
+        jLabel3.setText("");
     }
 
     
@@ -81,6 +84,7 @@ public class mainView extends javax.swing.JFrame {
         jButton11 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jProgressBar1 = new javax.swing.JProgressBar();
+        jLabel3 = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
@@ -223,6 +227,8 @@ public class mainView extends javax.swing.JFrame {
                 jButton11ActionPerformed(evt);
             }
         });
+
+        jLabel3.setText("jLabel3");
 
         fileMenu.setMnemonic('f');
         fileMenu.setText("File");
@@ -456,6 +462,8 @@ public class mainView extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -494,7 +502,9 @@ public class mainView extends javax.swing.JFrame {
                         .addComponent(jButton11)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)))
         );
 
         pack();
@@ -842,7 +852,7 @@ public class mainView extends javax.swing.JFrame {
     private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
         // TODO add your handling code here:
         JOptionPane Help = new JOptionPane();
-        JOptionPane.showMessageDialog(this, "Meow");
+        JOptionPane.showMessageDialog(this, "This will be updated.");
     }//GEN-LAST:event_jMenuItem17ActionPerformed
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
@@ -904,6 +914,32 @@ public class mainView extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem23ActionPerformed
+        
+        class worker extends SwingWorker<String,Object>{
+
+            @Override
+            protected String doInBackground() throws DbxException{
+                
+                jProgressBar1.setEnabled(true);
+                jProgressBar1.setIndeterminate(true);
+                    
+                jLabel3.setText("Updating Database...");
+                BackupExit.dropboxSave();
+                    
+                
+                return "Upload jBar Complete.";
+            }
+            
+            @Override
+            protected void done(){
+                jProgressBar1.setEnabled(false);
+                jProgressBar1.setIndeterminate(false);
+                jLabel3.setText("Database Update Complete!");
+            }
+        
+        }
+        new worker().execute();
+        /*
         try {
             // TODO add your handling code here:
             
@@ -913,9 +949,10 @@ public class mainView extends javax.swing.JFrame {
         } catch (DbxException ex) {
             Logger.getLogger(mainView.class.getName()).log(Level.SEVERE, null, ex);
         }
+        */
     }//GEN-LAST:event_jMenuItem23ActionPerformed
     
-
+    
         
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -935,6 +972,7 @@ public class mainView extends javax.swing.JFrame {
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;

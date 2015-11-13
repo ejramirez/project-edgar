@@ -116,7 +116,8 @@ public class BackupExit {
             
             //file that is being uploaded
             String USERDIR = System.getProperty("user.dir");
-            String dBackup = USERDIR + "\\Project-Edgar-Database.accdb"; //change the access file name when it's time to give the database to sean
+            //String dBackup = USERDIR + "\\Project-Edgar-Database.accdb"; //change the access file name when it's time to give the database to sean
+            String dBackup = USERDIR + "\\WAC_ScotTrak_Database.accdb";
             
             File inputFile = new File(dBackup);
             FileInputStream inputStream = new FileInputStream(inputFile);
@@ -139,7 +140,7 @@ public class BackupExit {
                 //Check if file exists, if not write a new one, else overwrite the old one
                 
                 //System.out.println("Overwriting...");
-                DbxEntry.File OverwriteFile = client.uploadFile("/Project-Edgar-Database.accdb",
+                DbxEntry.File OverwriteFile = client.uploadFile("/WAC_ScotTrak_Database.accdb",
                 DbxWriteMode.force(), inputFile.length(), inputStream);
                 System.out.println("Uploaded: " + OverwriteFile.toString());
                         

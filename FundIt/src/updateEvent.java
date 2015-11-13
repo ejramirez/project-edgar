@@ -27,7 +27,7 @@ public class updateEvent extends javax.swing.JFrame {
      */
     public updateEvent() {
         initComponents();
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        //setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
         
         jTextField1.setColumns(10);
@@ -39,6 +39,10 @@ public class updateEvent extends javax.swing.JFrame {
         
         jComboBox2.removeAllItems();
         jComboBox2.addItem("");
+        
+        jTextField1.setText("MM/DD/YYYY");
+        jTextField2.setText("");
+        jTextField3.setText("");
         
         //"jdbc:ucanaccess://C:\\Users\\Eric\\Documents\\Github\\project-edgar\\Project-Edgar-Database.accdb"
         

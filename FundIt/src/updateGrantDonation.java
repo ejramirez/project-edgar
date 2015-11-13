@@ -18,7 +18,13 @@ public class updateGrantDonation extends javax.swing.JFrame {
      */
     public updateGrantDonation() {
         initComponents();
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        //setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        
+        jTextField1.setText("");
+        jTextField5.setText("");
+        jTextField6.setText("");
+        jTextField3.setText("MM/DD/YYYY");
+        jTextField4.setText("");
     }
 
     /**
