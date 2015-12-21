@@ -1,4 +1,5 @@
 
+import java.io.IOException;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -22,7 +23,7 @@ public class addCampaign extends javax.swing.JFrame {
     /**
      * Creates new form addCampaign
      */
-    public addCampaign() {
+    public addCampaign() throws IOException {
         initComponents();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         String DBLoc1 = "jdbc:ucanaccess:///Users/Alexander/Documents/Projects/Project-Edgar/Project-Edgar-Database.accdb"; // Alex
@@ -252,7 +253,11 @@ public class addCampaign extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new addCampaign().setVisible(true);
+                try {
+                    new addCampaign().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(addCampaign.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

@@ -1,4 +1,5 @@
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -20,7 +21,7 @@ import javax.swing.JFrame;
  */
 public class viewEvents extends javax.swing.JFrame {
     
-    public viewEvents() {
+    public viewEvents() throws IOException {
         initComponents();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.campaigns.removeAllItems();
@@ -283,7 +284,11 @@ public class viewEvents extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new viewEvents().setVisible(true);
+                try {
+                    new viewEvents().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(viewEvents.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

@@ -1,5 +1,6 @@
 
 import java.awt.Color;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -25,7 +26,7 @@ public class updateIndiDonationImproved extends javax.swing.JFrame {
     /**
      * Creates new form updateIndiDonationImproved
      */
-    public updateIndiDonationImproved() {
+    public updateIndiDonationImproved() throws IOException {
         initComponents();
         //setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
@@ -483,6 +484,8 @@ public class updateIndiDonationImproved extends javax.swing.JFrame {
             System.out.println("Is connection closed: " + con.isClosed());
         } catch (SQLException ex) {
             Logger.getLogger(userLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(updateIndiDonationImproved.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -554,6 +557,8 @@ public class updateIndiDonationImproved extends javax.swing.JFrame {
             System.out.println("Is connection closed: " + con.isClosed());
         } catch (SQLException ex) {
             Logger.getLogger(userLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(updateIndiDonationImproved.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -655,6 +660,8 @@ public class updateIndiDonationImproved extends javax.swing.JFrame {
             System.out.println("Is connection closed: " + con.isClosed());
         } catch (SQLException ex) {
             Logger.getLogger(userLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(updateIndiDonationImproved.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         jLabel8.setText("Updated.");
@@ -707,7 +714,11 @@ public class updateIndiDonationImproved extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new updateIndiDonationImproved().setVisible(true);
+                try {
+                    new updateIndiDonationImproved().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(updateIndiDonationImproved.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

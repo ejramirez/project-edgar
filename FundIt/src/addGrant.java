@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import java.io.IOException;
 import java.sql.*;
 import java.util.Date;
 import java.text.ParseException;
@@ -413,6 +414,8 @@ public class addGrant extends javax.swing.JFrame {
             System.out.println("Is connection closed: " + con.isClosed());
         } catch (SQLException ex) {
             Logger.getLogger(userLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(addGrant.class.getName()).log(Level.SEVERE, null, ex);
         }
         jLabel1.setText("Saved.");
         //reset all fields to empty

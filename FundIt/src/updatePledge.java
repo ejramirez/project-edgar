@@ -1,6 +1,7 @@
 
 import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
 import java.awt.Color;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -32,7 +33,7 @@ public class updatePledge extends javax.swing.JFrame {
     /**
      * Creates new form updatePledge
      */
-    public updatePledge() {
+    public updatePledge() throws IOException {
         initComponents();
         
         //setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -333,6 +334,8 @@ public class updatePledge extends javax.swing.JFrame {
             System.out.println("Is connection closed: " + con.isClosed());
         } catch (SQLException ex) {
             Logger.getLogger(userLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(updatePledge.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -395,6 +398,8 @@ public class updatePledge extends javax.swing.JFrame {
             System.out.println("Is connection closed: " + con.isClosed());
         } catch (SQLException ex) {
             Logger.getLogger(userLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(updatePledge.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -445,6 +450,8 @@ public class updatePledge extends javax.swing.JFrame {
             System.out.println("Is connection closed: " + con.isClosed());
         } catch (SQLException ex) {
             Logger.getLogger(userLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(updatePledge.class.getName()).log(Level.SEVERE, null, ex);
         }
         jLabel4.setText("Updated.");
         
@@ -487,7 +494,11 @@ public class updatePledge extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new updatePledge().setVisible(true);
+                try {
+                    new updatePledge().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(updatePledge.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

@@ -162,15 +162,23 @@ public class updateInfo extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        this.setVisible(false);
-        new updateIndDonor().setVisible(true);
+        try {
+            // TODO add your handling code here:
+            this.setVisible(false);
+            new updateIndDonor().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(updateInfo.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        this.setVisible(false);
-        new updateCorpOrgDonor().setVisible(true);
+        try {
+            // TODO add your handling code here:
+            this.setVisible(false);
+            new updateCorpOrgDonor().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(updateInfo.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -186,21 +194,33 @@ public class updateInfo extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-        this.setVisible(false);
-        new updateCampaign().setVisible(true);
+        try {
+            // TODO add your handling code here:
+            this.setVisible(false);
+            new updateCampaign().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(updateInfo.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-        this.setVisible(false);
-        new updateEvent().setVisible(true);
+        try {
+            // TODO add your handling code here:
+            this.setVisible(false);
+            new updateEvent().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(updateInfo.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
-        this.setVisible(false);
-        new updatePledge().setVisible(true);
+        try {
+            // TODO add your handling code here:
+            this.setVisible(false);
+            new updatePledge().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(updateInfo.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton8ActionPerformed
 
     /**

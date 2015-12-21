@@ -1,4 +1,5 @@
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -33,7 +34,7 @@ public class viewDonations extends javax.swing.JFrame {
     /**
      * Creates new form viewDonations
      */
-    public viewDonations() throws ParseException {
+    public viewDonations() throws ParseException, IOException {
         initComponents();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         jFormattedTextField1.setEnabled(false);
@@ -1170,6 +1171,8 @@ public class viewDonations extends javax.swing.JFrame {
             Logger.getLogger(userLogin.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
             Logger.getLogger(viewDonations.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(viewDonations.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -1362,6 +1365,8 @@ public class viewDonations extends javax.swing.JFrame {
             System.out.println("Is connection closed: " + con.isClosed());
         } catch (SQLException ex) {
             Logger.getLogger(userLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(viewDonations.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -1482,6 +1487,8 @@ public class viewDonations extends javax.swing.JFrame {
             System.out.println("Is connection closed: " + con.isClosed());
         } catch (SQLException ex) {
             Logger.getLogger(userLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(viewDonations.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -1546,7 +1553,11 @@ public class viewDonations extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new viewDonations().setVisible(true);
+                    try {
+                        new viewDonations().setVisible(true);
+                    } catch (IOException ex) {
+                        Logger.getLogger(viewDonations.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 } catch (ParseException ex) {
                     Logger.getLogger(viewDonations.class.getName()).log(Level.SEVERE, null, ex);
                 }

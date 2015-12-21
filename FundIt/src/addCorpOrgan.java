@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 import java.awt.Color;
+import java.io.IOException;
 import java.sql.*;
 import java.util.Arrays;
 import java.util.logging.Level;
@@ -499,6 +500,8 @@ public class addCorpOrgan extends javax.swing.JFrame {
             System.out.println("Is connection closed: " + con.isClosed());
         } catch (SQLException ex) {
             Logger.getLogger(userLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(addCorpOrgan.class.getName()).log(Level.SEVERE, null, ex);
         }
         jLabel3.setText("Saved.");
     }//GEN-LAST:event_jButton1ActionPerformed

@@ -1,4 +1,5 @@
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -25,7 +26,7 @@ import javax.swing.JFrame;
  */
 public class addCE extends javax.swing.JFrame {
 
-    public addCE() {
+    public addCE() throws IOException {
         initComponents();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.campaign.removeAllItems();
@@ -287,7 +288,11 @@ public class addCE extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new addCE().setVisible(true);
+                try {
+                    new addCE().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(addCE.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

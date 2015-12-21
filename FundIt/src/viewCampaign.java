@@ -1,4 +1,5 @@
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -23,7 +24,7 @@ public class viewCampaign extends javax.swing.JFrame {
     /**
      * Creates new form viewCampaign
      */
-    public viewCampaign() {
+    public viewCampaign() throws IOException {
         initComponents();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.textArea.setEditable(false);
@@ -244,7 +245,11 @@ public class viewCampaign extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new viewCampaign().setVisible(true);
+                try {
+                    new viewCampaign().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(viewCampaign.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

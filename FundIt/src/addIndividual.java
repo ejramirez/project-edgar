@@ -1,5 +1,6 @@
 
 import java.awt.Color;
+import java.io.IOException;
 import java.sql.*;
 import java.util.Arrays;
 import java.util.logging.Level;
@@ -577,6 +578,8 @@ public class addIndividual extends javax.swing.JFrame {
             System.out.println("Is connection closed: " + con.isClosed());
         } catch (SQLException ex) {
             Logger.getLogger(userLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(addIndividual.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         jLabel17.setText("Saved.");

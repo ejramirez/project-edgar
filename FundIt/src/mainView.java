@@ -124,6 +124,8 @@ public class mainView extends javax.swing.JFrame {
         jMenuItem18 = new javax.swing.JMenuItem();
         jMenuItem19 = new javax.swing.JMenuItem();
         jMenuItem24 = new javax.swing.JMenuItem();
+        jMenu10 = new javax.swing.JMenu();
+        jMenuItem25 = new javax.swing.JMenuItem();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -439,6 +441,18 @@ public class mainView extends javax.swing.JFrame {
 
         menuBar.add(jMenu3);
 
+        jMenu10.setText("Settings");
+
+        jMenuItem25.setText("Database Preferences");
+        jMenuItem25.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem25ActionPerformed(evt);
+            }
+        });
+        jMenu10.add(jMenuItem25);
+
+        menuBar.add(jMenu10);
+
         setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -525,17 +539,27 @@ public class mainView extends javax.swing.JFrame {
             new viewDonationsImproved().setVisible(true);
         } catch (ParseException ex) {
             Logger.getLogger(mainView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(mainView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
     //button 2 - add donation(s)
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        this.setVisible(false); 
-        new addDonation().setVisible(true);
+        try {
+            this.setVisible(false);
+            new addDonation().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(mainView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        this.setVisible(false); 
-        new addCE().setVisible(true);
+        try {
+            this.setVisible(false);
+            new addCE().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(mainView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -544,13 +568,21 @@ public class mainView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
     //button 3 - add campaign
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        this.setVisible(false); 
-        new addCampaign().setVisible(true);
+        try {
+            this.setVisible(false);
+            new addCampaign().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(mainView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
     //button 4 - view campaign
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        this.setVisible(false); 
-        new viewCampaign().setVisible(true);
+        try {
+            this.setVisible(false);
+            new viewCampaign().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(mainView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -753,14 +785,20 @@ public class mainView extends javax.swing.JFrame {
             System.out.println("Is connection closed: " + con.isClosed());
         } catch (SQLException ex) {
             Logger.getLogger(userLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(mainView.class.getName()).log(Level.SEVERE, null, ex);
         }
         jTextArea1.append("Export to Text File is done");
     
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void viewEventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewEventsActionPerformed
-        this.setVisible(false);
-        new viewEvents().setVisible(true);
+        try {
+            this.setVisible(false);
+            new viewEvents().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(mainView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_viewEventsActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
@@ -852,9 +890,13 @@ public class mainView extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem19ActionPerformed
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
-        // TODO add your handling code here:
-        this.setVisible(false);
-        new updateIndDonor().setVisible(true);
+        try {
+            // TODO add your handling code here:
+            this.setVisible(false);
+            new updateIndDonor().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(mainView.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
@@ -865,9 +907,13 @@ public class mainView extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem17ActionPerformed
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
-        // TODO add your handling code here:
-        this.setVisible(false);
-        new updateCorpOrgDonor().setVisible(true);
+        try {
+            // TODO add your handling code here:
+            this.setVisible(false);
+            new updateCorpOrgDonor().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(mainView.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
@@ -876,39 +922,63 @@ public class mainView extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
-        // TODO add your handling code here:
-        this.setVisible(false);
-        new updateIndiDonationImproved().setVisible(true);
+        try {
+            // TODO add your handling code here:
+            this.setVisible(false);
+            new updateIndiDonationImproved().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(mainView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
     private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
-        // TODO add your handling code here:
-        this.setVisible(false);
-        new updateCorpOrgDonation().setVisible(true);
+        try {
+            // TODO add your handling code here:
+            this.setVisible(false);
+            new updateCorpOrgDonation().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(mainView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jMenuItem15ActionPerformed
 
     private void jMenuItem20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem20ActionPerformed
-        // TODO add your handling code here:
-        this.setVisible(false);
-        new updateCampaign().setVisible(true);
+        try {
+            // TODO add your handling code here:
+            this.setVisible(false);
+            new updateCampaign().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(mainView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jMenuItem20ActionPerformed
 
     private void jMenuItem21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem21ActionPerformed
-        // TODO add your handling code here:
-        this.setVisible(false);
-        new updateEvent().setVisible(true);
+        try {
+            // TODO add your handling code here:
+            this.setVisible(false);
+            new updateEvent().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(mainView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jMenuItem21ActionPerformed
 
     private void jMenuItem22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem22ActionPerformed
-        // TODO add your handling code here:
-        this.setVisible(false);
-        new updatePledge().setVisible(true);
+        try {
+            // TODO add your handling code here:
+            this.setVisible(false);
+            new updatePledge().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(mainView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jMenuItem22ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-        // TODO add your handling code here:
-        this.setVisible(false);
-        new addCE().setVisible(true);
+        try {
+            // TODO add your handling code here:
+            this.setVisible(false);
+            new addCE().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(mainView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
@@ -917,6 +987,8 @@ public class mainView extends javax.swing.JFrame {
             this.setVisible(false);
             new viewDonationsImproved().setVisible(true);
         } catch (ParseException ex) {
+            Logger.getLogger(mainView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
             Logger.getLogger(mainView.class.getName()).log(Level.SEVERE, null, ex);
         }
         
@@ -971,6 +1043,18 @@ public class mainView extends javax.swing.JFrame {
             Logger.getLogger(mainView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jMenuItem24ActionPerformed
+
+    private void jMenuItem25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem25ActionPerformed
+        try {
+            // TODO add your handling code here:
+            this.setVisible(true);
+            this.setEnabled(false);
+            new SettingsFrame().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(mainView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.setEnabled(true);
+    }//GEN-LAST:event_jMenuItem25ActionPerformed
     
     
         
@@ -994,6 +1078,7 @@ public class mainView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
@@ -1019,6 +1104,7 @@ public class mainView extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem22;
     private javax.swing.JMenuItem jMenuItem23;
     private javax.swing.JMenuItem jMenuItem24;
+    private javax.swing.JMenuItem jMenuItem25;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;

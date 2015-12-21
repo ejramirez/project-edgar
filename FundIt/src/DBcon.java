@@ -1,3 +1,6 @@
+
+import java.io.IOException;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -15,17 +18,19 @@ public class DBcon {
     * This also allows for the database location, user login, and user password to only have to be changed in one place instead of 
     * each instance when the database has to be called.
     */
-    public static String Connect(){
+    public static String Connect() throws IOException{
         
+        String driver = "jdbc:ucanaccess://";
         
         String USERHOME = System.getProperty("user.home");
         String USERDIR = System.getProperty("user.dir");
-        String Path = "jdbc:ucanaccess://" + USERDIR + "\\Project-Edgar-Database.accdb";
-        String MainPath = "jdbc:ucanaccess://" + USERDIR + "\\WAC_ScotTrak_Database.accdb";
+        String Path = driver + USERDIR + "\\Project-Edgar-Database.accdb";
+        String MainPath = driver + USERDIR + "\\WAC_ScotTrak_Database.accdb";
+        String ConfigPath = driver + Config.getProperty("CurrentDatabasePath");
         
         //return "jdbc:ucanaccess://" + USERDIR + "\\WAC_ScotTrak_Database.accdb";
-        System.out.println(Path);
-        return Path; 
+        System.out.println(ConfigPath);
+        return ConfigPath; 
         
         //(file path, db login, db password) - since it doesnt have a login, leave it blank
     }

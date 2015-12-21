@@ -1,6 +1,7 @@
 
 import java.awt.Color;
 import java.awt.event.ItemEvent;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -28,7 +29,7 @@ public class updateIndDonor extends javax.swing.JFrame {
      */
     
     
-    public updateIndDonor() {
+    public updateIndDonor() throws IOException {
         initComponents();
         
         
@@ -697,6 +698,8 @@ public class updateIndDonor extends javax.swing.JFrame {
             System.out.println("Is connection closed: " + con.isClosed());
         } catch (SQLException ex) {
             Logger.getLogger(userLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(updateIndDonor.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         jLabel19.setText("Updated.");
@@ -824,7 +827,9 @@ public class updateIndDonor extends javax.swing.JFrame {
             System.out.println("Is connection closed: " + con.isClosed());
         } catch (SQLException ex) {
             Logger.getLogger(userLogin.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }   catch (IOException ex) {
+                Logger.getLogger(updateIndDonor.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }else if(evt.getStateChange() == ItemEvent.DESELECTED){
             System.out.print("; Deselected " + evt.getItem());
         }   
@@ -876,7 +881,11 @@ public class updateIndDonor extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new updateIndDonor().setVisible(true);
+                try {
+                    new updateIndDonor().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(updateIndDonor.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

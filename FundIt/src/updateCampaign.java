@@ -1,4 +1,5 @@
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -23,7 +24,7 @@ public class updateCampaign extends javax.swing.JFrame {
     /**
      * Creates new form updateCampaign
      */
-    public updateCampaign() {
+    public updateCampaign() throws IOException {
         initComponents();
         //setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
@@ -254,6 +255,8 @@ public class updateCampaign extends javax.swing.JFrame {
             System.out.println("Is connection closed: " + con.isClosed());
         } catch (SQLException ex) {
             Logger.getLogger(userLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(updateCampaign.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -308,6 +311,8 @@ public class updateCampaign extends javax.swing.JFrame {
             System.out.println("Is connection closed: " + con.isClosed());
         } catch (SQLException ex) {
             Logger.getLogger(userLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(updateCampaign.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         jLabel6.setText("Updated.");
@@ -350,7 +355,11 @@ public class updateCampaign extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new updateCampaign().setVisible(true);
+                try {
+                    new updateCampaign().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(updateCampaign.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

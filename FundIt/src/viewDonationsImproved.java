@@ -1,5 +1,6 @@
 
 import java.awt.Color;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -30,7 +31,7 @@ public class viewDonationsImproved extends javax.swing.JFrame {
     /**
      * Creates new form viewDonationsImproved
      */
-    public viewDonationsImproved() throws ParseException {
+    public viewDonationsImproved() throws ParseException, IOException {
         initComponents();
         
         /*
@@ -599,6 +600,8 @@ public class viewDonationsImproved extends javax.swing.JFrame {
                 System.out.println("Is connection closed: " + con.isClosed());
             } catch (SQLException ex) {
                 Logger.getLogger(userLogin.class.getName()).log(Level.SEVERE, null, ex);                
+            } catch (IOException ex) {
+                Logger.getLogger(viewDonationsImproved.class.getName()).log(Level.SEVERE, null, ex);
             }
             
         } catch (ParseException ex) {
@@ -665,7 +668,9 @@ public class viewDonationsImproved extends javax.swing.JFrame {
             System.out.println("Is connection closed: " + con.isClosed());
         } catch (SQLException ex) {
             Logger.getLogger(userLogin.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }   catch (IOException ex) {
+                Logger.getLogger(viewDonationsImproved.class.getName()).log(Level.SEVERE, null, ex);
+            }
         
         }else if(jComboBox1.getSelectedItem() == "Amount Between"){
             
@@ -731,7 +736,9 @@ public class viewDonationsImproved extends javax.swing.JFrame {
             System.out.println("Is connection closed: " + con.isClosed());
         } catch (SQLException ex) {
             Logger.getLogger(userLogin.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }   catch (IOException ex) {
+                Logger.getLogger(viewDonationsImproved.class.getName()).log(Level.SEVERE, null, ex);
+            }
         
         }else if(jComboBox1.getSelectedItem() == "Amount Above"){
             
@@ -795,7 +802,9 @@ public class viewDonationsImproved extends javax.swing.JFrame {
             System.out.println("Is connection closed: " + con.isClosed());
         } catch (SQLException ex) {
             Logger.getLogger(userLogin.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }   catch (IOException ex) {
+                Logger.getLogger(viewDonationsImproved.class.getName()).log(Level.SEVERE, null, ex);
+            }
         
         }else if(jComboBox1.getSelectedItem() == "Amount Below"){
             
@@ -860,7 +869,9 @@ public class viewDonationsImproved extends javax.swing.JFrame {
             System.out.println("Is connection closed: " + con.isClosed());
         } catch (SQLException ex) {
             Logger.getLogger(userLogin.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }   catch (IOException ex) {
+                Logger.getLogger(viewDonationsImproved.class.getName()).log(Level.SEVERE, null, ex);
+            }
         
         }else{
             
@@ -904,6 +915,8 @@ public class viewDonationsImproved extends javax.swing.JFrame {
                 try {
                     new viewDonationsImproved().setVisible(true);
                 } catch (ParseException ex) {
+                    Logger.getLogger(viewDonationsImproved.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
                     Logger.getLogger(viewDonationsImproved.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
