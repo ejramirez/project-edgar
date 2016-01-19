@@ -1,4 +1,5 @@
 
+import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -24,7 +25,10 @@ public class SettingsFrame extends javax.swing.JFrame {
      */
     public SettingsFrame() throws IOException {
         initComponents();
+        jLabel1.setText("");
+        
         String path = Config.getProperty("CurrentDatabasePath");
+        
         jTextField1.setText(path);
         jTextField1.setEnabled(false);
         
@@ -146,6 +150,7 @@ public class SettingsFrame extends javax.swing.JFrame {
             Config.setProperty("CurrentDatabasePath", selFile.toString());
             System.out.println("Path Set.");
             jTextField1.setText(selFile.toString());
+            jLabel1.setText("Database Set.");
         } catch (IOException ex) {
             Logger.getLogger(SettingsFrame.class.getName()).log(Level.SEVERE, null, ex);
         }

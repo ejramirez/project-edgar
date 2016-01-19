@@ -775,7 +775,8 @@ public class updateCorpOrgDonor extends javax.swing.JFrame {
             }
         }else if(evt.getStateChange() == ItemEvent.DESELECTED){
             System.out.print("; Deselected " + evt.getItem());
-        }   
+        }
+        jLabel19.setText("");
     }//GEN-LAST:event_jComboBox5ItemStateChanged
 
     private void jComboBox6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox6ActionPerformed

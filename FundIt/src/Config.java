@@ -23,6 +23,14 @@ public class Config {
     */
     private final static Properties properties = new Properties();
     
+    
+    /**
+     * 
+     * @param s is the property that will be pulled from the configuration file.
+     * @return the return is the value that is at the parameter s
+     * @throws FileNotFoundException
+     * @throws IOException 
+     */
     public static String getProperty(String s) throws FileNotFoundException, IOException{
         
         FileReader reader =  new FileReader("config.properties");
@@ -32,6 +40,14 @@ public class Config {
         
     }
     
+    /**
+     * 
+     * @param prop is the property within the config file that will be set
+     * @param sett is the setting that the property will be set to within the config file.
+     * @return null
+     * @throws FileNotFoundException
+     * @throws IOException 
+     */
     public static String setProperty(String prop, String sett) throws FileNotFoundException, IOException{
         
         FileInputStream in = new FileInputStream("config.properties");

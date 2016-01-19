@@ -46,7 +46,6 @@ public class BackupExit {
             System.out.println(System.getProperty("user.dir"));
             System.out.println(System.getProperty("user.name"));
             
-            
             if(processComplete == 0){
                 System.out.println("Backup Complete.");
                 //jLabel2.setText("Backup Complete.");

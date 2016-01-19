@@ -28,7 +28,6 @@ public class addCorpOrgan extends javax.swing.JFrame {
      */
     public addCorpOrgan() {
         initComponents();
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         jComboBox1.removeAllItems();
         jComboBox1.addItem("Yes");
         jComboBox1.addItem("No");
@@ -215,11 +214,29 @@ public class addCorpOrgan extends javax.swing.JFrame {
 
         jLabel11.setText("Solicitation:");
 
+        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField6ActionPerformed(evt);
+            }
+        });
+
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jTextField9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField9ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Coporation/Organization Name:");
 
         jLabel2.setText("Primary Contact Name:");
+
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField1KeyPressed(evt);
+            }
+        });
 
         jButton1.setText("Save");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -369,7 +386,7 @@ public class addCorpOrgan extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -484,7 +501,8 @@ public class addCorpOrgan extends javax.swing.JFrame {
                                     jTextField11.getText() +"', '" + jTextField12.getText() + "', '" +
                                     jComboBox4.getSelectedItem().toString() + "', '"  + jTextField13.getText() + "' )");
             
-            ResultSet rs = s.executeQuery("select DonorID From Donor where Donor.Street like '" + jTextField6.getText()+ "'");
+            ResultSet rs = s.executeQuery("select DonorID From Donor where Donor.Street like '" + jTextField6.getText()+ "' "
+                    + "AND Donor.Phone like '" + jTextField9.getText() + "' ");
             String donorID = ""; 
             while(rs.next()){
                 System.out.println("Donor id for insert is: " + rs.getString(1)); 
@@ -497,6 +515,7 @@ public class addCorpOrgan extends javax.swing.JFrame {
             con.commit();
         
             con.close();
+            System.out.println("INSERT COMPLETE");
             System.out.println("Is connection closed: " + con.isClosed());
         } catch (SQLException ex) {
             Logger.getLogger(userLogin.class.getName()).log(Level.SEVERE, null, ex);
@@ -550,6 +569,19 @@ public class addCorpOrgan extends javax.swing.JFrame {
            jComboBox4.setSelectedIndex(jComboBox2.getSelectedIndex());
         }
     }//GEN-LAST:event_jCheckBox1ActionPerformed
+
+    private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
+        // TODO add your handling code here:
+        jLabel3.setText("");
+    }//GEN-LAST:event_jTextField1KeyPressed
+
+    private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField9ActionPerformed
+
+    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField6ActionPerformed
 
     /**
      * @param args the command line arguments

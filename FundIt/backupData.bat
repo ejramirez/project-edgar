@@ -1,2 +1,2 @@
-copy cd\WAC_ScotTrak_Database.accdb C:\Users\%USERNAME%\Documents
+copy .\WAC_ScotTrak_Database.accdb C:\Users\%USERNAME%\Documents
 

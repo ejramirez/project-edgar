@@ -350,7 +350,7 @@ public class updatePledge extends javax.swing.JFrame {
         jComboBox3.addItem("Item 1");
         
         jComboBox2.setSelectedIndex(jComboBox1.getSelectedIndex());
-        
+        jLabel4.setText("");
     }//GEN-LAST:event_jComboBox1ItemStateChanged
 
     private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
@@ -406,6 +406,7 @@ public class updatePledge extends javax.swing.JFrame {
     private void jComboBox3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox3ItemStateChanged
         // TODO add your handling code here:
         jComboBox4.setSelectedIndex(jComboBox3.getSelectedIndex());
+        jLabel4.setText("");
     }//GEN-LAST:event_jComboBox3ItemStateChanged
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

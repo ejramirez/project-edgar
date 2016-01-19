@@ -10,6 +10,13 @@
  */
 class StringCC {
     //StringCC means String Currency Cleaner
+    
+    /**
+     * Cleans the given string of anything that isn't a number or a single decimal
+     * 
+     * @param s is the string that is to be cleaned
+     * @return the cleaned string
+     */
     public String CleanUp(String s){
         
         /*

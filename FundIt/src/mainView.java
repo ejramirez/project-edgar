@@ -100,6 +100,7 @@ public class mainView extends javax.swing.JFrame {
         jMenuItem8 = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem26 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -292,6 +293,9 @@ public class mainView extends javax.swing.JFrame {
 
         jMenuItem5.setText("View Donors");
         jMenu5.add(jMenuItem5);
+
+        jMenuItem26.setText("Delete Donor");
+        jMenu5.add(jMenuItem26);
 
         menuBar.add(jMenu5);
 
@@ -1105,6 +1109,7 @@ public class mainView extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem23;
     private javax.swing.JMenuItem jMenuItem24;
     private javax.swing.JMenuItem jMenuItem25;
+    private javax.swing.JMenuItem jMenuItem26;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;

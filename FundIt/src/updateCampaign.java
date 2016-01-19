@@ -258,6 +258,8 @@ public class updateCampaign extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(updateCampaign.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        jLabel6.setText("");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
